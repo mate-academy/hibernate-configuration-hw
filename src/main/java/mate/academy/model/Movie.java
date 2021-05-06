@@ -35,4 +35,12 @@ public class Movie implements Cloneable {
             throw new RuntimeException("Can't make clone of " + this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Movie{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + '}';
+    }
 }
