@@ -14,3 +14,5 @@ Your task is to implement the following steps:
 - complete implementation of `mate/academy/service/impl/MovieServiceImpl.java` class
 - make `mate/academy/Main.java` work (you should be able to run `main()` method without any errors)
 - use annotations and the annotation injector located in the `lib` folder
+
+#### [Try to avoid these common mistakes, while solving task](https://mate-academy.github.io/jv-program-common-mistakes/hibernate/configuration/configuration_checklist)
