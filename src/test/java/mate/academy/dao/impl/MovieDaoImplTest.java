@@ -16,20 +16,20 @@ public class MovieDaoImplTest extends AbstractTest {
     @Test
     public void create_Ok() {
         MovieDao movieDao = new MovieDaoImpl(getSessionFactory());
-        insertPhones(movieDao);
+        insertMovies(movieDao);
     }
 
     @Test
     public void getById_Ok() {
         MovieDao movieDao = new MovieDaoImpl(getSessionFactory());
-        insertPhones(movieDao);
+        insertMovies(movieDao);
         Movie actual = movieDao.get(1L);
         Assert.assertNotNull(actual);
         Assert.assertEquals(1L, actual.getId().longValue());
         Assert.assertEquals(Movies.shawshankRedemption.getTitle(), actual.getTitle());
     }
 
-    private void insertPhones(MovieDao movieDao) {
+    private void insertMovies(MovieDao movieDao) {
         Movie shawshankRedemption = Movies.shawshankRedemption.clone();
         verifyCreateMovieWorks(movieDao, shawshankRedemption, 1L);
 
