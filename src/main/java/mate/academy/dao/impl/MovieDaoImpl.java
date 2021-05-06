@@ -1,5 +1,6 @@
 package mate.academy.dao.impl;
 
+import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.model.Movie;
 
@@ -14,7 +15,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     }
 
     @Override
-    public Movie get(Long id) {
+    public Optional<Movie> get(Long id) {
         return null;
     }
 }

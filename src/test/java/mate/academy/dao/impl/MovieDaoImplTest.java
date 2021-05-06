@@ -1,5 +1,6 @@
 package mate.academy.dao.impl;
 
+import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.model.Movie;
 import org.junit.Assert;
@@ -23,10 +24,20 @@ public class MovieDaoImplTest extends AbstractTest {
     public void getById_Ok() {
         MovieDao movieDao = new MovieDaoImpl(getSessionFactory());
         insertMovies(movieDao);
-        Movie actual = movieDao.get(1L);
+
+        Optional<Movie> actualOptional = movieDao.get(1L);
+        Assert.assertTrue(actualOptional.isPresent());
+        Movie actual = actualOptional.get();
         Assert.assertNotNull(actual);
         Assert.assertEquals(1L, actual.getId().longValue());
         Assert.assertEquals(Movies.shawshankRedemption.getTitle(), actual.getTitle());
+    }
+
+    @Test
+    public void getByNotExistingId_Ok() {
+        MovieDao movieDao = new MovieDaoImpl(getSessionFactory());
+        Optional<Movie> actual = movieDao.get(100L);
+        Assert.assertFalse(actual.isPresent());
     }
 
     private void insertMovies(MovieDao movieDao) {
