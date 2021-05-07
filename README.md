@@ -8,6 +8,7 @@ Your task is to implement the following steps:
 - add the `checkstyle maven plugin`. You can use the configuration from your previous projects.
 - add required hibernate dependencies
 - create `hibernate.cfg.xml` file
+- create `HibernateUtil` class - you should use it on dao layer
 - complete implementation of `mate/academy/model/Movie.java` class
 - complete implementation of `mate/academy/dao/impl/MovieDaoImpl.java` class
 - create your custom unchecked DataProcessingException and throw it in the catch block on dao layer
