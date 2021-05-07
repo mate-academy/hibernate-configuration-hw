@@ -27,7 +27,7 @@ Your task is to implement the following steps:
       }
     ```
 - create your custom unchecked DataProcessingException and throw it in the catch block on dao layer
-- in the `mate/academy/Main.main()` method create instance of MovieService using injector and all methods from MovieService
+- in the `mate/academy/Main.main()` method create instance of MovieService using injector and test all methods from MovieService
 - use annotations and the annotation injector located in the `lib` folder
 
 #### [Try to avoid these common mistakes, while solving task](https://mate-academy.github.io/jv-program-common-mistakes/hibernate/configuration/configuration_checklist)
