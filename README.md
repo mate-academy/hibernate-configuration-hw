@@ -8,6 +8,7 @@ Your task is to implement the following steps:
 - add the `checkstyle maven plugin`. You can use the configuration from your previous projects.
 - add required hibernate dependencies
 - create `hibernate.cfg.xml` file
+- create `HibernateUtil` class
 - create `Movie` model class
 - create `MovieDao` interface and `MovieDaoImpl` class
 - create `MovieService` interface and `MovieServiceImpl` class
