@@ -4,10 +4,7 @@ import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.model.Movie;
 
-public class MovieDaoImpl extends AbstractDao implements MovieDao {
-    public MovieDaoImpl(SessionFactory sessionFactory) {
-        super(sessionFactory);
-    }
+public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
@@ -16,6 +13,6 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        return null;
+        return Optional.empty();
     }
 }
