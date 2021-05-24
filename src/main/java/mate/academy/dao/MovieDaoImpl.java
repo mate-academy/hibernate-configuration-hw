@@ -13,19 +13,22 @@ import mate.academy.util.HibernateUtil;
 public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
-            session = sessionFactory.openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
+            return movie;
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingException("Can't save movie: " + movie + " to DB.", e);
+        } finally {
+            session.close();
         }
-        session.close();
-        return movie;
     }
 
     @Override
