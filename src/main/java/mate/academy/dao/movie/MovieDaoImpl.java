@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.Optional;
+
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
@@ -33,9 +35,11 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Movie get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        return session.get(Movie.class, id);
+    public Optional<Movie> get(Long id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get movie by id - " + id, e);
+        }
     }
 }
