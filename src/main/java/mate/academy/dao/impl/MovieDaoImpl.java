@@ -1,5 +1,6 @@
 package mate.academy.dao.impl;
 
+import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.exceptions.DataProcessingException;
 import mate.academy.lib.Dao;
@@ -8,7 +9,6 @@ import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
@@ -23,9 +23,10 @@ public class MovieDaoImpl implements MovieDao {
             session.save(movie);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null ) {
+            if (transaction != null) {
                 transaction.rollback();
             }
+            throw new DataProcessingException("Couldn't get movie: " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
