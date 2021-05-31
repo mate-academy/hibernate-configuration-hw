@@ -43,6 +43,5 @@ public class MovieDaoImpl implements MovieDao {
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie from DB with id: " + id, e);
         }
-
     }
 }
