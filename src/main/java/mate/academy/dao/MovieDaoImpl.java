@@ -20,7 +20,6 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-            session.close();
             return movie;
         } catch (Exception e) {
             if (transaction != null) {
