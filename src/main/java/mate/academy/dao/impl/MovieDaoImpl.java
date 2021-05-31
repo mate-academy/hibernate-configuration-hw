@@ -25,7 +25,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert" + movie
+            throw new DataProcessingException("Can't insert " + movie
                     + "to ticket_app_db", e);
         } finally {
             if (session != null) {
@@ -39,7 +39,7 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't read data by id. " + id, e);
+            throw new DataProcessingException("Can't get movie by id. " + id, e);
         }
     }
 }
