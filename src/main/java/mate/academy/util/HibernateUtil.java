@@ -15,6 +15,6 @@ public class HibernateUtil {
         return instance;
     }
 
-    public HibernateUtil() {
+    private HibernateUtil() {
     }
 }
