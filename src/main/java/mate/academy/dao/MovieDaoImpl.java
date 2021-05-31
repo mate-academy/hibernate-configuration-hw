@@ -10,7 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 @Dao
-public class MovieDaoImpl implements MovieDao{
+public class MovieDaoImpl implements MovieDao {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
@@ -38,7 +38,7 @@ public class MovieDaoImpl implements MovieDao{
 
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get filed of DB", e);
