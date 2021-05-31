@@ -16,8 +16,12 @@ public class Main {
                 "After years of searching, Morpheus and Trinity finally find information about a "
                         + "man that could possibly be The One they have been searching for who is"
                         + " capable of manipulating the Matrix universe.");
-        
+        Movie terminator = new Movie();
+        terminator.setTitle("Terminator");
+        terminator.setDescription("No fate");
         movieService.add(matrix);
-        System.out.println(movieService.get(matrix.getId()));
+        movieService.add(terminator);
+        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(2L));
     }
 }
