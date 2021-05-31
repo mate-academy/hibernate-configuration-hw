@@ -11,9 +11,9 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+    private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     @Override
     public Movie add(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
@@ -28,7 +28,9 @@ public class MovieDaoImpl implements MovieDao {
             }
             throw new DataProcessingException("Can't save movie to DB", e);
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
