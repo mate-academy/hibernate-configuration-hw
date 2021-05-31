@@ -21,9 +21,6 @@ public class Main {
         movieService.add(inception);
         movieService.add(johnWick);
 
-        movieService.add(inception);
-        movieService.add(johnWick);
-
         System.out.println(movieService.get(inception.getId()));
         System.out.println(movieService.get(johnWick.getId()));
     }
