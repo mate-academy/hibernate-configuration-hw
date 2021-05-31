@@ -19,8 +19,7 @@ public class Movie {
 
     }
 
-    public Movie(Long id, String title, String description) {
-        this.id = id;
+    public Movie(String title, String description) {
         this.title = title;
         this.description = description;
     }

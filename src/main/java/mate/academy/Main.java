@@ -13,9 +13,7 @@ public class Main {
         Movie movie = new Movie();
         movie.setTitle("Cars 2");
         movie.setDescription("children's cartoon");
-        movieService.add(movie);
-        System.out.println(movie);
-        movieService.get(movie.getId());
-        System.out.println(movie);
+        System.out.println(movieService.add(movie));
+        System.out.println(movieService.get(movie.getId()));
     }
 }
