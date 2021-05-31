@@ -21,17 +21,17 @@ public class MovieDaoImpl implements MovieDao {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
+            return movie;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Couldn't save movie in DB. " + movie, e);
+            throw new DataProcessingException("Couldn't save movie to DB. " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return movie;
     }
 
     @Override
