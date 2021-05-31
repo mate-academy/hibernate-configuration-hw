@@ -1,14 +1,15 @@
 package mate.academy.service;
 
 import mate.academy.dao.MovieDao;
+import mate.academy.lib.Inject;
 import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
 import mate.academy.lib.Dao;
 
 @Dao
 public class MovieServiceImpl implements MovieService {
-    static final Injector injector = Injector.getInstance("mate.academy");
-    static final MovieDao movieDao = (MovieDao) injector.getInstance(MovieDao.class);
+    @Inject
+    MovieDao movieDao;
 
     @Override
     public Movie add(Movie movie) {
