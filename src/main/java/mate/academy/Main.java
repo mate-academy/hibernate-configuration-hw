@@ -5,16 +5,16 @@ import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
 
 public class Main {
-    public static void main(String[] args) {
-        Injector injector = Injector.getInstance("mate.academy");
-        MovieService manufacturerService = (MovieService) injector
-                .getInstance(MovieService.class);
+    public static final Injector injector = Injector.getInstance("mate.academy");
+    public static final MovieService manufacturerService = (MovieService) injector
+            .getInstance(MovieService.class);
 
+    public static void main(String[] args) {
         Movie movieIsaura = new Movie("Escrava Isaura", "Awesome film");
         Movie movieClone = new Movie("O Clone", "Brazilian telenovela");
 
-        movieIsaura = manufacturerService.add(movieIsaura);
-        movieClone = manufacturerService.add(movieClone);
+        manufacturerService.add(movieIsaura);
+        manufacturerService.add(movieClone);
         System.out.println(movieIsaura);
         System.out.println(movieClone);
 
