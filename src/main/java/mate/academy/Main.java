@@ -20,7 +20,7 @@ public class Main {
         movieZootopia.setDescription("Story about bunny policemen");
         movieService.add(movieZootopia);
 
-        System.out.println(movieService.get(1L));
-        System.out.println(movieService.get(2L));
+        System.out.println(movieService.get(movieToyStory.getId()));
+        System.out.println(movieService.get(movieZootopia.getId()));
     }
 }
