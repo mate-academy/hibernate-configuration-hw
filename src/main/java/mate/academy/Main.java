@@ -10,13 +10,21 @@ public class Main {
             .getInstance(MovieService.class);
 
     public static void main(String[] args) {
-        Movie movie = new Movie("BEST", "The bets of the best movie");
+        Movie bestMovie = new Movie("BEST", "The bets of the best movie");
+        Movie goodMovie = new Movie("GOOD", "Good movie");
 
         System.out.println("__________________________________________________________________");
-        movieService.add(movie);
-        Movie movieFromDB = movieService.get(1L);
+        movieService.add(bestMovie);
+        movieService.add(goodMovie);
+
+        Movie bestMovieFromDB = movieService.get(1L);
+        Movie goodMovieFromDB = movieService.get(goodMovie.getId());
+
         System.out.println("__________________________________________________________________");
-        System.out.println(movieFromDB);
+
+        System.out.println(bestMovieFromDB);
+        System.out.println(goodMovieFromDB);
+
         System.out.println("__________________________________________________________________");
     }
 }
