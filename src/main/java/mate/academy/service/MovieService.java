@@ -1,0 +1,9 @@
+package mate.academy.service;
+
+import mate.academy.model.Movie;
+
+public interface MovieService extends GenericService<Movie> {
+    Movie add(Movie movie);
+
+    Movie get(Long id);
+}
