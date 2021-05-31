@@ -12,6 +12,6 @@ public class Main {
     public static void main(String[] args) {
         Movie movie = new Movie("Frozen 2", "broke your hart");
         movieService.add(movie);
-        movieService.get(movie.getId());
+        System.out.println(movieService.get(movie.getId()));
     }
 }
