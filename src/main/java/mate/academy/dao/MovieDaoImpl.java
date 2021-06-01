@@ -24,12 +24,14 @@ public class MovieDaoImpl implements MovieDao {
             transaction.commit();
             return movie;
         } catch (Exception e) {
-            assert transaction != null;
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingException("Can`t add movie: " + movie, e);
         } finally {
-            assert session != null;
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
