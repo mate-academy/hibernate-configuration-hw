@@ -6,13 +6,14 @@ import mate.academy.service.MovieService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
+    private static final MovieService movieService
+            = (MovieService) injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
         movie.setTitle("Avengers");
         movie.setDescription("Great new movie by Marvel Studio");
         movieService.add(movie);
-        movieService.get(1L);
+        movieService.get(movie.getId());
     }
 }
