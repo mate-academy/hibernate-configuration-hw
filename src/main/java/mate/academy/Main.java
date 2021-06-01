@@ -15,6 +15,14 @@ public class Main {
         shadows.setDescription("OST - You Have Already Gone to the Other World");
         movieService.add(shadows);
         System.out.println(shadows);
+
+        Movie mib = new Movie();
+        mib.setTitle("Man in Black");
+        mib.setDescription("Its not about monks");
+        movieService.add(mib);
+        System.out.println(mib);
+
         System.out.println(movieService.get(shadows.getId()));
+        System.out.println(movieService.get(mib.getId()));
     }
 }
