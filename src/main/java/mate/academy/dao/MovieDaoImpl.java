@@ -23,18 +23,17 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-            session.close();
+            return movie;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add movie to DB", e);
+            throw new DataProcessingException("Can't add movie to DB, " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return movie;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = sessionFactory.openSession()) {
             movie = session.get(Movie.class, id);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get movie from DB", e);
+            throw new DataProcessingException("Can't get movie from DB by id " + id, e);
         }
         return Optional.ofNullable(movie);
     }
