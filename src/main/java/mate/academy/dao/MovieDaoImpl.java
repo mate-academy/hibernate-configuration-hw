@@ -17,7 +17,6 @@ public class MovieDaoImpl implements MovieDao {
     public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
-
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
@@ -28,7 +27,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Cant save to DB" + movie, e);
+            throw new DataProcessingException("Cant save movie to DB " + movie.getTitle(), e);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,7 +40,7 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get filed of DB" + id, e);
+            throw new DataProcessingException("Can't get filed of DB, id - " + id, e);
         }
     }
 }
