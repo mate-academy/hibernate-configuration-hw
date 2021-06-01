@@ -19,6 +19,7 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
+            return movie;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -29,7 +30,6 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
-        return movie;
     }
 
     @Override
