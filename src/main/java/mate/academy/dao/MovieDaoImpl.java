@@ -38,6 +38,7 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         Session session = sessionFactory.openSession();
+        session.close();
         return Optional.ofNullable(session.get(Movie.class, id));
     }
 }
