@@ -22,16 +22,18 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
+            return movie;
         } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+            throw new DataProcessingException("Something went wong, check logs for further "
+                    + "details", e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return movie;
     }
     
     @Override
