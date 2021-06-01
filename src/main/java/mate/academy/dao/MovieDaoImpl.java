@@ -38,17 +38,11 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         Session session = null;
-        Transaction transaction = null;
         try {
             session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
             Movie movie = session.get(Movie.class, id);
-            transaction.commit();
             return Optional.ofNullable(movie);
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             throw new DataProcessingException("Can't get movie from DB by current ID: " + id, e);
         } finally {
             if (session != null) {
