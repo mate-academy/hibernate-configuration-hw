@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao{
+    private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     @Override
     public Movie add(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
@@ -25,7 +25,7 @@ public class MovieDaoImpl implements MovieDao{
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't save product to DB", e);
+            throw new DataProcessingException("Can't save movie: " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -36,15 +36,11 @@ public class MovieDaoImpl implements MovieDao{
 
     @Override
     public Optional<Movie> get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             Movie movie = session.get(Movie.class, id);
-            if(movie != null) {
-                return Optional.of(movie);
-            }
-            return Optional.empty();
+            return Optional.ofNullable(movie);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get movie from DB", e);
+            throw new DataProcessingException("Can't get movie from DB with this id: " + id, e);
         }
     }
 }
