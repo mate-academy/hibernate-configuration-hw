@@ -29,7 +29,7 @@ public class MovieDaoImpl implements MovieDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("An error occurred while "
-                    + "processing a transaction", e);
+                    + "processing a query to add new movie = " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,7 +43,7 @@ public class MovieDaoImpl implements MovieDao {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("An error occurred while "
-                    + "processing a transaction", e);
+                    + "processing a query to get movie id = " + id, e);
         }
     }
 }
