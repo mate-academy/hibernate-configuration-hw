@@ -8,7 +8,6 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
     private static final MovieService movieService =
                                 (MovieService) injector.getInstance(MovieService.class);
-    private static final Long WRONG_ID = 100L;
 
     public static void main(String[] args) {
         Movie movieMatrix = new Movie("Matrix", "It depicts a dystopian future in which "
@@ -20,6 +19,5 @@ public class Main {
 
         System.out.println(movieService.get(1L));
         System.out.println(movieService.get(2L));
-        System.out.println(movieService.get(WRONG_ID));
     }
 }
