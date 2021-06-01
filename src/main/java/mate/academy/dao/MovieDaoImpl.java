@@ -1,5 +1,6 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.lib.Dao;
 import mate.academy.lib.exception.DataProcessingException;
 import mate.academy.model.Movie;
@@ -10,9 +11,10 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+    private SessionFactory sessionFactory = HibernateUtil.getSessionFactor();
+
     @Override
     public Movie add(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactor();
         Session session = null;
         Transaction transaction = null;
         try {
@@ -35,13 +37,18 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Movie get(Long id) {
-        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactor();
-                Session session = sessionFactory.openSession()) {
-            return session.get(Movie.class, id);
+    public Optional<Movie> get(Long id) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie by id "
             + id + " from Db");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }
