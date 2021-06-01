@@ -59,8 +59,12 @@ public class Movie {
 
     @Override
     public boolean equals(Object movie) {
-        if (this == movie) return true;
-        if (movie == null || getClass() != movie.getClass()) return false;
+        if (this == movie) {
+            return true;
+        }
+        if (movie == null || getClass() != movie.getClass()) {
+            return false;
+        }
         Movie otherMovie = (Movie) movie;
         return Objects.equals(id, otherMovie.id)
                 && Objects.equals(title, otherMovie.title)

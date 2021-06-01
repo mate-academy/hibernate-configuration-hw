@@ -15,8 +15,7 @@ public class Main {
         grandBudapestHotel.setTitle("The Grand Budapest Hotel");
         grandBudapestHotel.setDescription("Da best work by Wes Anderson");
 
-
         System.out.println(movieService.add(grandBudapestHotel));
-        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(grandBudapestHotel.getId()));
     }
 }
