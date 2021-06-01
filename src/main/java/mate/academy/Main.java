@@ -10,9 +10,7 @@ public class Main {
             injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
-        Movie movie = new Movie();
-        movie.setTitle("Avatar");
-        movie.setDescription("12+");
+        Movie movie = new Movie("Avatar", "12+");
         movieService.add(movie);
 
         Movie movieFromDbById = movieService.get(movie.getId());
