@@ -13,7 +13,7 @@ public class Movie {
     private String title;
     private String description;
 
-    private Movie() {
+    public Movie() {
     }
 
     public Movie(String title, String description) {
