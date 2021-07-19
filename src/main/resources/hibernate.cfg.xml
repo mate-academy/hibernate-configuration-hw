@@ -7,11 +7,11 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hw</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">password</property>
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.connection.pool_size">10</property>
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <!-- SQL dialect -->
