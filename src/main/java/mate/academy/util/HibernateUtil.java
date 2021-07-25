@@ -15,7 +15,6 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("mate-academy");
         EntityManager entityManager = emf.createEntityManager();
-        // Get the Hibernate Session from the EntityManager in JPA
         Session session = entityManager.unwrap(org.hibernate.Session.class);
         return session.getSessionFactory();
     }
