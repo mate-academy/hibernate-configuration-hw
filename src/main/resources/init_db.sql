@@ -1,0 +1,2 @@
+DROP SCHEMA `cinema_db`;
+CREATE SCHEMA `cinema_db` DEFAULT CHARACTER SET utf8 ;
