@@ -26,7 +26,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error while adding a movie", e);
+            throw new DataProcessingException("Error while adding a movie: " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,7 +41,7 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = sessionFactory.openSession()) {
             movie = session.get(Movie.class, id);
         } catch (Exception e) {
-            throw new DataProcessingException("Error while getting a movie", e);
+            throw new DataProcessingException("Error while getting a movie by id: " + id, e);
         }
         return Optional.ofNullable(movie);
     }
