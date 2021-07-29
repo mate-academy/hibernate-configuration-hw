@@ -11,7 +11,7 @@ public class HibernateUtil {
 
     public static SessionFactory getSessionFactory() {
         if (instance == null) {
-            return new Configuration().configure().buildSessionFactory();
+            instance = new Configuration().configure().buildSessionFactory();
         }
         return instance;
     }
