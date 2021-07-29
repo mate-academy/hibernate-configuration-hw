@@ -1,11 +1,12 @@
 package mate.academy.dao.impl;
 
 import java.util.Optional;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import mate.academy.dao.MovieDao;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class MovieDaoImpl implements MovieDao {
@@ -25,7 +26,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can`t add movie: " + movie, e);
+            throw new DataProcessingException("Can`t add movie: " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,7 +42,7 @@ public class MovieDaoImpl implements MovieDao {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {
-            throw new RuntimeException("Can`t get movie by id: " + id, e);
+            throw new DataProcessingException("Can`t get movie by id: " + id, e);
         } finally {
             if (session != null) {
                 session.close();
