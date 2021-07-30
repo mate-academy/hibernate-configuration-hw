@@ -9,15 +9,15 @@ import mate.academy.service.MovieService;
 @Service
 public class MovieServiceImpl implements MovieService {
     @Inject
-    private MovieDao carDao;
+    private MovieDao movieDao;
 
     @Override
     public Movie add(Movie movie) {
-        return carDao.add(movie);
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        return carDao.get(id).get();
+        return movieDao.get(id).get();
     }
 }
