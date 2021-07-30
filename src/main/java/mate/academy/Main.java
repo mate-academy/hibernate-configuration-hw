@@ -6,10 +6,10 @@ import mate.academy.service.MovieService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
+    private static final MovieService movieService = (MovieService)
+            injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
-
         Movie matrixOne = new Movie();
         matrixOne.setTitle("The Matrix 1");
         movieService.add(matrixOne);
