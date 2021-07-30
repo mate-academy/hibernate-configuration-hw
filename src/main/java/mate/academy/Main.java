@@ -11,10 +11,10 @@ public class Main {
             (MovieService) injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
-        Movie[] myFavoritesMovie = new Movie[] {
-                new Movie("Avengers","Marvel"),
-                new Movie("Avengers1","Marvel1"),
-                new Movie("Avengers2","Marvel2"),
+        Movie[] myFavoritesMovie = new Movie[]{
+                new Movie("Avengers", "Marvel"),
+                new Movie("Avengers1", "Marvel1"),
+                new Movie("Avengers2", "Marvel2"),
         };
         Arrays.stream(myFavoritesMovie).forEach(service::add);
 
