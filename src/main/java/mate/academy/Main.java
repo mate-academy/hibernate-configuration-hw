@@ -10,7 +10,7 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movieOne = new Movie("Rick and Morty", "film");
         movieService.add(movieOne);
-        System.out.println(movieService.get(1l));
+        System.out.println(movieService.get(1L));
 
     }
 }
