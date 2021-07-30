@@ -16,6 +16,7 @@ public class Movie {
     private String description;
 
     public Movie() {
+
     }
 
     public Long getId() {
