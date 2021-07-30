@@ -12,13 +12,12 @@ import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     @Override
     public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = sessionFactory.openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
@@ -37,10 +36,10 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("CCouldn't get movie from DB were id: " + id, e);
+            throw new DataProcessingException("Couldn't get movie from DB were id: " + id, e);
         }
     }
 }
