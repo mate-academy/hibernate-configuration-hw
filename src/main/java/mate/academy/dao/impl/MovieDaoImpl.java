@@ -12,9 +12,10 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static SessionFactory sessionFactory;
     @Override
     public Movie add(Movie movie) {
+        sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
@@ -37,12 +38,13 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
+        sessionFactory = HibernateUtil.getSessionFactory();
         Movie movie;
         try (Session session = sessionFactory.openSession()) {
-            movie = session.get(Movie.class, id);
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Error while getting a movie by id: " + id, e);
         }
-        return Optional.ofNullable(movie);
+
     }
 }
