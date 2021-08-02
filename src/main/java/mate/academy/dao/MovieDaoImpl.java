@@ -8,7 +8,6 @@ import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
@@ -21,7 +20,7 @@ public class MovieDaoImpl implements MovieDao {
             session.save(movie);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null){
+            if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't add movie " + movie + " to DB", e);
