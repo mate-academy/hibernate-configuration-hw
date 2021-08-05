@@ -5,14 +5,13 @@ import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
     public Movie add(Movie movie) {
@@ -24,11 +23,11 @@ public class MovieDaoImpl implements MovieDao {
             session.save(movie);
             transaction.commit();
             return movie;
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Movie " + movie + "saving to DB failed " + e);
+            throw new DataProcessingException("Movie " + movie + "saving to DB failed ", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -40,8 +39,8 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (HibernateException e) {
-            throw new DataProcessingException("Movie with id " + id + "search in DB failed" + e);
+        } catch (Exception e) {
+            throw new DataProcessingException("Movie with id " + id + "search in DB failed", e);
         }
     }
 }
