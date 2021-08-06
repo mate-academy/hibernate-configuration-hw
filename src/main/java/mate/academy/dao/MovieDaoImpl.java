@@ -22,7 +22,7 @@ public class MovieDaoImpl implements MovieDao {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            movie = (Movie) session.save(movie);
+            session.save(movie);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
