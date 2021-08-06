@@ -28,7 +28,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(e.getMessage());
+            throw new DataProcessingException("movie didn't save" + e.getMessage());
         } finally {
             if (session != null) {
                 session.close();
@@ -38,10 +38,9 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Optional<Movie> get(Long id) {
+    public Movie get(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
-            Movie movie = session.get(Movie.class, id);
-            return Optional.of(movie);
+            return session.get(Movie.class, id);
         } catch (Exception e) {
             throw new NoSuchElementException("Movie not found with id: " + id);
         }
