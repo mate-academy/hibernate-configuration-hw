@@ -15,10 +15,7 @@ public class HibernateUtil {
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("mate-academy");
-            EntityManager entityManager = emf.createEntityManager();
-            Session session = entityManager.unwrap(org.hibernate.Session.class);
-            sessionFactory = session.getSessionFactory();
+         return new Configuration().configure().buildSessionFactory();
         }
         return sessionFactory;
     }
