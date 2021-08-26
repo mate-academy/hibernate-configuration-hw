@@ -1,9 +1,12 @@
 package mate.academy.service;
 
 import mate.academy.dao.MovieDao;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
+
+import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -18,6 +21,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id);
+        Optional<Movie> movieOptional = movieDao.get(id);
+        return movieOptional.orElseThrow(() -> new DataProcessingException("Movie with id: " + id + " didn't find"));
     }
 }

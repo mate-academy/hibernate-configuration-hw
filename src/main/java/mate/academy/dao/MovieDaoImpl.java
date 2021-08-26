@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Dao
@@ -40,7 +39,8 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
-            return session.get(Movie.class, id);
+            Movie movie = session.get(Movie.class, id);
+            return movie == null ? Optional.empty() : Optional.of(movie);
         } catch (Exception e) {
             throw new DataProcessingException("Movie not found with id: " + id);
         }
