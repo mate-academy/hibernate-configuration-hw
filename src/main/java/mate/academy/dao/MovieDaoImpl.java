@@ -7,7 +7,6 @@ import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
 import java.util.Optional;
 
 @Dao
@@ -40,7 +39,7 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             Movie movie = session.get(Movie.class, id);
-            return movie == null ? Optional.empty() : Optional.of(movie);
+            return Optional.ofNullable(movie);
         } catch (Exception e) {
             throw new DataProcessingException("Movie not found with id: " + id);
         }
