@@ -1,6 +1,12 @@
 package mate.academy.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "movies")
 public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
@@ -27,5 +33,14 @@ public class Movie {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
