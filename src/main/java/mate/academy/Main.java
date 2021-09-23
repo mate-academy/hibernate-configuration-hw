@@ -5,7 +5,7 @@ import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
 
 public class Main {
-    private static final Injector INJECTOR = Injector.getInstance("mate.academy");
+    private static final Injector injector = Injector.getInstance("mate.academy");
 
     public static void main(String[] args) {
         Movie movieDune = new Movie();
@@ -14,7 +14,7 @@ public class Main {
         Movie movieMatrix = new Movie();
         movieMatrix.setTitle("The Matrix Resurrections");
         movieMatrix.setDescription("Realise 22.12.2021");
-        MovieService movieService = (MovieService) INJECTOR.getInstance(MovieService.class);
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.add(movieDune);
         movieService.add(movieMatrix);
         Movie movieId1 = movieService.get(1L);

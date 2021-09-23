@@ -36,8 +36,6 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession();) {
             return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("The transaction ended incorrectly", e);
         }
     }
 }
