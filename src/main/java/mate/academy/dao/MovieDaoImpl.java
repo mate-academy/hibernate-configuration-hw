@@ -1,14 +1,13 @@
 package mate.academy.dao;
 
+import java.util.List;
+import java.util.Optional;
 import mate.academy.exceptions.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import java.util.List;
-import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
@@ -39,7 +38,7 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (RuntimeException e) {
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("Can't get movie by id from DB", e);
         }
     }
 
@@ -70,7 +69,7 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from Movie").list();
         } catch (RuntimeException e) {
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("Can't get all movies from DB", e);
         }
     }
 
