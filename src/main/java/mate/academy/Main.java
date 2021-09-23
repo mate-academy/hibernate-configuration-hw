@@ -27,14 +27,13 @@ public class Main {
 
         System.out.println(movieService.getAll() + "\n");
 
-        Movie ironman2 = movieService.get(3L);
-        ironman2.setTitle("IronMan 2 ");
-        ironman2.setDescription("Marvel second film about Iron Man");
-        System.out.println(movieService.update(ironman2) + "\n");
+        ironman.setTitle("IronMan 2 ");
+        ironman.setDescription("Marvel second film about Iron Man");
+        System.out.println(movieService.update(ironman) + "\n");
 
         System.out.println(movieService.getAll() + "\n");
 
-        movieService.delete(ironman2);
+        movieService.delete(ironman);
 
         System.out.println(movieService.getAll() + "\n");
     }
