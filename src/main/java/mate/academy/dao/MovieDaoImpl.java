@@ -17,8 +17,7 @@ public class MovieDaoImpl implements MovieDao {
         Session session = null;
         Transaction transaction = null;
         try {
-            SessionFactory sessionFactory =
-                    HibernateUtil.getSessionFactory();
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
