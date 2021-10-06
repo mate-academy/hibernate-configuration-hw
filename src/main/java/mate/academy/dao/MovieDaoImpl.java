@@ -11,7 +11,6 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-
     @Override
     public Movie add(Movie movie) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -26,7 +25,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Couldn't save movie to DB!");
+            throw new DataProcessingException("Couldn't save movie to DB!", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -37,14 +36,12 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Session session;
-        Movie movie;
-        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory()) {
-            session = sessionFactory.openSession();
-            movie = session.get(Movie.class, id);
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        try (Session session = sessionFactory.openSession()) {
+            Movie movie = session.get(Movie.class, id);
+            return Optional.ofNullable(movie);
         } catch (Exception e) {
-            throw new DataProcessingException("Couldn't get movie from DB!");
+            throw new DataProcessingException("Couldn't get movie from DB!", e);
         }
-        return Optional.ofNullable(movie);
     }
 }

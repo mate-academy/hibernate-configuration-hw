@@ -13,6 +13,6 @@ public class Main {
         movie.setTitle("Movie Title 2");
         movie.setDescription("Short movie description 2");
         movieService.add(movie);
-        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(movie.getId()));
     }
 }
