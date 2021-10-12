@@ -37,16 +37,10 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Transaction transaction = null;
         Movie movie;
         try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
             movie = session.get(Movie.class, id);
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             throw new DataProcessingException("Can't get movie by id: " + id + " from DB", e);
         }
         return Optional.ofNullable(movie);
