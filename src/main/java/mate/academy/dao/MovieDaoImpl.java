@@ -1,6 +1,7 @@
 package mate.academy.dao;
 
 import java.util.Optional;
+
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
@@ -38,16 +39,10 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("The data weren't received!");
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
-        return Optional.ofNullable(session.get(Movie.class, id));
     }
 }
