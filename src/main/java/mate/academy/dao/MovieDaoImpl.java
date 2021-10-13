@@ -43,6 +43,10 @@ public class MovieDaoImpl implements MovieDao {
             session = sessionFactory.openSession();
         } catch (Exception e) {
             throw new DataProcessingException("The data weren't received!");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return Optional.ofNullable(session.get(Movie.class, id));
     }
