@@ -26,7 +26,9 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Rollback was called, transaction wasn't done!");
+            throw new DataProcessingException("Rollback was called, "
+                    + "transaction on wasn't done, movie: "
+                    + movie + " wasn't added!", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,7 +43,7 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("The data weren't received!");
+            throw new DataProcessingException("The data on id: " + id + " weren't received!", e);
         }
     }
 }
