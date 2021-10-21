@@ -10,8 +10,8 @@ public class Main {
             (MovieService) injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
-        Movie movie1 = new Movie("Terminator 5", "Awesome movie");
-        Movie movie2 = new Movie("Terminator 2", "Very awesome movie");
+        Movie movie1 = new Movie("Terminator 555", "Awesome movie");
+        Movie movie2 = new Movie("Terminator 128", "Very awesome movie");
         System.out.println("Movies before saving in DB");
         System.out.println(movie1);
         System.out.println(movie2);
@@ -27,6 +27,5 @@ public class Main {
         System.out.println("Movies read from DB");
         System.out.println(movie1);
         System.out.println(movie2);
-
     }
 }
