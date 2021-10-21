@@ -26,7 +26,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't save a model to DB", e);
+            throw new DataProcessingException("Can't save a movie: " + movie + " to DB", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -39,8 +39,6 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("Can't get a model from DB", e);
         }
     }
 }
