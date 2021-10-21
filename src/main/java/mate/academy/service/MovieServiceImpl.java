@@ -1,8 +1,7 @@
 package mate.academy.service;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 import mate.academy.dao.MovieDao;
-import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
@@ -13,16 +12,13 @@ public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
     @Override
-    public Movie add(Movie movie) throws DataProcessingException {
+    public Movie add(Movie movie) {
         return movieDao.add(movie);
     }
 
     @Override
-    public Movie get(Long id) throws DataProcessingException {
-        Optional<Movie> movie = movieDao.get(id);
-        if (movie.isPresent()) {
-            return movie.get();
-        }
-        throw new DataProcessingException("No movie by id: " + id);
+    public Movie get(Long id) {
+        return movieDao.get(id).orElseThrow(()
+                -> new NoSuchElementException("No movie by id: " + id));
     }
 }

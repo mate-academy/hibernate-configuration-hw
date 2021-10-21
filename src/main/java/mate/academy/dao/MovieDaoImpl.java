@@ -13,7 +13,7 @@ import org.hibernate.Transaction;
 public class MovieDaoImpl implements MovieDao {
 
     @Override
-    public Movie add(Movie movie) throws DataProcessingException {
+    public Movie add(Movie movie) {
         Transaction transaction = null;
         Session session = null;
         try {
@@ -38,7 +38,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Optional<Movie> get(Long id) throws DataProcessingException {
+    public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
