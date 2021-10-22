@@ -15,6 +15,6 @@ public class Main {
         movie.setTitle("Shrek");
         movie.setDescription("Fist Oscar winner");
         movieService.add(movie);
-        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(movie.getId()));
     }
 }
