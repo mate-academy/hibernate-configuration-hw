@@ -51,7 +51,7 @@ public class Movie {
         Movie movie = (Movie) o;
         return Objects.equals(id, movie.id) 
         	&& Objects.equals(title, movie.title)
-                && Objects.equals(description, movie.description);
+            && Objects.equals(description, movie.description);
     }
 
     @Override
