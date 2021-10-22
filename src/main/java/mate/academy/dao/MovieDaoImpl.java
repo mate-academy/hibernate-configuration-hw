@@ -11,7 +11,7 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private SessionFactory sessionFactory = HibernateUtil
+    private static final SessionFactory sessionFactory = HibernateUtil
             .getSessionFactory();
 
     @Override
@@ -23,7 +23,7 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -34,7 +34,7 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
-        return null;
+        return movie;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session
                     .get(Movie.class, id));
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             throw new DataProcessingException("Cannot find"
                     + "movie by id. Id: " + id, e);
         }
