@@ -1,7 +1,6 @@
 package mate.academy.service;
 
 import mate.academy.dao.MovieDao;
-import mate.academy.dao.MovieDaoImpl;
 import mate.academy.lib.Inject;
 import mate.academy.model.Movie;
 
