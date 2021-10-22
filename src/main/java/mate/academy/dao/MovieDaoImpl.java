@@ -26,7 +26,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Add movie to database transaction failed");
+            throw new DataProcessingException("Add movie to database transaction failed", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -38,6 +38,10 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         Session session = sessionFactory.openSession();
-        return Optional.ofNullable(session.get(Movie.class, id));
+        try {
+            return Optional.ofNullable(session.get(Movie.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException("Get movie from database transaction failed", e);
+        }
     }
 }
