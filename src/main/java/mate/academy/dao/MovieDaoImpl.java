@@ -21,7 +21,7 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (IllegalStateException e) {
+        } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -39,7 +39,7 @@ public class MovieDaoImpl implements MovieDao {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try(Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (IllegalStateException e) {
+        } catch (RuntimeException e) {
             throw new DataProcessingException("Can't get movie from DB with id: " + id, e);
         }
     }
