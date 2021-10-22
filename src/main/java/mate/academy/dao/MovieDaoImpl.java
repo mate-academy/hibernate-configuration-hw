@@ -16,24 +16,31 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
+        Session session = null;
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-            return movie;
-        } catch (Exception e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't saving Movie "
-                        + movie + " to DB", e);
+            throw new DataProcessingException("Can't add movie to db " + movie + ". ", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+        return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
         Session session = sessionFactory.openSession();
-        return Optional.ofNullable(session.get(Movie.class, id));
+        Optional<Movie> movie = Optional.ofNullable(session.get(Movie.class, id));
+        session.close();
+        return movie;
     }
 }
