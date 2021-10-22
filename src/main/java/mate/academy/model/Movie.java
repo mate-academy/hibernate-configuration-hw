@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 @Entity(name = "movies")
 public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
@@ -14,8 +16,6 @@ public class Movie {
     public Movie() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
