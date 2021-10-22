@@ -15,7 +15,6 @@ public class Main {
 
         MovieDao movieDao = new MovieDaoImpl();
         Movie movie = new Movie();
-        movie.setId(10L);
         movie.setTitle("Terminator 5");
         movie.setDescription("awesome movie");
 
