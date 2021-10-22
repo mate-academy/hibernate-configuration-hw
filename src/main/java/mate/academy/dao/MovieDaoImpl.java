@@ -14,8 +14,10 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie save(Movie movie) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = null;
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
@@ -24,6 +26,10 @@ public class MovieDaoImpl implements MovieDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't save movie to DB", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return movie;
     }
