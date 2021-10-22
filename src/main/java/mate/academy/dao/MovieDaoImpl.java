@@ -9,9 +9,10 @@ import org.hibernate.Transaction;
 import java.util.Optional;
 
 public class MovieDaoImpl implements MovieDao {
+    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
     @Override
     public Movie save(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
@@ -35,8 +36,10 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession();) {
+        try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
+        } catch (Exception e) {
+            throw new RuntimeException("Can't get a movie from the DB: " + id, e);
         }
     }
 }

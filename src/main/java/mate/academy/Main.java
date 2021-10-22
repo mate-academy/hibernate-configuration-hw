@@ -12,7 +12,7 @@ public class Main {
 
         Movie movie = new Movie();
         movie.setId(10L);
-        movie.setTitle("Terminator 5");
+        movie.setTitle("Terminator 555");
         movie.setDescription("Awesome movie");
 
         movieDao.save(movie);
