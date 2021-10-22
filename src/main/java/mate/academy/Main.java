@@ -14,6 +14,6 @@ public class Main {
         movie.setDescription("description");
         movie.setTitle("Titanic");
         System.out.println(movieService.add(movie));
-        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(movie.getId()));
     }
 }
