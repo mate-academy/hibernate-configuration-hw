@@ -21,6 +21,7 @@ public class Main {
         movieService.add(movie1);
         movieService.add(movie2);
         movieService.add(movie3);
-        System.out.println(movieService.get(movie2.getId()));
+        Movie movie = movieService.get(movie2.getId());
+        System.out.println(movie.getDescription());
     }
 }

@@ -32,12 +32,11 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
-        return movie; // Why do we need to return movie?
+        return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        Optional<Movie> optionalMovie;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
