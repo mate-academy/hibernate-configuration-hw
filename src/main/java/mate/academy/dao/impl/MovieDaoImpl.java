@@ -12,9 +12,10 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+    private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
     @Override
     public Movie add(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
