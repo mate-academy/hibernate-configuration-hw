@@ -1,9 +1,8 @@
 package mate.academy.service;
 
-import java.util.Optional;
 import mate.academy.model.Movie;
 
-public interface MovieService extends GenericService<Movie> {
+public interface MovieService {
 
     Movie save(Movie element);
 
