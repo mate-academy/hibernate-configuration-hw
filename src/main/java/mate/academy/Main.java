@@ -1,7 +1,7 @@
 package mate.academy;
 
 import mate.academy.util.HibernateUtil;
-import model.Movie;
+import mate.academy.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
