@@ -1,19 +1,16 @@
 package mate.academy;
 
-import mate.academy.util.HibernateUtil;
+import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import mate.academy.service.MovieService;
 
 public class Main {
+    private static final Injector injector = Injector.getInstance("mate.academy");
+
     public static void main(String[] args) {
-        Movie movie = new Movie("Goverment", "Big Bos and You");
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(movie);
-        transaction.commit();
-        session.close();
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+        Movie movie = new Movie("Bob & Jack", "Two purple person");
+        System.out.println(movieService.add(movie));
+        System.out.println(movieService.get(movie.getId()));
     }
 }
