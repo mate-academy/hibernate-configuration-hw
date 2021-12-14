@@ -24,9 +24,9 @@ public class MovieDaoImpl implements MovieDao {
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
-                throw new DataProcessingException(
-                        "Can't commit transaction. Transaction is rolled back", e);
             }
+            throw new DataProcessingException(
+                    "Can't add '" + movie.getTitle() + "' movie. Transaction is rolled back", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -37,13 +37,11 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Optional<Movie> movie;
         try (Session session = getSessionFactory().openSession()) {
-            movie = Optional.ofNullable(session.get(Movie.class, id));
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (HibernateException e) {
             throw new DataProcessingException(
-                    "Can't get movie with id = " + id + "from DB", e);
+                    "Can't get movie with id = " + id + " from DB", e);
         }
-        return movie;
     }
 }
