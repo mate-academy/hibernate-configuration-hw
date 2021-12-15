@@ -10,13 +10,10 @@ public class Main {
         Injector injector = Injector.getInstance("mate");
         MovieService movieService = (MovieService) injector
                 .getInstance(MovieService.class);
-
         Movie movie = new Movie();
         movie.setTitle("Dark Knight");
         movie.setDescription("New movie");
-
         movieService.add(movie);
-
         System.out.println(movieService.get(1L));
     }
 }
