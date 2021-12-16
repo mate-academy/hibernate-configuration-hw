@@ -5,7 +5,6 @@ import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
 
 public class Main {
-
     public static void main(String[] args) {
         Injector injector = Injector.getInstance("mate");
         MovieService movieService = (MovieService) injector
