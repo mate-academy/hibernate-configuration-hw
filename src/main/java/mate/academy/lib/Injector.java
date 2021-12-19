@@ -70,7 +70,7 @@ public class Injector {
         }
         throw new RuntimeException("Can't find class which implements "
                 + certainInterface.getName()
-                + " interface and has valid annotation (Dao or Service)");
+                + " interface and has valid annotation (dao or Service)");
     }
 
     private Object getNewInstance(Class<?> certainClass) {
