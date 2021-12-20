@@ -12,8 +12,8 @@ public class Main {
                 (MovieService) injector.getInstance(MovieService.class);
 
         Movie toyStory = new Movie();
-        toyStory.setTitle("STAS ASKET");
-        toyStory.setDescription("Пропащинск, БАЗА КОРМИТ");
+        toyStory.setTitle("Tusa V Kievi");
+        toyStory.setDescription("napilis");
         movieService.add(toyStory);
         Movie movieFromDB = movieService.get(toyStory.getId());
         System.out.println(movieFromDB);
