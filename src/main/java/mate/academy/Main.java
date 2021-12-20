@@ -23,6 +23,5 @@ public class Main {
         Movie movieFromDb = movieService.get(2L);
         System.out.println(movieFromDb);
         Movie movieFromDbBadId = movieService.get(-1L);
-        System.out.println(movieFromDbBadId);
     }
 }
