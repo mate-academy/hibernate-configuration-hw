@@ -41,8 +41,6 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = sessionFactory.openSession()) {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
-        } catch (Exception exception) {
-            throw new DataProcessingException("Can't get movie from DB by id: " + id, exception);
         }
     }
 }
