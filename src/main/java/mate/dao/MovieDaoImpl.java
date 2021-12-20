@@ -1,5 +1,6 @@
 package mate.dao;
 
+import java.util.Optional;
 import mate.exceptions.DataProcessingException;
 import mate.lib.Dao;
 import mate.model.Movie;
@@ -8,7 +9,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
@@ -40,7 +40,7 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         Movie movie;
         try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-             Session session = sessionFactory.openSession()) {
+                Session session = sessionFactory.openSession()) {
             movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (HibernateException e) {
