@@ -10,7 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 @Dao
-public class MovieDaoImpl implements MovieDao{
+public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
