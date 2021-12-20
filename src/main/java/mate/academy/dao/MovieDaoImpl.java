@@ -3,24 +3,20 @@ package mate.academy.dao;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.models.Movie;
-import mate.academy.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
 import java.util.Optional;
+import static mate.academy.util.HibernateUtil.getSessionFactory;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
     @Override
     public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = sessionFactory.openSession();
+            session = getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
@@ -39,16 +35,10 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Movie movie = null;
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            movie = session.get(Movie.class, id);
+        try (Session session = getSessionFactory().openSession()){
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (HibernateException e) {
             throw new DataProcessingException("Can't get movie wiht id = " + id + " from DB", e);
-        } finally {
-            session.close();
         }
-        return Optional.ofNullable(movie);
     }
 }
