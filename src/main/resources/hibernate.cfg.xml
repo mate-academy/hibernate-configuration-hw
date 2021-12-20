@@ -9,6 +9,5 @@
         <property name="hbm2ddl.auto">create-drop</property>
 
         <mapping class="mate.academy.model.Movie"/>
-
     </session-factory>
 </hibernate-configuration>
