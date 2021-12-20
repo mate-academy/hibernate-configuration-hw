@@ -11,7 +11,6 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-
     @Override
     public Movie add(Movie movie) {
         Session session = null;
@@ -25,7 +24,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add movie to DB ");
+            throw new DataProcessingException("Can't add movie to DB. Movie: "+ movie);
         } finally {
             if (session != null) {
                 session.close();

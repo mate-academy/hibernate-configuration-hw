@@ -14,6 +14,5 @@ public class Main {
         movie.setDescription("Awesome movie");
         movieService.add(movie);
         System.out.println(movieService.get(movie.getId()));
-
     }
 }
