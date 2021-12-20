@@ -1,7 +1,7 @@
 package mate.dao;
 
-import mate.model.Movie;
 import java.util.Optional;
+import mate.model.Movie;
 
 public interface MovieDao {
     Movie add(Movie movie);
