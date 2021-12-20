@@ -9,8 +9,8 @@ public class Main {
     private static final MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
-        Movie movie1 = new Movie("qwerty", "asdfghnbvcxz");
-        Movie movie2 = new Movie("Tusa V Kievi", "nupitsa");
+        Movie movie1 = new Movie("qwerty", "12345678");
+        Movie movie2 = new Movie("ytrewq", "87654321");
 
         movieService.add(movie1);
         movieService.add(movie2);
