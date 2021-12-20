@@ -16,9 +16,6 @@ public class Movie {
     private String title;
     private String description;
 
-    public Movie() {
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
