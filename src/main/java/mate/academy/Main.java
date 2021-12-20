@@ -19,6 +19,6 @@ public class Main {
         movie2.setDescription("Oscar 2018 - Best Actress in a Leading Role");
         movieService.add(movie2);
 
-        System.out.println(movieService.get(2L));
+        System.out.println(movieService.get(movie2.getId()));
     }
 }
