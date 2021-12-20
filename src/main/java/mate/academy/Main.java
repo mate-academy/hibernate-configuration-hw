@@ -27,6 +27,6 @@ public class Main {
                 + "возвращено пиратами на старое место.");
         Movie savedMovie = movieService.add(movie);
         System.out.println(savedMovie);
-        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(movie.getId()));
     }
 }
