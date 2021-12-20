@@ -1,7 +1,21 @@
 package mate.academy;
 
-public class Main {
-    public static void main(String[] args) {
+import mate.academy.lib.Injector;
+import mate.academy.model.Movie;
+import mate.academy.sevice.MovieService;
 
+public class Main {
+    private static final Injector injector = Injector.getInstance("mate.academy");
+
+    public static void main(String[] args) {
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+
+        Movie movie = new Movie();
+        movie.setTitle("Movie");
+        movie.setDescription("Movie-the best!");
+
+        movieService.add(movie);
+        Movie movieFromDB = movieService.get(1L);
+        System.out.println(movieFromDB);
     }
 }
