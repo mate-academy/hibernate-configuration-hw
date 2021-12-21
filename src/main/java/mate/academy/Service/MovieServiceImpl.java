@@ -1,7 +1,5 @@
 package mate.academy.Service;
 
-import java.util.Optional;
-
 import mate.academy.dao.MovieDao;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
