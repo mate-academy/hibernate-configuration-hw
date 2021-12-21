@@ -16,6 +16,5 @@ public class Main {
 
         movieService.add(movie);
         System.out.println(movieService.get(movie.getId()));
-
     }
 }
