@@ -22,11 +22,11 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (Exception exception) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't save movie to DB" + movie, exception);
+            throw new DataProcessingException("Can't save movie to DB" + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -37,11 +37,8 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (Exception exception) {
-            throw new DataProcessingException("Can't find movie by id:" + id, exception);
         }
     }
 }
