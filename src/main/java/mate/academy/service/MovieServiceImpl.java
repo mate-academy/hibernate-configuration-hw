@@ -1,6 +1,5 @@
 package mate.academy.service;
 
-import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
@@ -18,10 +17,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        Optional<Movie> movie = movieDao.get(id);
-        if (movie.isPresent()) {
-            return movie.get();
-        }
-        throw new RuntimeException("There is no movie with id " + id);
+        return movieDao.get(id).orElseThrow(() ->
+                new RuntimeException("There is no movie with id " + id));
     }
 }
