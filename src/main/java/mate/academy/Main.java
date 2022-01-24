@@ -18,7 +18,6 @@ public class Main {
         Injector instanceService = Injector.getInstance("mate.academy.services");
         MovieService movieService = (MovieServiceImpl) instanceService
                 .getInstance(MovieService.class);
-
         movieService.add(firstMovie);
         movieService.add(secondMovie);
     }
