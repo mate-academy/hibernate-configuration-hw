@@ -5,8 +5,8 @@ import mate.academy.lib.Dao;
 import mate.academy.models.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import java.util.Optional;
+import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
@@ -19,14 +19,14 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch(Exception e) {
-            if(transaction != null) {
+        } catch (Exception e) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't add new information to DB");
         } finally {
-            if(session != null) {
-               session.close();
+            if (session != null) {
+                session.close();
             }
         }
         return movie;

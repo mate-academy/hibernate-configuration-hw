@@ -7,9 +7,6 @@ import mate.academy.services.MovieServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        Injector instanceService = Injector.getInstance("mate.academy.services");
-        MovieService movieService = (MovieServiceImpl) instanceService.getInstance(MovieService.class);
-
         Movie firstMovie = new Movie();
         firstMovie.setTitle("Ghost Busters");
         firstMovie.setDescription("great!");
@@ -17,6 +14,9 @@ public class Main {
         Movie secondMovie = new Movie();
         secondMovie.setTitle("Harry Potter and the Chamber of Secrets");
         secondMovie.setDescription("great either!");
+
+        Injector instanceService = Injector.getInstance("mate.academy.services");
+        MovieService movieService = (MovieServiceImpl) instanceService.getInstance(MovieService.class);
 
         movieService.add(firstMovie);
         movieService.add(secondMovie);

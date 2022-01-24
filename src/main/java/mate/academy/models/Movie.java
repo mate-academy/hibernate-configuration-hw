@@ -1,6 +1,10 @@
 package mate.academy.models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 @Table(name = "movie", schema = "cinema_shop")
@@ -10,6 +14,9 @@ public class Movie {
     private Long id;
     private String title;
     private String description;
+
+    public Movie() {
+    }
 
     public Long getId() {
         return id;
@@ -33,17 +40,5 @@ public class Movie {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Movie() {
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 }
