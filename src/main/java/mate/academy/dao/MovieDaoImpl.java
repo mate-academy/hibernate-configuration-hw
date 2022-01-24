@@ -1,17 +1,17 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.models.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
-import java.util.Optional;
 import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
-    public Movie add(Movie movie) throws DataProcessingException {
+    public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
