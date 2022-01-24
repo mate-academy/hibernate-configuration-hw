@@ -55,5 +55,4 @@ public class Movie {
                 + ", description='" + description + '\''
                 + '}';
     }
-
 }
