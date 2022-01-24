@@ -1,17 +1,17 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.models.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
-    public Movie add(Movie movie) throws DataProcessingException {
+    public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -19,14 +19,14 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch(Exception e) {
-            if(transaction != null) {
+        } catch (Exception e) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't add new information to DB");
         } finally {
-            if(session != null) {
-               session.close();
+            if (session != null) {
+                session.close();
             }
         }
         return movie;
