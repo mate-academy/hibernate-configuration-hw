@@ -19,4 +19,5 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
         return movieDao.get(id).get();
     }
+
 }
