@@ -20,6 +20,6 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
 
         return movieDao.get(id)
-                .orElseThrow(() -> new RuntimeException("No movie by id" +  id));
+                .orElseThrow(() -> new RuntimeException("No movie by id" + id));
     }
 }
