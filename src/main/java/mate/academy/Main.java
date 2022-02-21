@@ -16,5 +16,6 @@ public class Main {
         movieService.add(movie);
 
         System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(100L));
     }
 }
