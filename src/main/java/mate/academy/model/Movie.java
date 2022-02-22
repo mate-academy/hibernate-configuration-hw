@@ -49,5 +49,4 @@ import javax.persistence.Table;
                     + description + '\'' + '}';
         }
     }
-
-
+    

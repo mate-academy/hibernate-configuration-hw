@@ -23,3 +23,4 @@ public class MovieServiceImpl implements MovieService {
                 .orElseThrow(() -> new RuntimeException("No movie by id" +  id));
     }
 }
+
