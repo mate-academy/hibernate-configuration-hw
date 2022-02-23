@@ -35,10 +35,9 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
-        Optional<Movie> movie;
         try {
             session = sessionFactory.openSession();
-            movie = Optional.ofNullable(session.get(Movie.class, id));
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get Movie from DB", e);
         } finally {
@@ -46,6 +45,5 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
-        return movie;
     }
 }
