@@ -1,10 +1,9 @@
 package mate.academy;
 
+import java.util.Arrays;
 import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
-
-import java.util.Arrays;
 
 public class Main {
     private static MovieService movieService;
@@ -35,7 +34,7 @@ public class Main {
                 movieService.get(nemoMovie.getId()));
     }
 
-    private static void showMovies(Movie ... movies) {
+    private static void showMovies(Movie...movies) {
         Arrays.stream(movies).forEach(System.out::println);
     }
 

@@ -6,47 +6,46 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-    @Entity
-    @Table(name = "Batman")
-    public class Movie {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Entity
+@Table(name = "movies")
+public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-        private Long id;
-        private String title;
-        private String description;
+    private Long id;
+    private String title;
+    private String description;
 
-        public Long getId() {
-            return id;
-        }
+    public Long getId() {
+        return id;
+    }
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public String getTitle() {
-            return title;
-        }
+    public String getTitle() {
+        return title;
+    }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-        public String getDescription() {
-            return description;
-        }
+    public String getDescription() {
+        return description;
+    }
 
-        public void setDescription(String description) {
-            this.description = description;
-        }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-        @Override
+    @Override
         public String toString() {
-            return "Movie{"
+        return "Movie{"
                     + "id=" + id
                     + ", title='" + title + '\''
                     + ", description='"
                     + description + '\'' + '}';
-        }
     }
-    
+}
