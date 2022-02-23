@@ -10,7 +10,7 @@ public class Main {
             (MovieService) injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
-        Movie interstellar =   movieService.add(Movie.builder()
+        Movie interstellar = movieService.add(Movie.builder()
                 .title("Interstellar").description("My favorite movie").build());
         System.out.println(movieService.get(interstellar.getId()));
     }
