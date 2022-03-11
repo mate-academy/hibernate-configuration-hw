@@ -9,9 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
-        movieService.add(createMovie());
-        Movie movie = movieService.get(1L);
-        System.out.println(movie);
+        Movie movie = movieService.add(createMovie());
+        System.out.println(movieService.get(movie.getId()));
     }
 
     private static Movie createMovie() {
