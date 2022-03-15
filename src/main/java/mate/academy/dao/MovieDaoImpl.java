@@ -11,7 +11,6 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-
     @Override
     public Movie add(Movie movie) {
         Session session = null;
@@ -36,7 +35,6 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Movie movie = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (HibernateException e) {
