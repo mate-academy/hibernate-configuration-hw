@@ -17,7 +17,8 @@ public class Main {
         Movie movie = new Movie();
         movie.setTitle("Wild Max, chapter 3");
         movie.setDescription("apocalyptic movie");
-        movieService.add(movie);
+        Movie addedMovie = movieService.add(movie);
+        System.out.println(addedMovie);
     }
 
     private static void printMovie(MovieService movieService) {
