@@ -11,7 +11,6 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-
     @Override
     public Movie add(Movie movie) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -38,8 +37,15 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Movie movie = session.get(Movie.class, id);
-        return Optional.of(movie);
+        Movie movie;
+        //try with resources will close session automatically
+        try (Session session = sessionFactory.openSession()) {
+            movie = session.get(Movie.class, id);//may return null
+        }
+        if (movie == null) {
+            return Optional.empty();
+        }
+        return Optional.of(movie);//Param value must be non-null, otherwise .of() throws exception
+        //return Optional.ofNullable(movie);
     }
 }
