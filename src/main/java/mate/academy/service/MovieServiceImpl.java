@@ -19,9 +19,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         Optional<Movie> optionalMovie = movieDao.get(id);
-        if (optionalMovie.isEmpty()) {
-            throw new RuntimeException("Exception in method get(Long id) id = " + id);
-        }
-        return optionalMovie.get();
+        return optionalMovie.orElseThrow();
     }
 }
