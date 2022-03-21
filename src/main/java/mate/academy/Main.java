@@ -18,6 +18,5 @@ public class Main {
 
         Movie movieFromDB = movieService.get(returnedMovie.getId());
         System.out.println("movieFromDB: " + movieFromDB);
-
     }
 }

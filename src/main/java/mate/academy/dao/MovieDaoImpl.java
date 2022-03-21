@@ -37,15 +37,8 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Movie movie;
-        //try with resources will close session automatically
         try (Session session = sessionFactory.openSession()) {
-            movie = session.get(Movie.class, id);//may return null
+            return Optional.ofNullable(session.get(Movie.class, id));
         }
-        if (movie == null) {
-            return Optional.empty();
-        }
-        return Optional.of(movie);//Param value must be non-null, otherwise .of() throws exception
-        //return Optional.ofNullable(movie);
     }
 }
