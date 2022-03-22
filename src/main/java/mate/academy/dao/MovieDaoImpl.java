@@ -1,7 +1,7 @@
 package mate.academy.dao;
 
 import java.util.Optional;
-//import mate.academy.exception.DataProcessingException;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
@@ -25,7 +25,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-        //    throw new DataProcessingException("Can't add movie " + movie + " into DB", e);
+            throw new DataProcessingException("Can't add movie " + movie + " into DB", e);
         } finally {
             if (session != null) {
                 session.close();
