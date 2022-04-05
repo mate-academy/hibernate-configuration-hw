@@ -10,7 +10,6 @@ public class Main {
             .getInstance(MovieService.class);
 
     public static void main(String[] args) {
-
         Movie movie = new Movie();
         movie.setTitle("Fear and Loathing in Las Vegas");
         movie.setDescription("An oddball journalist and his "
