@@ -11,14 +11,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 @Dao
-
 public class MovieDaoImp implements MovieDao {
 
     @Override
     public Movie save(Movie movie) {
         Session session = null;
         Transaction transaction = null;
-
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();

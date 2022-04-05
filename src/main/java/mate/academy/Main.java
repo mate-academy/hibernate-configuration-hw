@@ -13,7 +13,6 @@ public class Main {
         movie.setTitle("Avengers 2");
         movie.setDescription("Marvel movie");
         movieService.add(movie);
-
-        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(movie.getId()));
     }
 }
