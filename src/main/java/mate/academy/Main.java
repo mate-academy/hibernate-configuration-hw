@@ -17,7 +17,7 @@ public class Main {
         movie2.setTitle("Insider");
         movie2.setDescription("Quite good one!");
         movieService.add(movie2);
-        Movie movieToGet = movieService.get(2L);
-        System.out.println(movieToGet);
+        System.out.println(movieService.get(movie1.getId()));
+        System.out.println(movieService.get(movie2.getId()));
     }
 }
