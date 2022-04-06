@@ -18,7 +18,7 @@ public class Main {
         harryPotter.setDescription("movie for kids");
         movieService.add(spiderMan);
         movieService.add(harryPotter);
-        System.out.println(movieService.get(2L));
-        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(harryPotter.getId()));
+        System.out.println(movieService.get(spiderMan.getId()));
     }
 }
