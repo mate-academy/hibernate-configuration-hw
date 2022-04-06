@@ -33,7 +33,6 @@ public class MovieDaoImpl implements MovieDao {
             }
         }
         return movie;
-
     }
 
     @Override
@@ -43,6 +42,5 @@ public class MovieDaoImpl implements MovieDao {
         } catch (Exception e) {
             throw new DataProcessingException("Couldn't get movie by id " + id, e);
         }
-
     }
 }
