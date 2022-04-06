@@ -13,7 +13,7 @@ public class Main {
         movie.setTitle("Spider-man");
         movie.setDescription("Amazing superhero movie");
         movie = movieService.add(movie);
-        Movie movieByGet = movieService.get(1L);
+        Movie movieByGet = movieService.get(movie.getId());
         System.out.println(movie);
         System.out.println(movieByGet);
     }
