@@ -16,7 +16,7 @@ public class Main {
         terminator.setDescription("action");
         movieService.add(movie);
         movieService.add(terminator);
-        System.out.println(movieService.get(1L));
-        System.out.println(movieService.get(2L));
+        System.out.println(movieService.get(movie.getId()));
+        System.out.println(movieService.get(terminator.getId()));
     }
 }
