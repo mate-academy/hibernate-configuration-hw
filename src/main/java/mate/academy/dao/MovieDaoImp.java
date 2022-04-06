@@ -12,7 +12,6 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImp implements MovieDao {
-
     @Override
     public Movie save(Movie movie) {
         Session session = null;
