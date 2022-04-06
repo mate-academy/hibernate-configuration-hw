@@ -40,7 +40,7 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new RuntimeException("Can't add movie from DB ", e);
+            throw new DataProcessingException("Can't add movie from DB ", e);
         }
     }
 }
