@@ -14,8 +14,7 @@ public class Main {
         movie.setTitle("Terminator-2");
         movie.setDescription("fantasy film");
         movieService.add(movie);
-        Movie movie1 = movieService.get(1L);
-        System.out.println(movie1.toString());
-
+        Movie addedMovie = movieService.get(movie.getId());
+        System.out.println(addedMovie);
     }
 }
