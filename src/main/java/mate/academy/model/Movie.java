@@ -4,11 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.Table;
 import java.util.Objects;
 
-
 @Entity
+@Table(name = "movies")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +57,8 @@ public class Movie {
             return false;
         }
         Movie movie = (Movie) o;
-        return Objects.equals(id, movie.id) && Objects.equals(description, movie.description) && Objects.equals(title, movie.title);
+        return Objects.equals(id, movie.id) && Objects.equals(description, movie.description)
+                && Objects.equals(title, movie.title);
     }
 
     @Override
@@ -67,8 +68,8 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "id=" + id
+        return "Movie{"
+                + "id=" + id
                 + ", description='" + description + '\''
                 + ", title='" + title + '\''
                 + '}';
