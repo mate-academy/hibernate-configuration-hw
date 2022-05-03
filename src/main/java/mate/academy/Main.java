@@ -10,6 +10,6 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie("Interesting film","Fast and Furious 9");
         movieService.add(movie);
-        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(movie.getId()));
     }
 }
