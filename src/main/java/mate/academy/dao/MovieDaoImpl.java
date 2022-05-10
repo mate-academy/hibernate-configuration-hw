@@ -1,7 +1,7 @@
 package mate.academy.dao;
 
 import java.util.Optional;
-import mate.academy.exeption.DataProcessingException;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
@@ -22,8 +22,8 @@ public class MovieDaoImpl implements MovieDao {
         } catch (Exception e) {
             if (addTransaction != null) {
                 addTransaction.rollback();
-                throw new DataProcessingException("Couldn't save movie " + movie, e);
             }
+            throw new DataProcessingException("Couldn't save movie " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -38,7 +38,7 @@ public class MovieDaoImpl implements MovieDao {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {
-            throw new DataProcessingException("Couldn't save movie by id " + id, e);
+            throw new DataProcessingException("Couldn't get movie by id " + id, e);
         }
     }
 }
