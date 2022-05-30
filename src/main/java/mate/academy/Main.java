@@ -14,6 +14,6 @@ public class Main {
         movie.setDescription("Masterpiece");
 
         System.out.println(movieService.add(movie));
-        movieService.get(movie.getId());
+        System.out.println(movieService.get(movie.getId()));
     }
 }
