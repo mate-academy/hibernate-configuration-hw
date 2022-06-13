@@ -1,6 +1,5 @@
 package mate.academy.dao;
 
-import java.util.List;
 import java.util.Optional;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
@@ -47,20 +46,5 @@ public class MovieDaoImpl implements MovieDao {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         }
-    }
-
-    @Override
-    public List<Movie> getAll() {
-        return null;
-    }
-
-    @Override
-    public Movie update(Movie element) {
-        return null;
-    }
-
-    @Override
-    public boolean delete(Long id) {
-        return false;
     }
 }
