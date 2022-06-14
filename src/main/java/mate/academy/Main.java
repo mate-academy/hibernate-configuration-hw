@@ -10,6 +10,7 @@ public class Main {
         final MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Movie movie = new Movie("Harry Potter and the Philosopher's Stone", "Fantasy");
+        movieService.add(movie);
         System.out.println(movieService.get(1L));
     }
 }
