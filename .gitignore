@@ -1,3 +1,8 @@
 .idea/*
 *.iml
 target/*
+mem.properties
+mem.script
+mem.log
+mem.tmp/*
+Hibernate_Cinema_Uml.png
