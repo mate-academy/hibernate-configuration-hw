@@ -13,8 +13,8 @@ public class Main {
 
     public static void main(String[] args) {
         Movie movie = new Movie();
-        movie.setDescription("Cool movie description #1");
-        movie.setTitle("Cool movie #1");
+        movie.setDescription("Cool movie description #2");
+        movie.setTitle("Cool movie #2");
         movieService.add(movie);
 
     }
