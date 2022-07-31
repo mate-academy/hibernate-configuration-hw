@@ -1,15 +1,13 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
-import mate.academy.service.MovieServiceImpl;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
-import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
@@ -34,7 +32,14 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Movie movie = session.get(Movie.class, id);
+        Movie movie;
+        try {
+            movie = session.get(Movie.class, id);
+        } catch (RuntimeException e) {
+            throw new DataProcessingException("Error when adding a movie", e);
+        } finally {
+            session.close();
+        }
         return Optional.ofNullable(movie);
     }
 }
