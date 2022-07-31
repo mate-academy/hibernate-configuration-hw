@@ -34,8 +34,7 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-
         Movie movie = session.get(Movie.class, id);
-        return Optional.empty();
+        return Optional.ofNullable(movie);
     }
 }

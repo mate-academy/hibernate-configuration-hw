@@ -17,5 +17,8 @@ public class Main {
         movie.setTitle("Cool movie #2");
         movieService.add(movie);
 
+        Movie movie1 = movieService.get(1L);
+        System.out.println(movie1);
+
     }
 }
