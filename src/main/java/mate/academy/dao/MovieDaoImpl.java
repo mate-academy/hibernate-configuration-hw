@@ -10,6 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import javax.persistence.Table;
+
 @Dao
 public class MovieDaoImpl implements MovieDao {
     private SessionFactory sessionFactory;
@@ -42,18 +44,11 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Transaction transaction = null;
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
+        try (Session session = sessionFactory.openSession()) {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {
             throw new DataProcessingException("cant do it", e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }

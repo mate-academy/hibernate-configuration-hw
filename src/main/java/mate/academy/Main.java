@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Movie movie = new Movie();
         movie.setTitle("Putin Huilo");
-        movie.setDescription("Awesome movie");
+        movie.setDescription("Historical");
         movieService.add(movie);
         Movie movieFromDb = movieService.get(1L);
         System.out.println(movieFromDb);
