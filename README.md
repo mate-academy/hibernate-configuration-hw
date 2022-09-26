@@ -5,8 +5,8 @@ Completed structure of project is described below:
 ![pic](Hibernate_Cinema_Uml.png)
 
 Your task is to implement the following steps:
-- add required hibernate dependencies
-- create `hibernate.cfg.xml` file
+- add required hibernate dependencies +
+- create `hibernate.cfg.xml` file 
 - create `HibernateUtil` class
 - create `Movie` model class
 - create `MovieDao` interface and `MovieDaoImpl` class
