@@ -13,7 +13,7 @@ public class Main {
         Movie movie = new Movie();
         movie.setTitle("Terminator");
         movie.setDescription("Cool movie");
-        movie = movieService.add(movie);
-        System.out.println(movieService.get(movie.getId()));
+        movieService.add(movie);
+        System.out.println(movieService.get(1L));
     }
 }
