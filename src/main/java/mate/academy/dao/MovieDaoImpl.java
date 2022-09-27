@@ -5,6 +5,7 @@ import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -37,7 +38,7 @@ public class MovieDaoImpl implements MovieDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             return Optional.of(session.get(Movie.class, id));
-        } catch (Exception e) {
+        } catch (HibernateException | NullPointerException e) {
             return Optional.empty();
         } finally {
             if (session != null) {
