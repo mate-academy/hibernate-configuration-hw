@@ -32,6 +32,7 @@ public class MovieDaoImpl implements MovieDao {
         }
         return movie;
     }
+
     @Override
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
