@@ -8,14 +8,6 @@ import org.hibernate.Transaction;
 
 public class Main {
     public static void main(String[] args) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Movie movie = new Movie();
-        movie.setTitle("movie");
-        session.save(movie);
-        transaction.commit();
-        session.close();
-        System.out.println(movie);
+
     }
 }

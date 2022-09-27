@@ -11,18 +11,19 @@ import org.hibernate.Transaction;
 public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add movie = " + movie + "to Database",e);
+            throw new DataProcessingException("Can't create a movie = " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
