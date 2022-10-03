@@ -2,8 +2,10 @@ package mate.academy.dao;
 
 import mate.academy.model.Movie;
 
-public interface MovieDao {
-    Movie save(Movie movie);
+import java.util.Optional;
 
-    Movie get(Long id);
+public interface MovieDao {
+    Movie add(Movie movie);
+
+    Optional<Movie> get(Long id);
 }
