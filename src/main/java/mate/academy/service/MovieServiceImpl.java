@@ -1,7 +1,6 @@
 package mate.academy.service;
 
 import mate.academy.dao.MovieDao;
-import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Inject;
 import mate.academy.model.Movie;
 
@@ -16,10 +15,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        Movie movie = movieDao.get(id).get();
-        if (movie == null) {
-            throw new DataProcessingException("Movie by id: " + id + " doesn't exist.");
-        }
-        return movie;
+        return movieDao.get(id)
+                .orElseThrow(() -> new RuntimeException("User id:" + id + " doesn't exist."));
     }
 }
