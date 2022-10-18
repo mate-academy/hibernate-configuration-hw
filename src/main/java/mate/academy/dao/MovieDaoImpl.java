@@ -12,7 +12,7 @@ import org.hibernate.Transaction;
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
-    public Movie add(Movie movie) throws DataProcessingException {
+    public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -35,7 +35,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Optional<Movie> get(Long id) throws DataProcessingException {
+    public Optional<Movie> get(Long id) {
         Session session = null;
         Movie movie;
         try {

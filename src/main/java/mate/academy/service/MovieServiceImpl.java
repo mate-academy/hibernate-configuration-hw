@@ -12,12 +12,12 @@ public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
     @Override
-    public Movie add(Movie movie) throws DataProcessingException {
+    public Movie add(Movie movie) {
         return movieDao.add(movie);
     }
 
     @Override
-    public Movie get(Long id) throws DataProcessingException {
+    public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(() ->
                 new DataProcessingException("Couldn't can get movie from BD by ID " + id));
     }
