@@ -6,7 +6,9 @@ import mate.academy.service.MovieService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
-    private static final MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+    private static final MovieService movieService =
+            (MovieService) injector.getInstance(MovieService.class);
+
     public static void main(String[] args) {
         Movie movie = new Movie();
         movie.setTitle("How putin died in agony in 2022");
