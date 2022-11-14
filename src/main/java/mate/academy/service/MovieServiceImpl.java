@@ -1,6 +1,5 @@
 package mate.academy.service;
 
-import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
@@ -9,7 +8,7 @@ import mate.academy.model.Movie;
 @Service
 public class MovieServiceImpl implements MovieService {
     @Inject
-    MovieDao movieDao;
+    private MovieDao movieDao;
 
     @Override
     public Movie add(Movie movie) {
@@ -18,7 +17,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return  movieDao.get(id).orElseGet(Movie::new);
-
+        return movieDao.get(id).orElseGet(Movie::new);
     }
 }
