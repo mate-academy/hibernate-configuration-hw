@@ -36,10 +36,8 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        Optional<Movie> movieOptional = Optional.ofNullable(session.get(Movie.class, id));
-        session.close();
-        return movieOptional;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
+        }
     }
 }
