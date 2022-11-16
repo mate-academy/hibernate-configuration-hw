@@ -1,8 +1,8 @@
 package mate.academy.dao;
 
 import java.util.Optional;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
-import mate.academy.lib.exception.DataProcessingException;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
@@ -23,6 +23,7 @@ public class MovieDaoImpl implements MovieDao {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
+                transaction.rollback();
                 throw new DataProcessingException("Can't parse data from DB");
             }
         } finally {
@@ -35,8 +36,19 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        return Optional.of(session.get(Movie.class, id));
+        Movie movie;
+        Session session = null;
+        try {
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            session = sessionFactory.openSession();
+            movie = session.get(Movie.class, id);
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get movie from db");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return Optional.ofNullable(movie);
     }
 }

@@ -1,9 +1,9 @@
 package mate.academy.service;
 
 import mate.academy.dao.MovieDao;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Injector;
 import mate.academy.lib.Service;
-import mate.academy.lib.exception.DataProcessingException;
 import mate.academy.model.Movie;
 
 @Service
