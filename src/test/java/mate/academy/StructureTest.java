@@ -53,7 +53,7 @@ public class StructureTest {
         Optional<File> hibernateConfigFile = Arrays.stream(files)
                 .filter(f -> f.isFile() && f.getName().equals("hibernate.cfg.xml")).findAny();
         if (hibernateConfigFile.isEmpty()) {
-            Assert.fail("You should create \"hibernate.cfg.xml\" file in resources folder");
+            Assert.fail("You should create \"hi22bernate.cfg.xml\" file in resources folder");
         }
     }
 
@@ -184,7 +184,7 @@ public class StructureTest {
             } catch (NoClassDefFoundError e) {
                 if (e.getMessage().contains("HibernateUtil")) {
                     Assert.fail("Could not establish connection with db. You should create "
-                            + "\"hibernate.cfg.xml\" file in resources folder with all "
+                            + "\"hi22bernate.cfg.xml\" file in resources folder with all "
                             + "necessary configurations");
                 } else {
                     throw new RuntimeException("Could not initialize class.", e);
