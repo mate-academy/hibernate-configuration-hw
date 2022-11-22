@@ -20,13 +20,13 @@ public class MovieDaoImpl implements MovieDao {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.save(movie);
+            session.persist(movie);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("can not add movie");
+            throw new DataProcessingException("Can't add movie" + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -34,6 +34,7 @@ public class MovieDaoImpl implements MovieDao {
         }
         return movie;
     }
+
 
     @Override
     public Optional<Movie> get(Long id) {
