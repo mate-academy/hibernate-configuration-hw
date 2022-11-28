@@ -71,9 +71,9 @@ public class FunctionalityTest extends AbstractTest {
             addedMovie = invokeAddMethod(testMovie);
         } catch (Exception e) {
             if (ExceptionUtils.indexOfThrowable(e, dataProcessingExceptionClass) != -1) {
-                Assert.fail("Failed to add movie to db with exception" + e.getCause().getCause());
+                Assert.fail("Failed to add Movie to db with exception" + e.getCause().getCause());
             }
-            throw new RuntimeException("Failed to add movie " + testMovie, e);
+            throw new RuntimeException("Failed to add Movie " + testMovie, e);
         }
 
         Field movieIdField = Arrays.stream(movieClass.getDeclaredFields())
@@ -85,23 +85,23 @@ public class FunctionalityTest extends AbstractTest {
             movieIdField.setAccessible(true);
             movieId = (Long) movieIdField.get(addedMovie);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException("Could not get id from movie, added to db " + addedMovie, e);
+            throw new RuntimeException("Could not get id from Movie, added to db " + addedMovie, e);
         }
-        Assert.assertNotNull("Failed to add movie to db through \"add(Movie movie)\" method. "
-                + "Added movie should not be null.", addedMovie);
-        Assert.assertNotNull("The movie added to the database must not have null id.",
+        Assert.assertNotNull("Failed to add Movie to db through \"add(Movie Movie)\" method. "
+                + "Added Movie should not be null.", addedMovie);
+        Assert.assertNotNull("The Movie added to the database must not have null id.",
                 movieId);
         Optional optionalMovieFromDb;
         try {
             optionalMovieFromDb = invokeGetMethod(movieId);
         } catch (Exception e) {
             if (ExceptionUtils.indexOfThrowable(e, dataProcessingExceptionClass) != -1) {
-                Assert.fail("Failed to get movie to db with exception" + e.getCause().getCause());
+                Assert.fail("Failed to get Movie to db with exception" + e.getCause().getCause());
             }
-            throw new RuntimeException("Failed to add movie " + testMovie, e);
+            throw new RuntimeException("Failed to add Movie " + testMovie, e);
         }
         Object movieFromDb = optionalMovieFromDb.get();
-        Assert.assertNotNull("Failed to get movie from db through \"get(Long id)\" method. "
+        Assert.assertNotNull("Failed to get Movie from db through \"get(Long id)\" method. "
                 + "Movie should not be null.", movieFromDb);
 
         List<Field> nullFields = Arrays.stream(movieClass.getDeclaredFields()).filter(
@@ -111,11 +111,11 @@ public class FunctionalityTest extends AbstractTest {
                         return f.get(movieFromDb) == null;
                     } catch (IllegalAccessException e) {
                         throw new RuntimeException("Failed to get field "
-                                + f + " value for movie " + movieFromDb, e);
+                                + f + " value for Movie " + movieFromDb, e);
                     }
                 }
         ).collect(Collectors.toList());
-        Assert.assertEquals("We should not get null fields after getting movie "
+        Assert.assertEquals("We should not get null fields after getting Movie "
                 + testMovie + " from db.", 0, nullFields.size());
     }
 
@@ -139,9 +139,9 @@ public class FunctionalityTest extends AbstractTest {
                 if (ExceptionUtils.indexOfThrowable(e, dataProcessingExceptionClass) != -1) {
                     Mockito.verify(mockedTransaction,
                             description("You should close transaction in catch block "
-                                    + "if something went wrong while saving movie.")).rollback();
+                                    + "if something went wrong while saving Movie.")).rollback();
                     Mockito.verify(mockedSession, description("You should close session with db "
-                            + "in \"add(Movie movie)\" method after adding Movie do db."))
+                            + "in \"add(Movie Movie)\" method after adding Movie do db."))
                             .close();
                     InOrder inOrder = inOrder(mockedTransaction, mockedSession);
 
@@ -150,12 +150,12 @@ public class FunctionalityTest extends AbstractTest {
                     return;
                 }
                 Assert.fail("It's better to catch general \"Exception\" or \"RuntimeException\" "
-                        + "instead of specific one in \"add(Movie movie)\" method.");
+                        + "instead of specific one in \"add(Movie Movie)\" method.");
             }
             Assert.fail(
                     "You should throw DataProcessingException in the catch block on dao layer.");
         } catch (VerificationInOrderFailure ex) {
-            Assert.fail("You should not use try-with-resources in \"add(Movie movie)\" method, "
+            Assert.fail("You should not use try-with-resources in \"add(Movie Movie)\" method, "
                     + "as it closes session before catch block, so you could not rollback "
                     + "transaction. You should close session in finally block in order to make"
                     + " transaction rollback.");
@@ -173,7 +173,7 @@ public class FunctionalityTest extends AbstractTest {
         Mockito.when(mockedSession.get(movieClass, movieId)).thenReturn(null);
         invokeGetMethod(movieId);
         Mockito.verify(mockedSession, description("You should close session in \"get(Long id)\" "
-                + "method in dao layer after getting movie from db. You can use"
+                + "method in dao layer after getting Movie from db. You can use"
                 + " try-with-resources for this purpose.")).close();
     }
 
@@ -205,7 +205,7 @@ public class FunctionalityTest extends AbstractTest {
                     try {
                         f.set(testMovie, f.getName());
                     } catch (IllegalAccessException e) {
-                        throw new RuntimeException("Could not set value to movie instance.");
+                        throw new RuntimeException("Could not set value to Movie instance.");
                     }
                 });
         return testMovie;
@@ -245,7 +245,7 @@ public class FunctionalityTest extends AbstractTest {
         try {
             addMethod = movieDaoImplClass.getMethod("add", movieClass);
         } catch (NoSuchMethodException e) {
-            throw new RuntimeException("Could not get \"add(Movie movie)\" method", e);
+            throw new RuntimeException("Could not get \"add(Movie Movie)\" method", e);
         }
 
         Object addedMovie;
