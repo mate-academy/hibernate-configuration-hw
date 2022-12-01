@@ -21,10 +21,11 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+            throw new DataProcessingException("Transaction was failed");
         } finally {
             session.close();
         }
