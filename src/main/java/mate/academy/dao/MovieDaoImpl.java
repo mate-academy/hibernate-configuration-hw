@@ -12,16 +12,22 @@ import org.hibernate.Transaction;
 public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = null;
+        Transaction transaction = null;
         try {
-            session.save(movie);
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.persist(movie);
             transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingException("Cannot save movie: ", e);
         } finally {
-            transaction.rollback();
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
         return movie;
     }
