@@ -12,7 +12,7 @@ public class Main {
         Movie movie = new Movie();
         movie.setTitle("SuperMan fly and Batman");
         movie.setDescription("Person which can fly");
-        Movie mov = instance.add(movie);
+        Movie mov = instance.get(1L);
         System.out.println(mov);
     }
 }
