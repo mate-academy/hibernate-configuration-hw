@@ -4,13 +4,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    public static final SessionFactory instance = initSessionFactory();
+    private static final SessionFactory instance = initSessionFactory();
 
     private static SessionFactory initSessionFactory() {
         return new Configuration().configure().buildSessionFactory();
     }
 
-    private static SessionFactory getSessionFactory() {
+    public static SessionFactory getSessionFactory() {
         return instance;
     }
 }
