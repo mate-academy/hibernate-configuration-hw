@@ -10,8 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.util.Optional;
-
 @Dao
 public class MovieDaoImpl implements MovieDao {
     private SessionFactory sessionFactory;
@@ -44,11 +42,10 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(long id) {
-        try (Session session = sessionFactory.openSession()) {
-            Movie movie = session.get(Movie.class, id);
-            return Optional.ofNullable(movie);
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return Optional.ofNullable(session.get(Movie.class,id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can`t get movie with id: " + id, e);
+            throw new DataProcessingException("Can't read this id " + id + " from DB", e);
         }
     }
 }
