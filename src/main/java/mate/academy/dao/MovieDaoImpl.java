@@ -1,7 +1,6 @@
-package mate.academy.dao.impl;
+package mate.academy.dao;
 
 import java.util.Optional;
-import mate.academy.dao.MovieDao;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
@@ -12,14 +11,9 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private SessionFactory sessionFactory;
-
-    public MovieDaoImpl() {
-        sessionFactory = HibernateUtil.getSessionFactory();
-    }
-
     @Override
     public Movie add(Movie movie) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
@@ -31,30 +25,23 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can`t add movie to DB " + movie, e);
+            throw new DataProcessingException("Can't save movie " + movie + " to DB", e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return null;
+        return movie;
     }
 
     @Override
-    public Optional<Movie> get(long id) {
-        Movie movie;
-        Session session = null;
-        try {
-            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            session = sessionFactory.openSession();
-            movie = session.get(Movie.class, id);
+    public Optional<Movie> get(Long id) {
+        Optional<Movie> movie;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            movie = Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can`t get movie with id: " + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new DataProcessingException("Can't get movie by id " + id + " from DB", e);
         }
-        return Optional.ofNullable(movie);
+        return movie;
     }
 }
