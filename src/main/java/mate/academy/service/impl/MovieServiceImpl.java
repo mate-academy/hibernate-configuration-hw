@@ -5,6 +5,7 @@ import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
+import java.util.NoSuchElementException;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -19,7 +20,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id)
-                .orElseThrow(() -> new RuntimeException(String.format("Can't find"
+                .orElseThrow(() -> new NoSuchElementException(String.format("Can't find"
                         + " movie by %d in DB", id)));
     }
 }
