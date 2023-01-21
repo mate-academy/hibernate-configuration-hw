@@ -9,6 +9,7 @@ import mate.academy.model.Movie;
 public class MovieServiceImpl implements MovieService {
     @Inject
     private MovieDao movieDao;
+
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);
