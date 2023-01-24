@@ -7,5 +7,6 @@
         <property name="connection.password">Danyl7721</property>
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">create-drop</property>
+        <mapping class="mate.academy.model.Movie"/>
     </session-factory>
 </hibernate-configuration>
