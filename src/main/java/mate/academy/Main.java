@@ -20,7 +20,7 @@ public class Main {
 
         movieService.add(movie1);
         movieService.add(movie2);
-        System.out.println(movieService.get(1L));
-        System.out.println(movieService.get(2L));
+        System.out.println(movieService.get(movie1.getId()));
+        System.out.println(movieService.get(movie2.getId()));
     }
 }
