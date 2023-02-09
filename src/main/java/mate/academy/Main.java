@@ -8,11 +8,11 @@ public class Main {
     private static Injector injector = Injector.getInstance("mate.academy");
 
     public static void main(String[] args) {
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
         movie.setTitle("Sahara");
         movie.setDescription("adventure genre");
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.add(movie);
-
+        System.out.println(movieService.get(movie.getId()));
     }
 }
