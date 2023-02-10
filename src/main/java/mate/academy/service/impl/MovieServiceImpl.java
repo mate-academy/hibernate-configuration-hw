@@ -12,12 +12,12 @@ public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
     @Override
-    public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow();
+    public Movie add(Movie movie) {
+        return movieDao.add(movie);
     }
 
     @Override
-    public Movie add(Movie movie) {
-        return movieDao.add(movie);
+    public Movie get(Long id) {
+        return movieDao.get(id).orElseThrow();
     }
 }
