@@ -13,6 +13,6 @@ public class Main {
         movie.setDescription("Save the planet with Tom Cruse");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.add(movie);
-        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(movie.getId()));
     }
 }
