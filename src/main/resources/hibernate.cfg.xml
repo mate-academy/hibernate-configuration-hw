@@ -1,7 +1,7 @@
-<hibernate-configuration xmlns="http://www.hibernate.org/xsd/hibernate-configuration">
+<hibernate-configuration>
     <session-factory>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/ticket_ap</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/ticket_app</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.username">root</property>
         <property name="connection.password">!Q2w3e4r</property>
