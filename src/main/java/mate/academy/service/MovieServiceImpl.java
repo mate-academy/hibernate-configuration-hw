@@ -1,11 +1,10 @@
 package mate.academy.service;
 
+import java.util.NoSuchElementException;
 import mate.academy.dao.MovieDao;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
-
-import java.util.NoSuchElementException;
 
 @Service
 public class MovieServiceImpl implements MovieService {
