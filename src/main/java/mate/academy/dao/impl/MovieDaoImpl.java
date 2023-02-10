@@ -12,11 +12,7 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private final SessionFactory sessionFactory;
-
-    {
-        sessionFactory = HibernateUtil.getSessionFactory();
-    }
+    private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
     public Movie add(Movie movie) {
@@ -42,7 +38,7 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        try(Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can`t get movie from DB by id " + id);
