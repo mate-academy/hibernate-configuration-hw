@@ -39,7 +39,6 @@ public class MovieDaoImpl implements MovieDao {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             Movie movie = session.get(Movie.class, id);
-            session.close();
             return Optional.ofNullable(movie);
         } catch (Exception e) {
             throw new DataProcessingException("Can't save movie to DB", e);
