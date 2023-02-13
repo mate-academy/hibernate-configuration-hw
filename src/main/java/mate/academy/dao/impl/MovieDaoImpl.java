@@ -1,6 +1,7 @@
-package mate.academy.dao;
+package mate.academy.dao.impl;
 
 import java.util.Optional;
+import mate.academy.dao.MovieDao;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
@@ -21,27 +22,30 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-            return movie;
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Couldn't add movie "
-                    + movie + " to DB", e);
+            throw new DataProcessingException(
+                    String.format("Can't add movie %s to DB", movie), e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
+        return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Movie movie;
         try (Session session = sessionFactory.openSession()) {
-            return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("Couldn't get movie by id " + id, e);
+            movie = session.get(Movie.class, id);
+        } catch (Exception e) {
+            throw new DataProcessingException(
+                    String.format("Can't get movie id = %s from DB", id), e);
         }
+        return Optional.ofNullable(movie);
     }
 }

@@ -9,10 +9,10 @@ public class Main {
     private static final MovieService movieService =
             (MovieService) injector.getInstance(MovieService.class);
 
-    public static void main(String[]args) {
+    public static void main(String[] args) {
         Movie movie = new Movie();
         movie.setTitle("Moana");
-        movie.setDescription("Cartoon!");
+        movie.setDescription("Cartoon");
         movieService.add(movie);
         Long id = movie.getId();
         System.out.println(movieService.get(id));
