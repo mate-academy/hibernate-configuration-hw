@@ -29,8 +29,8 @@ public class MovieDaoImpl implements MovieDao {
             if (session != null) {
                 session.close();
             }
-            return movie;
         }
+        return movie;
     }
 
     @Override
