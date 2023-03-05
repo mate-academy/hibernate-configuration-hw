@@ -20,7 +20,6 @@ import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.MockedStatic;
@@ -61,7 +60,6 @@ public class FunctionalityTest extends AbstractTest {
         return new Class[]{getClass("Movie")};
     }
 
-    @Ignore
     @Test
     public void functionality_addAndGetMovie_Ok() {
         mockSessionFactory(getSessionFactory());
