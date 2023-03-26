@@ -3,10 +3,10 @@ package mate.academy.util;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class ConnectionUtil {
+public class HibernateUtil {
     private static SessionFactory instance = initSessionFactory();
 
-    private ConnectionUtil() {
+    private HibernateUtil() {
     }
 
     private static SessionFactory initSessionFactory() {
