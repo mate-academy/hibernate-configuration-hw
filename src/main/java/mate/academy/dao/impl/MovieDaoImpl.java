@@ -26,7 +26,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("it is method add not correct ");
+            throw new RuntimeException("it is method add not correct ", e);
         } finally {
             if (session != null) {
                 session.close();
