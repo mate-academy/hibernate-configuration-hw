@@ -20,9 +20,9 @@ public class MovieDaoImpl implements MovieDao {
             session.save(movie);
             transaction.commit();
         } catch (RuntimeException e) {
+            transaction.rollback();
             throw new DataProcessingException("The transaction was not completed!");
         } finally {
-            transaction.rollback();
             session.close();
         }
         return movie;
