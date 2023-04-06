@@ -15,7 +15,6 @@ public class Main {
         movie.setTitle("Jesus Revolution");
         movie.setDescription("Christian drama");
         movieService.add(movie);
-        Movie movie1 = movieService.get(1L);
-        System.out.println(movie1);
+        System.out.println(movieService.get(1L));
     }
 }
