@@ -13,6 +13,6 @@ public class Main {
         movie.setTitle("valia");
         movie.setDescription("nice");
         movieService.add(movie);
-        System.out.println(movieService.get(2L));
+        System.out.println(movieService.get(1L));
     }
 }
