@@ -68,7 +68,7 @@
                         <resource>
                             <filtering>true</filtering>
                             <includes>
-                                <include>src/test/resources/hibernate.cfg.xml</include>
+                                <include>src/main/resources/hibernate.cfg.xml</include>
                             </includes>
                         </resource>
                     </webResources>
