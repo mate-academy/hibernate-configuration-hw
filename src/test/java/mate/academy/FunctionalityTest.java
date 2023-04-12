@@ -1,3 +1,5 @@
+package mate.academy;
+
 import static org.mockito.Mockito.description;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
