@@ -6,7 +6,10 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
     private static SessionFactory sessionFactory = initSessionFactory();
 
-    public SessionFactory getSessionFactory() {
+    private HibernateUtil() {
+    }
+
+    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
