@@ -23,32 +23,31 @@ public class MovieDaoImpl implements MovieDao {
             session.save(movie);
             transaction.commit();
         } catch (Exception e) {
-            assert transaction != null;
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingException("Data processing failure...", e);
         } finally {
-            assert session != null;
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
-        return null;
+        return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
-        Transaction transaction = null;
         try {
             session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-            return Optional.of(session.get(Movie.class, id));
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            assert transaction != null;
-            transaction.rollback();
             throw new DataProcessingException("Data getting failure...", e);
         } finally {
-            assert session != null;
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }
