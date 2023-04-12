@@ -1,6 +1,5 @@
 package mate.academy;
 
-import mate.academy.dao.MovieDao;
 import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
@@ -10,7 +9,8 @@ public class Main {
     private static final Movie SECOND_DEFAULT_MOVIE = new Movie("ccc", "ddd");
     private static final Movie THIRD_DEFAULT_MOVIE = new Movie("eee", "fff");
     private static final Injector injector = Injector.getInstance("mate.academy");
-    private static final MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+    private static final MovieService movieService =
+            (MovieService) injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
         movieService.add(FIRST_DEFAULT_MOVIE);
