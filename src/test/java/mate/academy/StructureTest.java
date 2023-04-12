@@ -51,7 +51,7 @@ public class StructureTest {
         }
         File[] files = optionalResourcesFolder.get().listFiles();
         Optional<File> hibernateConfigFile = Arrays.stream(files)
-                .filter(f -> f.isFile() && f.getName().equals("hibernate.cfg.xml")).findAny();
+                .filter(f -> f.isFile() && f.getName().equals("src/hibernate.cfg.xml")).findAny();
         if (hibernateConfigFile.isEmpty()) {
             Assert.fail("You should create \"hibernate.cfg.xml\" file in resources folder");
         }
