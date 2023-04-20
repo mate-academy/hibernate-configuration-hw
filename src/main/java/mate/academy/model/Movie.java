@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 import java.util.Objects;
 
 @Entity
@@ -50,7 +49,8 @@ public class Movie {
             return false;
         }
         Movie movie = (Movie) o;
-        return Objects.equals(id, movie.id) && Objects.equals(title, movie.title) && Objects.equals(description, movie.description);
+        return Objects.equals(id, movie.id) && Objects.equals(title, movie.title)
+                && Objects.equals(description, movie.description);
     }
 
     @Override

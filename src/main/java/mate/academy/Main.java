@@ -1,6 +1,5 @@
 package mate.academy;
 
-import mate.academy.lib.Inject;
 import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
