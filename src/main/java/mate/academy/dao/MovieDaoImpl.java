@@ -30,6 +30,7 @@ public class MovieDaoImpl implements MovieDao {
             if (session != null) {
                 session.close();
             }
+
         }
         return movie;
     }
