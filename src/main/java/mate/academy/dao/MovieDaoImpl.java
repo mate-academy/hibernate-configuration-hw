@@ -51,6 +51,6 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
-        return Optional.of(movie);
+        return Optional.ofNullable(movie);
     }
 }
