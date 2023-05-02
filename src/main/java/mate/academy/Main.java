@@ -1,21 +1,19 @@
 package mate.academy;
 
-import mate.academy.dao.MovieDao;
-import mate.academy.dao.MovieDaoImpl;
+import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
-import mate.academy.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import mate.academy.service.MovieService;
 
 public class Main {
+    private static Injector injector = Injector.getInstance("mate.academy");
+    private static MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+
     public static void main(String[] args) {
         Movie movie = new Movie();
-        movie.setTitle("Batmen");
-        movie.setDescription("about batman");
+        movie.setTitle("Spider man 2");
+        movie.setDescription("Good");
 
-        MovieDao movieDao = new MovieDaoImpl();
-        movieDao.add(movie);
-        System.out.println(movieDao.get(1L));
+        movieService.add(movie);
+        System.out.println(movieService.get(1L).getDescription());
     }
 }
