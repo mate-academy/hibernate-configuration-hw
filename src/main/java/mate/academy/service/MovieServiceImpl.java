@@ -9,6 +9,7 @@ import mate.academy.model.Movie;
 public class MovieServiceImpl implements MovieService {
     @Inject
     private MovieDao movieDao;
+
     @Override
     public Movie save(Movie movie) {
         return movieDao.save(movie);
@@ -16,6 +17,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-         return movieDao.get(id).orElseThrow();
+        return movieDao.get(id).orElseThrow();
     }
 }

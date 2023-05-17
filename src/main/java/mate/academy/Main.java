@@ -10,7 +10,6 @@ public class Main {
     public static void main(String[] args) {
 
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
-
         Movie movie = new Movie();
         movie.setTitle("terminator");
         movie.setDescription("fantastic");
@@ -19,6 +18,6 @@ public class Main {
 
         Movie movieFromDB = movieService.get(1L);
         System.out.println(movieFromDB);
-
     }
 }
+
