@@ -14,7 +14,7 @@ public class Main {
         movie.setTitle("terminator");
         movie.setDescription("fantastic");
 
-        movieService.save(movie);
+        movieService.add(movie);
 
         Movie movieFromDB = movieService.get(1L);
         System.out.println(movieFromDB);
