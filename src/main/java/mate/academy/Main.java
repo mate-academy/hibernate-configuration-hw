@@ -6,10 +6,9 @@ import mate.academy.service.MovieService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
-    private static final MovieService movieService =
-            (MovieService) injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
         movie.setTitle("5 element");
         movie.setDescription("Great cinema");
