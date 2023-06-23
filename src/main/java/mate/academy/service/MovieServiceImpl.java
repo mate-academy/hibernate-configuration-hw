@@ -5,6 +5,7 @@ import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
+
 @Service
 public class MovieServiceImpl implements MovieService {
     @Inject
