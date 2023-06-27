@@ -14,6 +14,6 @@ public class Main {
         movie.setTitle("Pirates of the Carribean");
         movie.setDescription("Pirates Adventures");
         Movie addedMovie = movieService.add(movie);
-        movieService.get(1L);
+        System.out.println(movieService.get(1L));
     }
 }
