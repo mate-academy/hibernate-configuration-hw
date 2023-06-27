@@ -12,35 +12,43 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+
     @Override
     public Movie add(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
+        Long id = null;
+
         try {
-            session = sessionFactory.openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.save(movie);
+            session.persist(movie);
             transaction.commit();
+            id = (Long) session.getIdentifier(movie);
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Could not add new movie: " + movie + " to DB");
+            throw new DataProcessingException("Was unable to add a new movie to the db.");
         } finally {
             if (session != null) {
                 session.close();
             }
         }
+        movie.setId(id);
         return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Movie movie = session.get(Movie.class, id);
-        session.close();
+        Movie movie = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            movie = session.get(Movie.class, id);
+        } catch (Exception e) {
+            throw new DataProcessingException(String.format(
+                    "Was unable to get movie by ID %s from the db.", id));
+        }
         return Optional.ofNullable(movie);
     }
 }
