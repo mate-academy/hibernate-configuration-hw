@@ -8,13 +8,17 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
 
     public static void main(String[] args) {
-        MovieService movieService =
+        final MovieService movieService =
                 (MovieService) injector.getInstance(MovieService.class);
 
-        Movie homeAlone = new Movie("Home Alone 1", "A story "
+        Movie homeAlone = new Movie();
+        homeAlone.setTitle("Home Alone 1");
+        homeAlone.setDescription("A story "
                 + "about a boy who was left alone at home for Christmas");
-        Movie titanic = new Movie("Titanic", "A romantic "
-                + "story with a tragic ending");
+
+        Movie titanic = new Movie();
+        titanic.setTitle("Titanic");
+        titanic.setDescription("A romantic with a tragic ending");
 
         Movie addedHomeAlone = movieService.add(homeAlone);
         Movie addedTitanic = movieService.add(titanic);
