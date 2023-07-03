@@ -43,8 +43,8 @@ public class StructureTest {
     @Test
     public void structure_hibernateConfigFileExists_OK() {
         Optional<File> optionalResourcesFolder = Arrays.stream(
-                Objects.requireNonNull(new File(ROOT_FOLDER).listFiles()))
-                .filter(f -> f.isDirectory() && f.getName().equals("src/main/resources")) //src/main/resources/hibernate.cfg.xml
+                        Objects.requireNonNull(new File(ROOT_FOLDER).listFiles()))
+                .filter(f -> f.isDirectory() && f.getName().equals("resources"))
                 .findAny();
         if (optionalResourcesFolder.isEmpty()) {
             Assert.fail("You should create src/main/resources folder");
@@ -100,9 +100,9 @@ public class StructureTest {
             Assert.fail("SessionFactory field should be static");
         }
         Optional<Method> optionalGetSessionFactoryMethod = Arrays.stream(
-                hibernateUtil.getDeclaredMethods())
+                        hibernateUtil.getDeclaredMethods())
                 .filter(m -> m.getReturnType().getSimpleName().equals("SessionFactory")
-                && Modifier.isPublic(m.getModifiers()))
+                        && Modifier.isPublic(m.getModifiers()))
                 .findAny();
         if (optionalGetSessionFactoryMethod.isEmpty()) {
             Assert.fail("You should create public method, that return "
@@ -111,7 +111,7 @@ public class StructureTest {
     }
 
     private void checkMethod(String testedClass, String testedMethod,
-            String returnType, String parameter) {
+                             String returnType, String parameter) {
         Class testedClazz = allClasses.stream().filter(c -> c.getSimpleName().equals(testedClass))
                 .findAny().get();
         List<Method> allMethods = Arrays.stream(testedClazz.getDeclaredMethods())

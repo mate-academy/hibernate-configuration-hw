@@ -1,4 +1,4 @@
-package mate.academy.model.service;
+package mate.academy.service;
 
 import mate.academy.model.Movie;
 
