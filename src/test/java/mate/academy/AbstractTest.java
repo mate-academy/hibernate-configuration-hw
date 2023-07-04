@@ -10,6 +10,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hsqldb.jdbc.JDBCDataSource;
 import org.junit.Before;
+import org.junit.Test;
 
 public abstract class AbstractTest {
     protected interface DataSourceProvider {
