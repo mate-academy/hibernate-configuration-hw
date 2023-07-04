@@ -1,6 +1,5 @@
 package mate.academy.model;
 
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,11 +23,11 @@ public class Movie {
         this.description = description;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,25 +45,6 @@ public class Movie {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Movie movie = (Movie) o;
-        return id == movie.id
-                && Objects.equals(title, movie.title)
-                && Objects.equals(description, movie.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description);
     }
 
     @Override
