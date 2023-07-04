@@ -10,7 +10,6 @@ public class Main {
             = (MovieService) injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
-
         movieService.add(new Movie("Lord of the rings", "Film about the rings"));
         System.out.println(movieService.get(1L));
     }
