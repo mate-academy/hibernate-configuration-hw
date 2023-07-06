@@ -10,8 +10,8 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Movie movie = new Movie();
-        movie.setTitle("Matrix");
-        movie.setDescription("Fantastic");
+        movie.setTitle("Propala Gramota");
+        movie.setDescription("Trishechki ale vidro!");
 
         movieService.add(movie);
         System.out.println(movieService.get(1L));
