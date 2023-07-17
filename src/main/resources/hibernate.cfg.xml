@@ -6,7 +6,7 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/ticket_app</property>
+        <property name="connection.url">mysql:mysql-connector-java:jar:8.0.32</property>
         <property name="connection.username">root</property>
         <property name="connection.password">1664</property>
         <property name="hbm2ddl.auto">create-drop</property>

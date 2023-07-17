@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         Movie harryPotter = new Movie();
-        movieService.create(harryPotter);
+        movieService.add(harryPotter);
         System.out.println(movieService.get(1L));
     }
 }
