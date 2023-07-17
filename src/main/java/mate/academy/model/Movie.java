@@ -40,6 +40,10 @@ public class Movie {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Movie{"
+                + "id=" + id
+                + ", name='" + title + '\''
+                + ", description='" + description + '\''
+                + '}';
     }
 }
