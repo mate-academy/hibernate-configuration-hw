@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
