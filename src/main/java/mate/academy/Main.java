@@ -12,8 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
         Movie movie = new Movie();
-        movie.setTitle("aaaaa");
-        movie.setDescription("bbbbb");
+        movie.setTitle("aaaaaa");
+        movie.setDescription("bbbbbb");
         Long id = 1L;
         movieService.add(movie);
         movieService.get(id);
