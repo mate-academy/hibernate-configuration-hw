@@ -40,7 +40,7 @@ public class MovieDaoImpl implements MovieDao {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            return Optional.of(session.get(Movie.class, id));
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Something went wrong", e);
         } finally {
