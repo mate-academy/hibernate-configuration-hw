@@ -14,7 +14,6 @@ public class Main {
         Movie movie = new Movie();
         movie.setTitle("In a desert");
         movie.setDescription("Funny no water life");
-
         Movie result = movieService.add(movie);
         System.out.println(result);
         Movie movieFromDB = movieService.get(1L);
