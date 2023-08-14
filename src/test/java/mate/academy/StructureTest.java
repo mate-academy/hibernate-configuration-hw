@@ -1,5 +1,9 @@
 package mate.academy;
 
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -7,16 +11,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class StructureTest {
     public static final String ROOT_FOLDER = "src/main";
@@ -44,7 +40,7 @@ public class StructureTest {
     public void structure_hibernateConfigFileExists_OK() {
         Optional<File> optionalResourcesFolder = Arrays.stream(
                 Objects.requireNonNull(new File(ROOT_FOLDER).listFiles()))
-                .filter(f -> f.isDirectory() && f.getName().equals("resources"))
+                .filter(f -> f.isDirectory() && f.getName().equals(""))
                 .findAny();
         if (optionalResourcesFolder.isEmpty()) {
             Assert.fail("You should create src/main/resources folder");

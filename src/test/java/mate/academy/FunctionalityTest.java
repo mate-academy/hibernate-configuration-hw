@@ -1,23 +1,5 @@
 package mate.academy;
 
-import static org.mockito.Mockito.description;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mockStatic;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,6 +12,18 @@ import org.mockito.InOrder;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.exceptions.verification.VerificationInOrderFailure;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.net.URL;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.mockito.Mockito.*;
 
 public class FunctionalityTest extends AbstractTest {
     private static List<Class> allClasses = new ArrayList<>();
@@ -141,7 +135,7 @@ public class FunctionalityTest extends AbstractTest {
                             description("You should close transaction in catch block "
                                     + "if something went wrong while saving movie.")).rollback();
                     Mockito.verify(mockedSession, description("You should close session with db "
-                            + "in \"add(Movie movie)\" method after adding Movie do db."))
+                                    + "in \"add(Movie movie)\" method after adding Movie do db."))
                             .close();
                     InOrder inOrder = inOrder(mockedTransaction, mockedSession);
 
@@ -182,7 +176,7 @@ public class FunctionalityTest extends AbstractTest {
         try {
             return movieDaoImpl.getConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException
-                | InvocationTargetException | NoSuchMethodException e) {
+                 | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException("Could not get instance of " + className + " class.", e);
         }
     }
