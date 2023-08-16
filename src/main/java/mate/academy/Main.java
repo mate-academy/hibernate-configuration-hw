@@ -6,7 +6,7 @@ import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
 
 public class Main {
-    private static final Injector injector = Injector.getInstance("mate.academy.service");
+    private static final Injector injector = Injector.getInstance("mate.academy");
     @Inject
     private static final MovieService movieService
                              = (MovieService) injector.getInstance(MovieService.class);
