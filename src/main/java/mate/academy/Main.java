@@ -19,6 +19,6 @@ public class Main {
         System.out.println(movieService.add(movie));
 
         System.out.println("***Get Movie by id***");
-//        System.out.println(movieService.get(1L));
+        System.out.println(movieService.get(1L));
     }
 }
