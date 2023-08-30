@@ -10,6 +10,7 @@ public class Main {
             injector.getInstance(MovieService.class);
 
     public static void main(String[] args) {
+
         Movie movie = new Movie("Harry Potter", "Movie about magicians");
         System.out.println(movieService.add(movie));
         System.out.println(movieService.get(1L));
