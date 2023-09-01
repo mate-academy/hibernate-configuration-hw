@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Movie movie = new Movie("The little women", "amazing movie");
         movie = movieService.add(movie);
-        System.out.println("New movie was added to DB " +movie);
+        System.out.println("New movie was added to DB " + movie);
         Movie receivedMovie = movieService.get(movie.getId());
         System.out.println("Requested movie form DB is: " + receivedMovie);
     }
