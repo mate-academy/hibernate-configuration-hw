@@ -14,6 +14,6 @@ public class Main {
         movie.setTitle("Potter");
         movie.setDescription("Fantastic");
         movieService.add(movie);
-        System.out.println( movieService.get(1L).toString());
+        System.out.println(movieService.get(1L).toString());
     }
 }

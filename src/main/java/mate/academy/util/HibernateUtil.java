@@ -9,6 +9,7 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return INSTANCE;
     }
+
     private HibernateUtil() {
     }
 
