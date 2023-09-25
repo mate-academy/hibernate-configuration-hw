@@ -22,3 +22,4 @@ public class MovieServiceImpl implements MovieService {
                 -> new DataProcessingException("Can't find movie in DB by Id " + id));
     }
 }
+
