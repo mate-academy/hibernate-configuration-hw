@@ -15,14 +15,18 @@ public class MovieDaoImpl implements MovieDao {
     public Movie add(Movie movie) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
+        Transaction transaction = null;
         try {
             session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             throw new DataProcessingException("Can't save movie: " + movie, e);
         } finally {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             if (session != null) {
                 session.close();
             }
