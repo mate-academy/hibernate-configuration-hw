@@ -22,30 +22,25 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-            session.close();
         } catch (RuntimeException e) {
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingException("Process is interrupted with object: " + movie);
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
         return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        SessionFactory sessionFactory = null;
-        Session session = null;
-        Movie movie = null;
-        try {
-            sessionFactory = HibernateUtil.getSessionFactory();
-            session = sessionFactory.openSession();
-            movie = session.get(Movie.class, id);
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("Process is interrupted: " + e);
-        } finally {
-            session.close();
-        }
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Movie movie = session.get(Movie.class, id);
+
         return Optional.of(movie);
     }
 }
