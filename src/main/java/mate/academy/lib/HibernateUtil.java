@@ -6,12 +6,12 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
     private static final SessionFactory instance = initSessionFactory();
 
-    public static SessionFactory getSessionFactory() {
-        return instance;
-    }
-
     private HibernateUtil() {
 
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return instance;
     }
 
     private static SessionFactory initSessionFactory() {
