@@ -1,13 +1,15 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.exceptions.DataProcessingException;
+import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
-import java.util.Optional;
-
+@Dao
 public class MovieDaoImpl implements MovieDao {
     private final SessionFactory sessionFactory;
 
@@ -17,17 +19,15 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        Session session = sessionFactory.openSession();
-        try {
-            session.beginTransaction();
-            Long id = (Long) session.save(movie);
-            session.getTransaction().commit();
-            movie.setId(id);
-        } catch (Exception e) {
-            throw new DataProcessingException("Error while adding a movie", e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            try {
+                Long id = (Long) session.save(movie);
+                transaction.commit();
+                movie.setId(id);
+            } catch (Exception e) {
+                transaction.rollback();
+                throw new DataProcessingException("Error while adding a movie", e);
             }
         }
         return movie;
@@ -35,15 +35,9 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Session session = sessionFactory.openSession();
-        try {
-            return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (Exception e) {
-            throw new DataProcessingException("Error while getting a movie by ID", e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
+        try (Session session = sessionFactory.openSession()) {
+            Optional<Movie> movieOptional = Optional.ofNullable(session.get(Movie.class, id));
+            return movieOptional;
         }
     }
 }
