@@ -10,7 +10,7 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
         movie.setTitle("Wednesday");
-        movie.setDescription("Wednesday - is an intriguing new serial");
+        movie.setDescription("Wednesday - is very intriguing new serial");
         movieService.add(movie);
         Movie savedMovie = movieService.get(1L);
         System.out.println(savedMovie);
