@@ -11,6 +11,8 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+    private static final String EXCEPTION = "Can't open a session";
+
     @Override
     public Movie add(Movie movie) {
         Transaction transaction = null;
@@ -21,10 +23,11 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+            throw new DataProcessingException(EXCEPTION, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -36,7 +39,8 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        return Optional.of(session.get(Movie.class, id));
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
+        }
     }
 }
