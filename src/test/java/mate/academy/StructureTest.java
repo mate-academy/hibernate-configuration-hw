@@ -43,8 +43,8 @@ public class StructureTest {
     @Test
     public void structure_hibernateConfigFileExists_OK() {
         Optional<File> optionalResourcesFolder = Arrays.stream(
-                Objects.requireNonNull(new File(ROOT_FOLDER).listFiles()))
-                .filter(f -> f.isDirectory() && f.getName().equals(""))
+                        Objects.requireNonNull(new File(ROOT_FOLDER).listFiles()))
+                .filter(f -> f.isDirectory() && f.getName().equals("resources"))
                 .findAny();
         if (optionalResourcesFolder.isEmpty()) {
             Assert.fail("You should create src/main/resources folder");
