@@ -10,8 +10,9 @@ public class Main {
         final MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Movie movieToAdd = new Movie();
-        movieToAdd.setTitle("Title 1");
-        movieToAdd.setDescription("Description 1");
+        movieToAdd.setTitle("Pain Hustlers");
+        movieToAdd.setDescription("After losing her job, a woman who's struggling to raise "
+                + "her daughter takes a job out of desperation.");
 
         movieService.add(movieToAdd);
         final Movie movieFromDb = movieService.get(1L);
