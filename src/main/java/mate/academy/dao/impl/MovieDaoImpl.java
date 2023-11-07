@@ -42,10 +42,11 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         Session session = null;
+        Optional<Movie> movie;
 
         try {
             session = sessionFactory.openSession();
-            return Optional.of(session.get(Movie.class, id));
+            movie = Optional.of(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie from db by id = " + id, e);
         } finally {
@@ -53,5 +54,7 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
+
+        return movie;
     }
 }
