@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skipTests>true</skipTests>
-        <maven.checkstyle.plugin.version>3.3.0</maven.checkstyle.plugin.version>
+        <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
         <maven.checkstyle.plugin.configLocation>
             https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
@@ -23,8 +23,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.3.1.Final</version>
-        </dependency>
+            <version>6.3.1.Final</version></dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -57,11 +56,6 @@
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>2.7.1</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.1.0</version>
         </dependency>
     </dependencies>
     <build>
@@ -96,6 +90,7 @@
                 </executions>
                 <configuration>
                     <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
+                    <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
