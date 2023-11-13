@@ -12,6 +12,9 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+    private static final String ADD_EXCEPTION_MESSAGE = "Failed to add movie to db";
+    private static final String FIND_EXCEPTION_MESSAGE = "Failed to find object by id";
+
     @Override
     public Movie add(Movie movie) {
         Session session = null;
@@ -26,7 +29,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Failed to add movie to db", e);
+            throw new DataProcessingException(ADD_EXCEPTION_MESSAGE, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,7 +46,7 @@ public class MovieDaoImpl implements MovieDao {
             session = sessionFactory.openSession();
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (HibernateException e) {
-            throw new DataProcessingException("Failed to find object by id" + id, e);
+            throw new DataProcessingException(FIND_EXCEPTION_MESSAGE + id, e);
         } finally {
             if (session != null) {
                 session.close();
