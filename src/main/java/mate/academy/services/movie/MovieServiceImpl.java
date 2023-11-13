@@ -1,4 +1,4 @@
-package mate.academy.services.movieservice;
+package mate.academy.services.movie;
 
 import java.util.NoSuchElementException;
 import mate.academy.dao.MovieDao;
