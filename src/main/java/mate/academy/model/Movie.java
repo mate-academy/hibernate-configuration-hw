@@ -11,9 +11,16 @@ import jakarta.persistence.Table;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String title;
-    String description;
+    private Long id;
+    private String title;
+    private String description;
+
+    public Movie() {
+    }
+
+    public Movie(String title) {
+        this.title = title;
+    }
 
     public Long getId() {
         return id;

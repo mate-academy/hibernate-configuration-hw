@@ -8,7 +8,10 @@ import mate.academy.model.Movie;
 @Service
 public class MovieServiceImpl implements MovieService {
     @Inject
-    private final MovieDao movieDao;
+    private MovieDao movieDao;
+
+    public MovieServiceImpl() {
+    }
 
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
