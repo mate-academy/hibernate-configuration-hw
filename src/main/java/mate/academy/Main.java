@@ -10,13 +10,13 @@ public class Main {
     private static final Injector INJECTOR = Injector.getInstance("mate.academy");
 
     public static void main(String[] args) {
-        MovieService movieService = (MovieService) INJECTOR.getInstance(MovieService.class);
         Movie movie = new Movie();
-        MovieDao movieDao = new MovieDaoImpl();
         movie.setId(10L);
         movie.setTitle("Fast and Furious 9");
         movie.setDescription("Awesome movie");
+        MovieDao movieDao = new MovieDaoImpl();
         movieDao.save(movie);
+        MovieService movieService = (MovieService) INJECTOR.getInstance(MovieService.class);
         Movie movieFromDB = movieService.get(1L);
         System.out.println(movieFromDB);
     }
