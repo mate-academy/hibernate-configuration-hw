@@ -10,8 +10,7 @@ public class MovieServiceImpl implements MovieService {
     @Inject
     private MovieDao movieDao;
 
-    public MovieServiceImpl() {
-    }
+    public MovieServiceImpl(){};
 
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
