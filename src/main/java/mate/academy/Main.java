@@ -12,6 +12,7 @@ public class Main {
 
         Movie movie = new Movie();
         movie.setTitle("2013");
+        movie.setDescription("2024 is near");
         movieService.add(movie);
 
         System.out.println(movieService.get(1L));
