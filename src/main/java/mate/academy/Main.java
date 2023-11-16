@@ -15,7 +15,7 @@ public class Main {
         movie.setTitle("Fast and Furious 9");
         movie.setDescription("Awesome movie");
         MovieDao movieDao = new MovieDaoImpl();
-        movieDao.save(movie);
+        movieDao.add(movie);
         MovieService movieService = (MovieService) INJECTOR.getInstance(MovieService.class);
         Movie movieFromDB = movieService.get(1L);
         System.out.println(movieFromDB);

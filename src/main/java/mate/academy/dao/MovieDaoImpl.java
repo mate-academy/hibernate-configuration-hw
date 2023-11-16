@@ -12,17 +12,6 @@ import org.hibernate.Transaction;
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
-    public Movie save(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.persist(movie);
-        transaction.commit();
-        session.close();
-        return movie;
-    }
-
-    @Override
     public Movie add(Movie movie) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
@@ -30,10 +19,12 @@ public class MovieDaoImpl implements MovieDao {
             try {
                 session.persist(movie);
                 transaction.commit();
-            } catch (DataProcessingException e) {
+            } catch (Exception e) {
                 if (transaction != null) {
                     transaction.rollback();
                 }
+                throw new DataProcessingException(
+                        "Can not to add movie with title: " + movie.getTitle());
             }
         }
         return movie;
@@ -45,6 +36,6 @@ public class MovieDaoImpl implements MovieDao {
         Session session = sessionFactory.openSession();
         Movie movie = session.get(Movie.class, id);
         session.close();
-        return Optional.of(movie);
+        return Optional.ofNullable(movie);
     }
 }
