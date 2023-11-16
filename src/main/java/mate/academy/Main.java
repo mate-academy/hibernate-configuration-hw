@@ -12,7 +12,7 @@ public class Main {
     private static final String TITLE_3 = "Spider-Man";
     private static final String DESCRIPTION_3 = "Turn your world upside down";
 
-    private static final Injector IJECTOR = Injector.getInstance("mate.academy");
+    private static final Injector INJECTOR = Injector.getInstance("mate.academy");
 
     public static void main(String[] args) {
         Movie movie1 = new Movie();
@@ -27,7 +27,7 @@ public class Main {
         movie3.setTitle(TITLE_3);
         movie3.setDescription(DESCRIPTION_3);
 
-        MovieService movieService = (MovieService) IJECTOR.getInstance(MovieService.class);
+        MovieService movieService = (MovieService) INJECTOR.getInstance(MovieService.class);
 
         movieService.add(movie1);
         movieService.add(movie2);
