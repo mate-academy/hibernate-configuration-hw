@@ -22,19 +22,25 @@ public class Main {
         Movie movie1 = new Movie();
         movie1.setTitle(FIRST_TITLE);
         movie1.setDescription(FIRST_DESCRIPTION);
+
         Movie movie2 = new Movie();
         movie2.setTitle(SECOND_TITLE);
         movie2.setDescription(SECOND_DESCRIPTION);
+
         Movie movie3 = new Movie();
         movie3.setTitle(THIRD_TITLE);
         movie3.setDescription(THIRD_DESCRIPTION);
+
         movieService.add(movie1);
         movieService.add(movie2);
         movieService.add(movie3);
+
         Movie movieById1 = movieService.get(ID_FOR_MOVIE_1);
         System.out.println(movieById1);
+
         Movie movieById2 = movieService.get(ID_FOR_MOVIE_2);
         System.out.println(movieById2);
+
         Movie movieById3 = movieService.get(ID_FOR_MOVIE_3);
         System.out.println(movieById3);
     }
