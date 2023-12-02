@@ -1,6 +1,5 @@
 package mate.academy.service;
 
-import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Inject;
