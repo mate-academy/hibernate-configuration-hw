@@ -19,11 +19,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        Optional<Movie> movieOptional = movieDao.get(id);
-        if (movieOptional.isPresent()) {
-            return movieOptional.get();
-        } else {
-            throw new DataProcessingException("Failed to get movie from DB by ID: " + id);
-        }
+        return movieDao.get(id).orElseThrow(
+                () ->new DataProcessingException("Cannot get movie from DB by ID: " + id));
     }
 }
