@@ -1,9 +1,9 @@
 package mate.academy.model;
 
 public class Movie {
-  private Long id;
-  private String title;
-  private String description;
+    private Long id;
+    private String title;
+    private String description;
 
     public Movie() {
     }
