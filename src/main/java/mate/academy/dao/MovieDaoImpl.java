@@ -47,7 +47,7 @@ public class MovieDaoImpl implements MovieDao {
         Optional<Movie> movieOptional;
         try {
             session = sessionFactory.openSession();
-            return Optional.ofNullable(session.get(Movie.class, id));
+            movieOptional = Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie with ID: " + id);
         } finally {
@@ -55,5 +55,6 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
+        return movieOptional;
     }
 }
