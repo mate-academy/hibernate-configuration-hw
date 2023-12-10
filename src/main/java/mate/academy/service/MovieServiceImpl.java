@@ -3,28 +3,22 @@ package mate.academy.service;
 import mate.academy.dao.DataProcessingException;
 import mate.academy.dao.MovieDao;
 import mate.academy.lib.Inject;
+import mate.academy.lib.Service;
 import mate.academy.model.Movie;
 
+@Service
 public class MovieServiceImpl implements MovieService {
-
     @Inject
     private MovieDao movieDao;
 
     @Override
     public Movie add(Movie movie) {
-        try {
-            return movieDao.add(movie);
-        } catch (DataProcessingException e) {
-            throw new DataProcessingException("Error adding movie", e);
-        }
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        try {
-            return movieDao.get(id).orElse(null);
-        } catch (DataProcessingException e) {
-            throw new DataProcessingException("Error getting movie by id", e);
-        }
+        return movieDao.get(id).orElseThrow(() ->
+                new DataProcessingException("Can't find movie with id: " + id));
     }
 }
