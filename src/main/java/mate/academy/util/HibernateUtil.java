@@ -1,20 +1,27 @@
 package mate.academy.util;
 
+import mate.academy.dao.DataProcessingException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    private static final SessionFactory instance = initSessionFactory();
+    private static final SessionFactory SESSION_FACTORY = buildSessionFactory();
 
-    private HibernateUtil() {
-        // private constructor to prevent instantiation
-    }
-
-    private static SessionFactory initSessionFactory() {
-        return new Configuration().configure().buildSessionFactory();
+    private static SessionFactory buildSessionFactory() {
+        try {
+            return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        } catch (DataProcessingException ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
     }
 
     public static SessionFactory getSessionFactory() {
-        return instance;
+        return SESSION_FACTORY;
+    }
+
+    public static void shutdown() {
+        // Close caches and connection pools
+        getSessionFactory().close();
     }
 }
