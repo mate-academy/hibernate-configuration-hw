@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Inject
 public class Injector {
-    private static final Map<String, Injector> injectors = new HashMap<>();
+    private static final Map<String, Injector> INJECTOR_MAP = new HashMap<>();
     private final Map<Class<?>, Object> instanceOfClasses = new HashMap<>();
     private final List<Class<?>> classes = new ArrayList<>();
 
@@ -26,11 +26,11 @@ public class Injector {
     }
 
     public static Injector getInstance(String mainPackageName) {
-        if (injectors.containsKey(mainPackageName)) {
-            return injectors.get(mainPackageName);
+        if (INJECTOR_MAP.containsKey(mainPackageName)) {
+            return INJECTOR_MAP.get(mainPackageName);
         }
         Injector injector = new Injector(mainPackageName);
-        injectors.put(mainPackageName, injector);
+        INJECTOR_MAP.put(mainPackageName, injector);
         return injector;
     }
 
@@ -57,7 +57,6 @@ public class Injector {
         }
         return newInstanceOfClass;
     }
-
     private Class<?> findClassExtendingInterface(Class<?> certainInterface) {
         for (Class<?> clazz : classes) {
             Class<?>[] interfaces = clazz.getInterfaces();
@@ -82,7 +81,6 @@ public class Injector {
         instanceOfClasses.put(certainClass, newInstance);
         return newInstance;
     }
-
     private boolean isFieldInitialized(Field field, Object instance) {
         field.setAccessible(true);
         try {
@@ -102,7 +100,6 @@ public class Injector {
         }
         return newInstance;
     }
-
     private void setValueToField(Field field, Object instanceOfClass, Object classToInject) {
         try {
             field.setAccessible(true);
@@ -111,35 +108,34 @@ public class Injector {
             throw new RuntimeException("Can't set value to field ", e);
         }
     }
-    /**
-     * Scans all classes accessible from the context class loader which
-     * belong to the given package and subpackages.
-     *
-     * @param packageName The base package
-     * @return The classes
-     * @throws ClassNotFoundException if the class cannot be located
-     * @throws IOException            if I/O errors occur
-     */
-
-    private static List<Class<?>> getClasses(String packageName)
-            throws IOException, ClassNotFoundException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        if (classLoader == null) {
-            throw new RuntimeException("Class loader is null");
-        }
-        String path = packageName.replace('.', '/');
-        Enumeration<URL> resources = classLoader.getResources(path);
-        List<File> dirs = new ArrayList<>();
-        while (resources.hasMoreElements()) {
-            URL resource = resources.nextElement();
-            dirs.add(new File(resource.getFile()));
-        }
-        ArrayList<Class<?>> classes = new ArrayList<>();
-        for (File directory : dirs) {
-            classes.addAll(findClasses(directory, packageName));
-        }
-        return classes;
+/**
+ * Scans all classes accessible from the context class loader which
+ * belong to the given package and subpackages.
+ *
+ * @param packageName The base package
+ * @return The classes
+ * @throws ClassNotFoundException if the class cannot be located
+ * @throws IOException            if I/O errors occur
+ */
+private static List<Class<?>> getClasses(String packageName)
+        throws IOException, ClassNotFoundException {
+    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+    if (classLoader == null) {
+        throw new RuntimeException("Class loader is null");
     }
+    String path = packageName.replace('.', '/');
+    Enumeration<URL> resources = classLoader.getResources(path);
+    List<File> dirs = new ArrayList<>();
+    while (resources.hasMoreElements()) {
+        URL resource = resources.nextElement();
+        dirs.add(new File(resource.getFile()));
+    }
+    ArrayList<Class<?>> classes = new ArrayList<>();
+    for (File directory : dirs) {
+        classes.addAll(findClasses(directory, packageName));
+    }
+    return classes;
+}
     /**
      * Recursive method used to find all classes in a given directory and subdirs.
      *
@@ -148,7 +144,6 @@ public class Injector {
      * @return The classes
      * @throws ClassNotFoundException if the class cannot be located
      */
-
     private static List<Class<?>> findClasses(File directory, String packageName)
             throws ClassNotFoundException {
         List<Class<?>> classes = new ArrayList<>();
