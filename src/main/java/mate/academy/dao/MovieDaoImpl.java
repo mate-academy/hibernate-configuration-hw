@@ -28,7 +28,7 @@ public class MovieDaoImpl implements MovieDao {
             }
             throw new DataProcessingException("Unable to complete the transaction", e);
         } finally {
-            if (session != null && session.isOpen()) {
+            if (session != null) {
                 session.close();
             }
         }
