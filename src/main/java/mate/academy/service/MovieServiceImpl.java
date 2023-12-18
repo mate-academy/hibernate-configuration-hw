@@ -3,6 +3,7 @@ package mate.academy.service;
 import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.dao.MovieDaoImpl;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
@@ -19,6 +20,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).get();
+        Optional<Movie> optionalMovie = movieDao.get(id);
+        if (optionalMovie.isPresent()) {
+            return optionalMovie.get();
+        } else {
+            throw new DataProcessingException("No movie found by id " + id);
+        }
     }
 }
