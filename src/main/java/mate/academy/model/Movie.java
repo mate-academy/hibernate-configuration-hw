@@ -1,10 +1,11 @@
 package mate.academy.model;
 
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
 
 @Entity
 @Table(name = "movies")
