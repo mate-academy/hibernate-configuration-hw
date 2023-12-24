@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class StructureTest {
             allClasses = getClasses("mate.academy");
             if (allClasses.size() == 0) {
                 Assert.fail("You should not rename base mate.academy package and project"
-                        + " name should not contain spaces or some cyrillic letters in path");
+                            + " name should not contain spaces or some cyrillic letters in path");
             }
         } catch (Exception e) {
             throw new RuntimeException("Could not load classes ", e);
@@ -83,11 +84,11 @@ public class StructureTest {
         Optional<Constructor> optionalPrivateConstructor = Arrays
                 .stream(hibernateUtil.getDeclaredConstructors())
                 .filter(c -> c.getParameterTypes().length == 0
-                        && Modifier.toString(c.getModifiers()).equals("private"))
+                             && Modifier.toString(c.getModifiers()).equals("private"))
                 .findAny();
         if (optionalPrivateConstructor.isEmpty()) {
             Assert.fail("You should add a private default constructor to HibernateUtil class"
-                    + "in order to prevent creating HibernateUtil objects.");
+                        + "in order to prevent creating HibernateUtil objects.");
         }
         Optional<Field> optionalSessionFactory = Arrays.stream(hibernateUtil.getDeclaredFields())
                 .filter(f -> f.getType().getName().equals("org.hibernate.SessionFactory"))
@@ -100,18 +101,18 @@ public class StructureTest {
             Assert.fail("SessionFactory field should be static");
         }
         Optional<Method> optionalGetSessionFactoryMethod = Arrays.stream(
-                hibernateUtil.getDeclaredMethods())
+                        hibernateUtil.getDeclaredMethods())
                 .filter(m -> m.getReturnType().getSimpleName().equals("SessionFactory")
-                && Modifier.isPublic(m.getModifiers()))
+                             && Modifier.isPublic(m.getModifiers()))
                 .findAny();
         if (optionalGetSessionFactoryMethod.isEmpty()) {
             Assert.fail("You should create public method, that return "
-                    + "SessionFactory instance in HibernateUtil class");
+                        + "SessionFactory instance in HibernateUtil class");
         }
     }
 
     private void checkMethod(String testedClass, String testedMethod,
-            String returnType, String parameter) {
+                             String returnType, String parameter) {
         Class testedClazz = allClasses.stream().filter(c -> c.getSimpleName().equals(testedClass))
                 .findAny().get();
         List<Method> allMethods = Arrays.stream(testedClazz.getDeclaredMethods())
@@ -123,16 +124,16 @@ public class StructureTest {
         }
         Optional<Method> method = allMethods.stream()
                 .filter(m -> m.getParameterCount() == 1
-                        && Arrays.stream(m.getParameterTypes())
-                        .findAny()
-                        .get().getSimpleName().equals(parameter))
+                             && Arrays.stream(m.getParameterTypes())
+                                     .findAny()
+                                     .get().getSimpleName().equals(parameter))
                 .findAny();
         if (method.isEmpty()) {
             Assert.fail("You should create \"" + method + "\" method in " + testedClazz);
         }
         if (!method.get().getReturnType().getSimpleName().equals(returnType)) {
             Assert.fail("Method \"" + method.get().getName() + "\" in " + testedClazz.getName()
-                    + " should have \"" + returnType + "\" return type");
+                        + " should have \"" + returnType + "\" return type");
         }
     }
 
@@ -142,7 +143,7 @@ public class StructureTest {
                 .findAny();
         if (optionalClass.isEmpty()) {
             Assert.fail("You should create " + type + " called " + name
-                    + ". Create this " + type + " or check naming");
+                        + ". Create this " + type + " or check naming");
         }
     }
 
@@ -184,8 +185,8 @@ public class StructureTest {
             } catch (NoClassDefFoundError e) {
                 if (e.getMessage().contains("HibernateUtil")) {
                     Assert.fail("Could not establish connection with db. You should create "
-                            + "\"hibernate.cfg.xml\" file in resources folder with all "
-                            + "necessary configurations");
+                                + "\"hibernate.cfg.xml\" file in resources folder with all "
+                                + "necessary configurations");
                 } else {
                     throw new RuntimeException("Could not initialize class.", e);
                 }
