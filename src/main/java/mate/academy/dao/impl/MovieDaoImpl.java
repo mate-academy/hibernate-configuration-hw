@@ -16,11 +16,10 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        Session session = null;
+        Session session = sessionFactory.openSession();;
         Transaction transaction = null;
 
         try {
-            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
