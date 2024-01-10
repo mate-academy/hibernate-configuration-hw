@@ -5,13 +5,19 @@ import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
 
 public class Main {
-    private static final Injector injector = Injector
-            .getInstance("mate.academy");
+    private static final Injector injector = Injector.getInstance("mate.academy");
 
     public static void main(String[] args) {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
-        Movie movie = new Movie("Godfather", "Awesome film");
-        Movie movieInDB = movieService.add(movie);
-        System.out.println(movieService.get(movieInDB.getId()));
+
+        Movie movie = new Movie();
+        movie.setTitle("Ghosts in Venice");
+        movie.setDescription("Detective");
+
+        movieService.add(movie);
+
+        Movie movieFromDB = movieService.get(movie.getId());
+        System.out.println(movieFromDB);
+
     }
 }
