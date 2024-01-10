@@ -9,10 +9,9 @@ public class Main {
             .getInstance("mate.academy");
 
     public static void main(String[] args) {
-        Movie duneMovie = new Movie("Dune", "sci-fy");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
-        movieService.add(duneMovie);
-        Movie anotherDuneMovie = movieService.get(1L);
-        System.out.println(anotherDuneMovie);
+        Movie movie = new Movie("Godfather", "Awesome film");
+        Movie movieInDB = movieService.add(movie);
+        System.out.println(movieService.get(movieInDB.getId()));
     }
 }
