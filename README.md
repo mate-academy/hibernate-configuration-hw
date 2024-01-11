@@ -9,7 +9,7 @@ Your task is to implement the following steps:
 - create a `hibernate.cfg.xml` file
 - create `HibernateUtil` class
 - create `Movie` model class
-- create `MovieDao` interface and `MovieDaoImpl` class
+- create `MovieDao` interface and `MovieDaoImpl` class 
     ```java
       public interface MovieDao {
           Movie add(Movie movie);
