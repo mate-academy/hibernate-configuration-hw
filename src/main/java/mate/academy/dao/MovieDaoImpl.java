@@ -11,14 +11,14 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static final SessionFactory SESSION_FACTORY = HibernateUtil.getSessionFactory();
 
     @Override
     public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = sessionFactory.openSession();
+            session = SESSION_FACTORY.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
@@ -26,7 +26,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add a new movie " + movie, e);
+            throw new DataProcessingException("Can't add " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -37,7 +37,7 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = SESSION_FACTORY.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get a movie by id " + id, e);
