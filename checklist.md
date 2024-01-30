@@ -11,6 +11,7 @@
 * Do not push redundant files or folders (iml, .idea, target, etc).
 * If you have problems connecting to MySql because of timezone issues, check out this [article](https://stackoverflow.com/questions/930900/how-do-i-set-the-time-zone-of-mysql).
 * Be attentive with checkstyle plugin. You have to add it in the right place:
+  <!-- here should be checkstyle plugin -->
 
 ```xml
 <project>
@@ -18,7 +19,6 @@
   <build>
     <plugins>
       <plugin>
-        <!-- here should be checkstyle plugin -->
       </plugin>
     </plugins>
     <pluginManagement>
