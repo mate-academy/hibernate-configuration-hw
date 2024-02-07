@@ -1,9 +1,10 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.model.Movie;
 
 public interface MovieDao {
     Movie save(Movie movie);
 
-    Movie get(Long id);
+    Optional<Movie> get(Long id);
 }
