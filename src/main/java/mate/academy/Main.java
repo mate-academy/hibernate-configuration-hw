@@ -1,20 +1,22 @@
 package mate.academy;
 
+import mate.academy.dao.MovieDao;
+import mate.academy.dao.impl.MovieDaoImpl;
 import mate.academy.model.Movie;
-import mate.academy.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 public class Main {
     public static void main(String[] args) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        MovieDao movieDao = new MovieDaoImpl();
+
         Movie movie = new Movie();
         movie.setTitle("Transformers");
-        session.save(movie);
-        transaction.commit();
-        session.close();
+        movie.setDescription("A film about robots capable of being "
+                + "either a humanoid robot or transport");
+
+        movieDao.save(movie);
+
+        Movie movieFromDb = movieDao.get(movie.getId());
+
+        System.out.println(movieFromDb);
     }
 }
