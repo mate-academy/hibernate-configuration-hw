@@ -1,29 +1,12 @@
 <hibernate-configuration>
     <session-factory>
-        <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-
-        <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">Nabulio$2005</property>
-
-        <!-- JDBC connection pool settings -->
-<!--        <property title="hibernate.connection.pool_size">5</property>-->
-
-        <!-- Enable Hibernate's automatic session context management -->
-<!--        <property title="hibernate.current_session_context_class">thread</property>-->
-
-        <!-- Echo all executed SQL to stdout -->
         <property name="hibernate.show_sql">true</property>
-
-        <!-- Drop and create the database schema on startup -->
-<!--        <property title="hibernate.hbm2ddl.auto">update</property>-->
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
-
-        <!-- Mapping files -->
-        <!-- Add your entity mapping files here -->
         <mapping class="mate.academy.model.Movie"/>
     </session-factory>
 </hibernate-configuration>
