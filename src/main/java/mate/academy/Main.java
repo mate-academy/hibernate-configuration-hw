@@ -1,21 +1,23 @@
 package mate.academy;
 
-import mate.academy.dao.MovieDao;
-import mate.academy.dao.impl.MovieDaoImpl;
+import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
+import mate.academy.services.MovieService;
 
 public class Main {
+    private static final Injector injector = Injector.getInstance("mate.academy");
+
     public static void main(String[] args) {
-        MovieDao movieDao = new MovieDaoImpl();
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Movie movie = new Movie();
         movie.setTitle("Transformers");
         movie.setDescription("A film about robots capable of being "
                 + "either a humanoid robot or transport");
 
-        movieDao.save(movie);
-
-        Movie movieFromDb = movieDao.get(movie.getId());
+        Movie saved = movieService.add(movie);
+        Long savedMovieId = saved.getId();
+        Movie movieFromDb = movieService.get(savedMovieId);
 
         System.out.println(movieFromDb);
     }
