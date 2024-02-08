@@ -8,11 +8,12 @@ import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 @SuppressWarnings("all")
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
-    public Movie save(Movie movie) {
+    public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
