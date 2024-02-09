@@ -1,7 +1,6 @@
 package mate.academy.dao;
 
 import java.util.Optional;
-
 import mate.academy.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.lib.Inject;
