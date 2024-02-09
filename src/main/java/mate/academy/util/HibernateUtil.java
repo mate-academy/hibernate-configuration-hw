@@ -13,4 +13,7 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return instance;
     }
+
+    private HibernateUtil() {}
+
 }
