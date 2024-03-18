@@ -12,11 +12,9 @@ public class Main {
 
         Movie movie = new Movie();
         movie.setTitle("Nightmare on Big Mouse Street");
-        movie.setDescription("In a world where rodents have become humanity's greatest terror, "
-                + "a group of relentless mice sets out on a hunt for giant rats to save their "
-                + "neighborhood from the tyranny of terrifying rodents. In this fantasy-action "
-                + "comedy, the toothy heroes will battle for their territory in an epic clash "
-                + "between the eared and tailed!");
+        movie.setDescription("In a world terrified by rodents, brave mice hunt giant rats to "
+                + "save their neighborhood. This fantasy-action comedy pits the toothy heroes "
+                + "against terrifying rodents in an epic clash!");
 
         System.out.println("Movie added: " + movieService.add(movie));
         System.out.println("Movie get by id 1: " + movieService.get(movie.getId()));
