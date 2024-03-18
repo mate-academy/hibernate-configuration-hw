@@ -18,6 +18,5 @@ public class Main {
 
         System.out.println("Movie added: " + movieService.add(movie));
         System.out.println("Movie get by id 1: " + movieService.get(movie.getId()));
-        System.out.println("Movie get by id 2: " + movieService.get(2L));
     }
 }
