@@ -1,7 +1,6 @@
 package mate.academy.dao;
 
 import java.util.Optional;
-
 import mate.academy.HibernateUtil;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
@@ -12,8 +11,7 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-
-    public SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
     public Movie add(Movie movie) {
