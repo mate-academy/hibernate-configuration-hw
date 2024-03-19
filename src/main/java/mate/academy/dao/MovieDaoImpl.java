@@ -1,6 +1,7 @@
 package mate.academy.dao;
 
 import java.util.Optional;
+
 import mate.academy.HibernateUtil;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
@@ -12,15 +13,14 @@ import org.hibernate.Transaction;
 @Dao
 public class MovieDaoImpl implements MovieDao {
 
+    public SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
     @Override
     public Movie add(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = null;
-        Transaction transaction = null;
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
         try {
-            session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-            session.save(movie);
+            session.persist(movie);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -28,29 +28,17 @@ public class MovieDaoImpl implements MovieDao {
             }
             throw new DataProcessingException();
         } finally {
-            if (session != null) {
-                session.close();
-            }
+            session.close();
         }
         return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        Session session = null;
-        Movie movie;
-        try {
-            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            movie = session.get(Movie.class, id);
-        } catch (Exception e) {
-            throw new DataProcessingException();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return movie != null ? Optional.of(movie) : Optional.empty();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Movie movie = session.get(Movie.class, id);
+        session.close();
+        return Optional.ofNullable(movie);
     }
 }
