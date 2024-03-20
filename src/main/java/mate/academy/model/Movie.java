@@ -8,6 +8,14 @@ import java.math.BigInteger;
 
 @javax.persistence.Entity
 public class Movie {
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
