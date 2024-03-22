@@ -127,6 +127,13 @@ public class StructureTest {
                         .findAny()
                         .get().getSimpleName().equals(parameter))
                 .findAny();
+        if (method.isEmpty()) {
+            Assert.fail("You should create \"" + method + "\" method in " + testedClazz);
+        }
+        if (!method.get().getReturnType().getSimpleName().equals(returnType)) {
+            Assert.fail("Method \"" + method.get().getName() + "\" in " + testedClazz.getName()
+                    + " should have \"" + returnType + "\" return type");
+        }
     }
 
     private void checkExistence(String name, String type) {
