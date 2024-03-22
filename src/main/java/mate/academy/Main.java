@@ -1,6 +1,5 @@
 package mate.academy;
 
-import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
@@ -23,11 +22,9 @@ public class Main {
         movie1.setDescription("desc1");
         movieService.add(movie1, movieDao);
 
-        Optional<Movie> opt = movieService.get(1L, movieDao);
-        /*System.out.println(movieService.get(1L, movieDao)
+        System.out.println(movieService.get(23L, movieDao)
                 .map(Object::toString)
                 .orElse("none found"));
-                */
-        opt.ifPresent(value -> System.out.println(value));
+
     }
 }
