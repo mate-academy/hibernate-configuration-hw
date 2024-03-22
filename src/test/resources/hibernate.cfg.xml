@@ -8,21 +8,11 @@
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.username">mysql</property>
         <property name="hibernate.connection.password">ko4erhin</property>
-
-        <!-- SQL dialect for MySQL -->
-
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
 
         <!-- Automatically create/update database schema -->
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
-
-        <!-- Configure connection pool settings -->
-
-
-        <!-- Enable caching -->
-        >
-
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Specify annotated entity classes -->
         <mapping class="mate.academy.model.Movie"/>
