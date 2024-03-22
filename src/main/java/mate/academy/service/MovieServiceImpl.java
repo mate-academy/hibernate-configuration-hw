@@ -12,9 +12,9 @@ public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
     @Override
-    public Movie add(Movie movie, MovieDao movieDao) {
+    public Optional<Movie> add(Movie movie, MovieDao movieDao) {
         this.movieDao = movieDao;
-        return movieDao.save(movie);
+        return Optional.of(movieDao.add(movie));
     }
 
     @Override

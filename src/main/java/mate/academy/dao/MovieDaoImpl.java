@@ -2,6 +2,7 @@ package mate.academy.dao;
 
 import java.util.Optional;
 import mate.academy.lib.Dao;
+import mate.academy.lib.DataProcessingException;
 import mate.academy.lib.Inject;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
@@ -11,29 +12,23 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    @Inject
-    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    @Inject
-    private Session mySession = sessionFactory.openSession();
-
     @Override
-    public Movie save(Movie movie) {
+    public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.save(movie);
+            session.persist(movie);
             transaction.commit();
-            return movie;
-        } catch (Exception e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         } finally {
-            if (mySession != null) {
-                mySession.close();
+            if (session != null) {
+                session.close();
             }
         }
 
@@ -42,7 +37,15 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        mySession = sessionFactory.openSession();
-        return Optional.ofNullable(mySession.get(Movie.class, id));
+       Session session = null;
+       try {
+           SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            session = sessionFactory.openSession();
+           return Optional.ofNullable(session.get(Movie.class, id));
+       } finally {
+           if (session != null) {
+               session.close();
+           }
+       }
     }
 }
