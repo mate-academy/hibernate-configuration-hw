@@ -3,7 +3,6 @@ package mate.academy.dao;
 import java.util.Optional;
 import mate.academy.lib.Dao;
 import mate.academy.lib.DataProcessingException;
-import mate.academy.lib.Inject;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
@@ -22,10 +21,12 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+
+            throw new DataProcessingException("Exception was caught. Transaction rollback");
         } finally {
             if (session != null) {
                 session.close();
