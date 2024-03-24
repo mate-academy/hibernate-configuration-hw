@@ -20,6 +20,6 @@ public class Main {
         movie1.setDescription("desc1");
         movieService.add(movie1);
 
-        System.out.println(movieService.get(23L));
+        System.out.println(movieService.get(1L));
     }
 }
