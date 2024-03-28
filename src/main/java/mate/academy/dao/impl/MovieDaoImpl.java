@@ -16,8 +16,10 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
+        Session session = null;
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
@@ -28,18 +30,28 @@ public class MovieDaoImpl implements MovieDao {
             }
             throw new DataProcessingException(String.format(
                     "An error occurred while trying to add a film %s to the database", movie), ex);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = sessionFactory.openSession()) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (RuntimeException ex) {
             throw new DataProcessingException(String.format(
                     "An error occurred while trying to retrieve a film with ID %d "
                             + "from the database", id), ex);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }
