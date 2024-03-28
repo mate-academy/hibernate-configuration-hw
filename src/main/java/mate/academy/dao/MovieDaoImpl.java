@@ -31,12 +31,15 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Movie movie = null;
+        Movie movie;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             movie = session.get(Movie.class, id);
         } catch (Exception e) {
             throw new DataProcessingException("Can not read from the DB: ", e);
         }
-        return Optional.of(movie);
+        if (movie != null) {
+            return Optional.of(movie);
+        }
+        return Optional.empty();
     }
 }
