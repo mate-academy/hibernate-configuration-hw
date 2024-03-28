@@ -44,10 +44,11 @@ public class MovieDaoImpl implements MovieDao {
             Movie result = session.get(Movie.class, id);
             return Optional.ofNullable(result);
         } catch (RuntimeException e) {
+            throw new DataProcessingException("Failed to get movie by id=" + id);
+        } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return Optional.empty();
     }
 }
