@@ -1,9 +1,16 @@
 package mate.academy.util;
 
 import
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    public SessionFactory getSessionFactory() {
-        return new Configuration
+    private static SessionFactory instance = initSessionFactory();
+    private static  SessionFactory initSessionFactory() {
+        return new Configuration().configure().buildSessionFactory();
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return instance;
     }
 }
