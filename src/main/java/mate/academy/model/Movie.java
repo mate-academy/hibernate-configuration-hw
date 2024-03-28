@@ -17,9 +17,6 @@ public class Movie {
     private String title;
     private String description;
 
-    public Movie(int i, String movie, String movie1) {
-    }
-
     public Movie() {
 
     }

@@ -1,23 +1,21 @@
 package mate.academy;
 
+import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
-import mate.academy.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import mate.academy.service.MovieService;
 
 public class Main {
+    private static final Injector injector = Injector.getInstance("mate.academy");
+
     public static void main(String[] args) {
 
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
         Movie movie = new Movie();
-        movie.setTitle("Terminator");
-        movie.setDescription("another movie");
-        session.persist(movie);
-        transaction.commit();
-        session.close();
+        movie.setTitle("Bullet Train");
+        movie.setDescription("Action");
+
+        System.out.println(movieService.add(movie));
+        System.out.println(movieService.get(1L));
     }
 }
