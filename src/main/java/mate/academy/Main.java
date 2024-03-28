@@ -10,14 +10,9 @@ public class Main {
     public static void main(String[] args) {
 
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
-
-
-
-
         Movie movie = new Movie();
         movie.setTitle("BulletTrain");
         movie.setDescription("Action");
-
         System.out.println(movieService.add(movie));
         System.out.println(movieService.get(1L));
     }
