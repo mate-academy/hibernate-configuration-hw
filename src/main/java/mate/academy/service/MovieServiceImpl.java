@@ -1,15 +1,25 @@
 package mate.academy.service;
 
+import mate.academy.dao.MovieDao;
+import mate.academy.lib.Inject;
+import mate.academy.lib.Service;
 import mate.academy.model.Movie;
 
+import java.util.NoSuchElementException;
+
+@Service
 public class MovieServiceImpl implements MovieService {
+    @Inject
+    private MovieDao movieDao;
+
     @Override
     public Movie add(Movie movie) {
-        return null;
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        return null;
+        return movieDao.get(id).orElseThrow(() ->
+                new NoSuchElementException("Failed to find movie by id = " + id));
     }
 }
