@@ -1,6 +1,8 @@
 package mate.academy.exception;
 
-public class DataProcessingException extends RuntimeException{
+public class DataProcessingException extends RuntimeException {
 
-    public DataProcessingException(String s) {}
+    public DataProcessingException(String s) {
+
+    }
 }
