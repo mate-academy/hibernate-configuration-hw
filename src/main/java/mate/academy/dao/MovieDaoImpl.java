@@ -15,7 +15,24 @@ import java.util.Optional;
 public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
-        return null;
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.persist(movie);
+            transaction.commit();
+        } catch (RuntimeException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return movie;
     }
 
     @Override
