@@ -1,5 +1,6 @@
 package mate.academy.dao.impl;
 
+import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
@@ -8,7 +9,6 @@ import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
@@ -38,7 +38,8 @@ public class MovieDaoImpl implements MovieDao {
             return Optional.ofNullable(movie);
         } catch (RuntimeException ex) {
             throw new DataProcessingException(String.format(
-                    "An error occurred while trying to retrieve a film with ID %d from the database", id), ex);
+                    "An error occurred while trying to retrieve a film with ID %d "
+                            + "from the database", id), ex);
         }
     }
 }
