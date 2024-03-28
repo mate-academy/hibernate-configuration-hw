@@ -7,6 +7,7 @@ public class HibernateUtil {
     private static final SessionFactory instance = initSessionFactory();
 
     private HibernateUtil() {
+
     }
 
     private static SessionFactory initSessionFactory() {
@@ -16,4 +17,5 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return instance;
     }
+
 }

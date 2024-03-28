@@ -5,20 +5,16 @@ import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final String ADD_EXCEPTION_MESSAGE = "Failed to add movie to db";
-    private static final String FIND_EXCEPTION_MESSAGE = "Failed to find object by id";
-
     @Override
     public Movie add(Movie movie) {
-        Session session = null;
         Transaction transaction = null;
+        Session session = null;
         try {
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             session = sessionFactory.openSession();
@@ -29,7 +25,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(ADD_EXCEPTION_MESSAGE, e);
+            throw new DataProcessingException("Failed to add movie to DB" + movie);
         } finally {
             if (session != null) {
                 session.close();
@@ -44,9 +40,10 @@ public class MovieDaoImpl implements MovieDao {
         try {
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             session = sessionFactory.openSession();
-            return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (HibernateException e) {
-            throw new DataProcessingException(FIND_EXCEPTION_MESSAGE + id, e);
+            Movie result = session.get(Movie.class, id);
+            return Optional.ofNullable(result);
+        } catch (RuntimeException e) {
+            throw new DataProcessingException("Failed to get movie by id=" + id);
         } finally {
             if (session != null) {
                 session.close();

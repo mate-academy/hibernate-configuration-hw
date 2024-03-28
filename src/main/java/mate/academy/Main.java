@@ -1,25 +1,21 @@
 package mate.academy;
 
-import mate.academy.dao.MovieDao;
-import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
-import mate.academy.services.movie.MovieService;
-import mate.academy.services.movie.MovieServiceImpl;
+import mate.academy.service.MovieService;
 
 public class Main {
-    private static final Injector injector = Injector.getInstance("mate.academy.dao");
+    private static final Injector injector = Injector.getInstance("mate.academy");
 
-    public static void main(String[] args) throws DataProcessingException {
-        MovieDao movieDao = (MovieDao) injector.getInstance(MovieDao.class);
+    public static void main(String[] args) {
 
-        MovieService movieService = new MovieServiceImpl(movieDao);
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Movie movie = new Movie();
-        movie.setTitle("Bullet train");
-        movie.setDescription("Comedy/action/thriller");
+        movie.setTitle("Bullet Train");
+        movie.setDescription("Action");
 
-        movieService.add(movie);
+        System.out.println(movieService.add(movie));
         System.out.println(movieService.get(1L));
     }
 }
