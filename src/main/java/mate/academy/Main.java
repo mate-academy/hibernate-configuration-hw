@@ -14,7 +14,7 @@ public class Main {
         movieService.add(firstMovie);
         movieService.add(secondMovie);
 
-        Movie fromDb = movieService.get(1L);
+        Movie fromDb = movieService.get(firstMovie.getId());
         System.out.println(fromDb);
     }
 }
