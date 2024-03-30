@@ -1,10 +1,8 @@
 package mate.academy.util;
 
-import mate.academy.lib.Service;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-@Service
 public class HibernateUtil {
     private static SessionFactory instance = initSessionFactory();
 

@@ -5,7 +5,6 @@ import mate.academy.exceptions.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,7 +19,7 @@ public class MovieDaoImpl implements MovieDao {
             session.save(movie);
             transaction.commit();
             return movie;
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             transaction.rollback();
             throw new DataProcessingException("Can not complete saving:" + movie.getTitle(), e);
         } finally {
