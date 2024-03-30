@@ -16,7 +16,7 @@ public class MovieDaoImpl implements MovieDao {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.save(movie);
+            session.persist(movie);
             transaction.commit();
             return movie;
         } catch (Exception e) {
