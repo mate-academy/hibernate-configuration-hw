@@ -1,11 +1,13 @@
 package mate.academy.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
+@Table(name = "movies")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +37,18 @@ public class Movie {
 
     public void setDescription(java.lang.String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{"
+                + "id="
+                + id
+                + ", title='"
+                + title + '\''
+                + ", description='"
+                + description
+                + '\''
+                + '}';
     }
 }
