@@ -1,10 +1,10 @@
 package mate.academy;
 
+import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.dao.MovieDaoImpl;
 import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
-import java.util.Optional;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
