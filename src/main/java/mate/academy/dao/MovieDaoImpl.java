@@ -34,7 +34,6 @@ public class MovieDaoImpl implements MovieDao {
             }
         }
         return movie;
-
     }
 
     @Override

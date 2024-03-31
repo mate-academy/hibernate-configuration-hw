@@ -31,5 +31,3 @@ public class Main {
         System.out.println(movieService.get(3L));
     }
 }
-
-
