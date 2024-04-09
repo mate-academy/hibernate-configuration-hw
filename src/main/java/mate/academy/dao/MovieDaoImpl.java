@@ -22,7 +22,7 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (HibernateException e) {
+        } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -41,7 +41,6 @@ public class MovieDaoImpl implements MovieDao {
         Movie movie;
         try (Session session = sessionFactory.openSession()) {
             movie = session.get(Movie.class, id);
-            session.close();
         } catch (HibernateException e) {
             throw new DataProcessingException("Error during getting movie with id: " + id, e);
         }
