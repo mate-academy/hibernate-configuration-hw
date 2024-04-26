@@ -1,5 +1,6 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
@@ -8,8 +9,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.Optional;
-
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
@@ -17,14 +16,16 @@ public class MovieDaoImpl implements MovieDao {
         Session session = null;
         Transaction transaction = null;
         try {
-            session =  HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (HibernateException e) {
-            if (transaction != null){
+        } catch (Exception e) {
+            if (transaction != null) {
                 transaction.rollback();
-            } throw new DataProcessingException("Can't add data to DB for movie: " + movie.getTitle(), e);
+            }
+            throw new DataProcessingException("Can't add data to DB for movie: "
+                    + movie.getTitle(), e);
         } finally {
             if (session != null) {
                 session.close();
@@ -35,11 +36,11 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                Movie movie = session.get(Movie.class, id);
-                return Optional.ofNullable(movie);
-            } catch (HibernateException e) {
-                throw new DataProcessingException("Can't get the movie for id = " + id, e);
-            }
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Movie movie = session.get(Movie.class, id);
+            return Optional.ofNullable(movie);
+        } catch (HibernateException e) {
+            throw new DataProcessingException("Can't get the movie for id = " + id, e);
         }
     }
+}
