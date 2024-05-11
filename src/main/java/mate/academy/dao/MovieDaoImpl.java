@@ -6,24 +6,38 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class MovieDaoImpl implements MovieDao {
+import java.util.Optional;
 
+@Dao
+public class MovieDaoImpl implements MovieDao {
     @Override
-    public Movie save(Movie movie) {
+    public Movie add(Movie movie) throws DataProcessingException {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(movie);
-        transaction.commit();
-        session.close();
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.save(movie);
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            throw new DataProcessingException("Can't add movie: " + movie, ex);
+        } finally {
+            session.close();
+        }
         return movie;
     }
 
     @Override
-    public Movie get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.get(Movie.class, id);
-        return session.get(Movie.class, id);
+    public Optional<Movie> get(Long id) throws DataProcessingException {
+        Optional<Movie> movie;
+        try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            movie = Optional.ofNullable(session.get(Movie.class, id));
+        } catch (Exception ex) {
+            throw new DataProcessingException("Can't find movie with id: " + id, ex);
+        }
+        return movie;
     }
 }

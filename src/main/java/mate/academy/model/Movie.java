@@ -18,10 +18,6 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String title) {
-        this.title = title;
-    }
-
     public Long getId() {
         return id;
     }
@@ -48,8 +44,13 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" + "id=" + id
-                + ", title='" + title + '\'' + ", description='"
-                + description + '\'' + '}';
+        return "Movie{"
+                + "id="
+                + id
+                + ", title='"
+                + title + '\''
+                + ", description='" + description
+                + '\''
+                + '}';
     }
 }
