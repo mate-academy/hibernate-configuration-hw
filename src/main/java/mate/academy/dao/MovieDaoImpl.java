@@ -1,17 +1,18 @@
 package mate.academy.dao;
 
+import java.util.Optional;
+import mate.academy.exception.DataProcessingException;
+import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.util.Optional;
-
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
-    public Movie add(Movie movie) throws DataProcessingException {
+    public Movie add(Movie movie) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
@@ -30,10 +31,10 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Optional<Movie> get(Long id) throws DataProcessingException {
+    public Optional<Movie> get(Long id) {
         Optional<Movie> movie;
         try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-             Session session = sessionFactory.openSession()) {
+                Session session = sessionFactory.openSession()) {
             movie = Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception ex) {
             throw new DataProcessingException("Can't find movie with id: " + id, ex);

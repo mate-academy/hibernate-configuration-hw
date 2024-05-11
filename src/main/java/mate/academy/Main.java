@@ -1,11 +1,8 @@
 package mate.academy;
 
-import mate.academy.dao.DataProcessingException;
-import mate.academy.dao.MovieDao;
-import mate.academy.dao.MovieDaoImpl;
+import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
-
-import java.util.Optional;
+import mate.academy.service.MovieService;
 
 public class Main {
     private static final Injector injector =
