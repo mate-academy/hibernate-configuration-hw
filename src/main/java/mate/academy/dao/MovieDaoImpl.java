@@ -45,7 +45,11 @@ public class MovieDaoImpl implements MovieDao {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
             session = sessionFactory.openSession();
-            return Optional.ofNullable(session.get(Movie.class, id));
+            if (session != null) {
+                return Optional.ofNullable(session.get(Movie.class, id));
+            } else {
+                return Optional.empty();
+            }
         } catch (Exception e) {
              throw new DataProcessingException("Did not find movie with id:" + id, e);
         } finally {
