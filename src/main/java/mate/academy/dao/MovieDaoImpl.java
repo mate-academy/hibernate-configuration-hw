@@ -51,7 +51,7 @@ public class MovieDaoImpl implements MovieDao {
                 return Optional.empty();
             }
         } catch (Exception e) {
-             throw new DataProcessingException("Did not find movie with id:" + id, e);
+            throw new DataProcessingException("Did not find movie with id:" + id, e);
         } finally {
             if (session != null) {
                 session.close();
