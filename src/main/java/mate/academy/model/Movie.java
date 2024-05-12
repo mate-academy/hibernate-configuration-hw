@@ -1,11 +1,11 @@
 package mate.academy.model;
 
-import mate.academy.lib.Inject;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import mate.academy.lib.Inject;
 
 @Entity
 @Table(name = "movies")
