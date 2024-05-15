@@ -1,30 +1,22 @@
-package mate.academy.lib;
+package mate.academy.lib.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "movies")
 public class Movie {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String title;
     private String description;
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + ", description='" + description + '\''
-                + '}';
     }
 
     public void setTitle(String title) {
@@ -45,5 +37,14 @@ public class Movie {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", description='" + description + '\''
+                + '}';
     }
 }

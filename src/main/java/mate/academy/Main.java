@@ -1,8 +1,8 @@
 package mate.academy;
 
-import mate.academy.lib.Movie;
-import mate.academy.lib.servicepackage.MovieService;
-import mate.academy.lib.servicepackage.MovieServiceImpl;
+import mate.academy.lib.model.Movie;
+import mate.academy.lib.service.MovieService;
+import mate.academy.lib.service.MovieServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
