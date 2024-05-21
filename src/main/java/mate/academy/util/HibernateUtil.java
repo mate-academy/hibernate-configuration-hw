@@ -12,7 +12,14 @@ public class HibernateUtil {
     }
 
     private static SessionFactory initSessionFactory() {
-        return new Configuration().configure().buildSessionFactory();
+        if (instance == null) {
+            try {
+                return new Configuration().configure().buildSessionFactory();
+            } catch (Exception e) {
+                throw new RuntimeException("Can't create session factory ", e);
+            }
+        }
+        return instance;
     }
 
     public static SessionFactory getSessionFactory() {

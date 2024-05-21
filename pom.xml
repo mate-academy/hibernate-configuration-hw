@@ -82,7 +82,7 @@
     <build>
         <resources>
             <resource>
-                <directory>src/resourcese</directory>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
         <plugins>

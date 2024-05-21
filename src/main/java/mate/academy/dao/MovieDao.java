@@ -1,6 +1,7 @@
-package mate.academy.lib;
+package mate.academy.dao;
 
 import java.util.Optional;
+import mate.academy.lib.DataProcessingException;
 import mate.academy.model.Movie;
 
 public interface MovieDao {
