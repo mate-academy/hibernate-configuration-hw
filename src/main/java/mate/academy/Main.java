@@ -8,19 +8,18 @@ import mate.academy.service.MovieService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
-    private static MovieService service;
 
     public static void main(String[] args) {
-        service = (MovieService) injector.getInstance(MovieService.class);
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
-        List movies = List.of(
+        List<Movie> movies = List.of(
                 new Movie("Harry Potter", "Magic gay"),
                 new Movie("Titanic", "submarine"),
                 new Movie("The Cars", "KCHAY"),
                 new Movie("The green mile", "I cry"));
 
-        movies.stream().map(movie -> service.add((Movie) movie)).collect(Collectors.toList());
+        movies.stream().map(movie -> movieService.add((Movie) movie)).collect(Collectors.toList());
 
-        System.out.println(service.get(1L));
+        System.out.println(movieService.get(1L));
     }
 }
