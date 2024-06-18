@@ -9,7 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
-        movieService.add(new Movie("Shrek 3", "10/10"));
-        System.out.println(movieService.get(1L));
+        Movie newMovie = new Movie("Shrek 3", "10/10");
+        movieService.add(newMovie);
+        System.out.println(movieService.get(newMovie.getId()));
     }
 }
