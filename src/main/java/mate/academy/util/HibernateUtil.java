@@ -9,6 +9,7 @@ public class HibernateUtil {
 
     private HibernateUtil() {
     }
+
     private static SessionFactory initSessionFactory() {
         try {
             Configuration configuration = new Configuration();
@@ -18,6 +19,7 @@ public class HibernateUtil {
             throw new RuntimeException("Cannot create session factory", e);
         }
     }
+
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
