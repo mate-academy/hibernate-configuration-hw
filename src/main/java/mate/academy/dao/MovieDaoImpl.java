@@ -1,7 +1,6 @@
 package mate.academy.dao;
 
 import java.util.Optional;
-import mate.academy.dao.MovieDao;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
