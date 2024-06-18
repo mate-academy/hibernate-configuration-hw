@@ -13,7 +13,9 @@ public class Main {
         // Test the add method
         Movie movie = new Movie();
         movie.setTitle("Inception");
-        movie.setDescription("A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.");
+        movie.setDescription("A thief who steals corporate secrets through "
+                + "the use of dream-sharing technology is given the inverse task "
+                + "of planting an idea into the mind of a CEO.");
         movieService.add(movie);
 
         // Test the get method
