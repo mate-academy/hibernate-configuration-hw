@@ -1,4 +1,4 @@
-package mate.academy.Dao;
+package mate.academy.dao;
 
 import java.util.Optional;
 import mate.academy.model.Movie;
