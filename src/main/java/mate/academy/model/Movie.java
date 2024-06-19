@@ -11,25 +11,15 @@ import jakarta.persistence.Table;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String title;
     private String year;
-    private int duration;
-
-    public Movie() {
-    }
-
-    public Movie(String title, String year, int duration) {
-        this.title = title;
-        this.year = year;
-        this.duration = duration;
-    }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,21 +39,12 @@ public class Movie {
         this.year = year;
     }
 
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
     @Override
     public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", year='" + year + '\'' +
-                ", duration=" + duration +
-                '}';
+        return "Movie{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", year='" + year + '\''
+                + '}';
     }
 }
