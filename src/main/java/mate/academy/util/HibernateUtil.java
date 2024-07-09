@@ -19,6 +19,5 @@ public class HibernateUtil {
     }
 
     private HibernateUtil() {
-        // Prevent instantiation
     }
 }
