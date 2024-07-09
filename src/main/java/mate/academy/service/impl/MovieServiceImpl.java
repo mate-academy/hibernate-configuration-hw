@@ -1,23 +1,23 @@
-package mate.academy.util;
+package mate.academy.service.impl;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import mate.academy.dao.MovieDao;
+import mate.academy.lib.Inject;
+import mate.academy.lib.Service;
+import mate.academy.model.Movie;
+import mate.academy.service.MovieService;
 
-public class HibernateUtil {
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+@Service
+public class MovieServiceImpl implements MovieService {
+    @Inject
+    private MovieDao movieDao;
 
-    private HibernateUtil() {
+    @Override
+    public Movie add(Movie movie) {
+        return movieDao.add(movie);
     }
 
-    private static SessionFactory buildSessionFactory() {
-        try {
-            return new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+    @Override
+    public Movie get(Long id) {
+        return movieDao.get(id).orElseThrow(() -> new RuntimeException("Movie not found"));
     }
 }
