@@ -38,8 +38,10 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
+        Optional<Movie> movie = Optional.empty();
         try {
             session = sessionFactory.openSession();
+            movie = Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("I can't find movie with id=" + id,
                     new RuntimeException());
@@ -48,6 +50,6 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
-        return Optional.ofNullable(session.get(Movie.class, id));
+        return movie;
     }
 }
