@@ -20,7 +20,6 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -43,7 +42,6 @@ public class MovieDaoImpl implements MovieDao {
         try {
             session = sessionFactory.openSession();
             movie = Optional.ofNullable(session.get(Movie.class, id));
-            session.close();
         } catch (Exception e) {
             throw new DataProcessingException("I can't find movie with id=" + id,
                     new RuntimeException());
