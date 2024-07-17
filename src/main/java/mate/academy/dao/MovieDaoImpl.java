@@ -20,8 +20,9 @@ public class MovieDaoImpl implements MovieDao {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            movie = (Movie) session.save(movie);
+            session.persist(movie);
             transaction.commit();
+            movie.setId((Long) session.getIdentifier(movie));
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

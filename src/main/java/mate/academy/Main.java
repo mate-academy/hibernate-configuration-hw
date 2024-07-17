@@ -6,10 +6,8 @@ import mate.academy.model.Movie;
 import mate.academy.services.MovieService;
 
 public class Main {
-    private static final Injector injector = Injector.getInstance("mate.academy");
-
     public static void main(String[] args) {
-        //        MovieDao movieDao = (MovieDao) injector.getInstance(MovieDao.class);
+        Injector injector = Injector.getInstance("mate.academy");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Map.of("Dune: Part Two", "Paul Atreides unites with Chani and the Fremen\\.\\.\\.",

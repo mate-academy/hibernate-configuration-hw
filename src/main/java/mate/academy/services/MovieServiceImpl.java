@@ -1,6 +1,5 @@
 package mate.academy.services;
 
-import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.exceptions.DataProcessingException;
 import mate.academy.lib.Inject;
@@ -18,12 +17,12 @@ public class MovieServiceImpl implements MovieService {
             throw new DataProcessingException("The argument (a movie) or his fields is null :"
                     + movie);
         }
-        if (movie.getId() != 0) {
+        if (movie.getId() != null) {
             throw new DataProcessingException("Incorrect operation, the movie already has an Id: "
                     + movie);
         }
         Movie addedMoved = movieDao.add(movie);
-        if (addedMoved.getId() == 0) {
+        if (addedMoved.getId() == null) {
             throw new DataProcessingException("The error when adding movie, the Id is missing. "
                     + addedMoved);
         }
@@ -32,14 +31,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        if (id == 0) {
+        if (id == null) {
             throw new DataProcessingException("The argument (an Id) is null.");
         }
-        Optional<Movie> optionalMovie = movieDao.get(id);
-        if (optionalMovie.isEmpty()) {
-            throw new DataProcessingException("The error when getting movie by Id: " + id
-                    + ", a movie is missing.");
-        }
-        return null;
+        return movieDao.get(id).orElseThrow(()
+                -> new DataProcessingException("The error when getting movie by Id: " + id
+                + ", a movie is missing."));
     }
 }
