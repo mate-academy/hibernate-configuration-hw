@@ -29,6 +29,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            throw new DataProcessingException("Cannot add movie");
         } finally {
             if (session != null) {
                 session.close();
@@ -47,6 +48,8 @@ public class MovieDaoImpl implements MovieDao {
             return Optional.ofNullable(session.get(Movie.class, movieId));
         } catch (RuntimeException e) {
             throw new DataProcessingException("Cannot get movie");
+        } finally {
+            session.close();
         }
     }
 }
