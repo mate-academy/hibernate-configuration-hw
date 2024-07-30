@@ -6,7 +6,7 @@ import java.util.Properties;
 import mate.academy.exception.DataProcessingException;
 
 public class PropertiesUtil {
-    private static final String PROPERTIES_FILE = "application.properties.example";
+    private static final String PROPERTIES_FILE = "application.properties";
     private static final Properties PROPERTIES = new Properties();
 
     static {
