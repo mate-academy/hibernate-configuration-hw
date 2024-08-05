@@ -1,10 +1,10 @@
-package mate.academy.lib.dao;
+package mate.academy.dao;
 
 import java.util.Optional;
 import mate.academy.lib.Dao;
 import mate.academy.lib.DataProcessingException;
 import mate.academy.lib.HibernateUtil;
-import mate.academy.lib.model.Movie;
+import mate.academy.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
