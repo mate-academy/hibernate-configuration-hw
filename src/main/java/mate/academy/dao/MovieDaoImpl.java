@@ -7,11 +7,11 @@ import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Dao
 public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        //SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
@@ -29,15 +29,11 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
-        //session.save(movie);
-        //transaction.commit();
-        //session.close();
         return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        //SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
