@@ -19,7 +19,7 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -39,7 +39,7 @@ public class MovieDaoImpl implements MovieDao {
             session = HibernateUtil.getSessionFactory().openSession();
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             throw new DataProcessingException("Can't find movie by id " + id);
         } finally {
             if (session != null) {
