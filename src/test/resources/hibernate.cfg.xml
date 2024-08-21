@@ -4,7 +4,7 @@
         <property name="connection.url">jdbc:mysql://localhost:3307/test</property>
         <property name="connection.username">Mykhailo</property>
         <property name="connection.password">root</property>
-        <property name = "hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name = "hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="show_sql">true</property>
     </session-factory>
 </hibernate-configuration>
