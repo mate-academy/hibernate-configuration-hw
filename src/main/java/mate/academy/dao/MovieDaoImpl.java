@@ -20,7 +20,7 @@ public class MovieDaoImpl implements MovieDao {
             session.persist(movie);
             transaction.commit();
         } catch (DataProcessingException e) {
-            if(transaction != null) {
+            if (transaction != null) {
                 transaction.rollback();
             }
         } finally {
