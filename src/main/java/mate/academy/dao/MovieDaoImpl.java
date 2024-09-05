@@ -45,7 +45,7 @@ public class MovieDaoImpl implements MovieDao {
             throw new DataProcessingException("Unable to get the movie from the table: "
             + id, e);
         }
-
+        session.close();
         return Optional.ofNullable(movie);
     }
 }
