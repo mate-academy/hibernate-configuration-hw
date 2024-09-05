@@ -6,6 +6,7 @@ import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 @Dao
@@ -15,18 +16,18 @@ public class MovieDaoImpl implements MovieDao {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Unable to add the movie to the table: "
-            + movie.getId(), e);
+            throw new DataProcessingException("Transaction was rollback", e);
         } finally {
-            if (session != null) {
+            if (transaction != null) {
                 session.close();
             }
         }
@@ -35,17 +36,13 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Session session = null;
-        Transaction transaction = null;
-        Movie movie = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
+        Movie movie;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             movie = session.get(Movie.class, id);
         } catch (Exception e) {
             throw new DataProcessingException("Unable to get the movie from the table: "
             + id, e);
         }
-        session.close();
         return Optional.ofNullable(movie);
     }
 }
