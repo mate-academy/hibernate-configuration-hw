@@ -1,13 +1,12 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.resource.transaction.spi.TransactionStatus;
-import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
@@ -22,7 +21,8 @@ public class MovieDaoImpl implements MovieDao {
             commitTransaction(transaction);
         } catch (RuntimeException e) {
             rollbackTransaction(transaction);
-            throw new DataProcessingException("Can not create a record in the movie table: " + movie, e);
+            throw new DataProcessingException("Can not create a record in the movie table: "
+                    + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -39,7 +39,8 @@ public class MovieDaoImpl implements MovieDao {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (RuntimeException e) {
-            throw new DataProcessingException("Can not find a record in the movie table by ID: " + id, e);
+            throw new DataProcessingException("Can not find a record in the movie table "
+                    + "by ID: " + id, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -49,13 +50,13 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     private void commitTransaction(Transaction transaction) {
-        if (transaction != null && transaction.getStatus() == TransactionStatus.ACTIVE) {
+        if (transaction != null) {
             transaction.commit();
         }
     }
 
     private void rollbackTransaction(Transaction transaction) {
-        if (transaction != null && transaction.getStatus() == TransactionStatus.ACTIVE) {
+        if (transaction != null) {
             transaction.rollback();
         }
     }
