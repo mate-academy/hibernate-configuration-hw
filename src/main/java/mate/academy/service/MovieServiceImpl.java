@@ -9,9 +9,6 @@ import mate.academy.model.Movie;
 public class MovieServiceImpl implements MovieService {
     private final MovieDao movieDao = new MovieDaoImpl();
 
-    public MovieServiceImpl() {
-    }
-
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);
