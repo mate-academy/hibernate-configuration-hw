@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+
     @Override
     public Movie add(Movie movie) {
         Session session = null;
@@ -17,13 +18,13 @@ public class MovieDaoImpl implements MovieDao {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.save(movie);
+            session.persist(movie);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error failed while trying to add movie = "
+            throw new DataProcessingException("Error occurred while trying to add movie = "
                     + movie, e);
         } finally {
             if (session != null) {
@@ -38,7 +39,8 @@ public class MovieDaoImpl implements MovieDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Error failed while trying to get movie = " + id, e);
+            throw new DataProcessingException("Error occurred while trying to get movie = "
+                    + id, e);
         }
     }
 }

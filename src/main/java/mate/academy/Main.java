@@ -8,11 +8,12 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
 
     public static void main(String[] args) {
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
         movie.setTitle("Bible");
-        movie.setDescription("A remarkable collection of ancient writings Christians" 
+        movie.setDescription("A remarkable collection of ancient writings Christians"
                 + " believe to be God's revelation to people");
+        System.out.println(movie);
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.add(movie);
         System.out.println(movie);
         movie = movieService.get(1L);
