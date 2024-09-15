@@ -1,11 +1,10 @@
 package mate.academy.service.impl;
 
+import javax.inject.Inject;
 import mate.academy.dao.MovieDao;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
-
-import javax.inject.Inject;
 
 @Service
 public class MovieServiceImpl implements MovieService {

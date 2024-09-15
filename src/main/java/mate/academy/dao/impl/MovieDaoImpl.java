@@ -4,12 +4,11 @@ import mate.academy.dao.MovieDao;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
+import java.util.Optional;
+import javax.inject.Inject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
-import java.util.Optional;
-import javax.inject.Inject;
 
 public class MovieDaoImpl implements MovieDao {
     private final SessionFactory sessionFactory;
