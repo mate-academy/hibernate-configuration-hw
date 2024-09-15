@@ -17,7 +17,6 @@ public class MovieDaoImpl implements MovieDao {
         this.sessionFactory = HibernateUtil.getSessionFactory();
     }
 
-
     @Inject
     public MovieDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
