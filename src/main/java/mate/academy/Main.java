@@ -3,7 +3,6 @@ package mate.academy;
 import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
 import mate.academy.movieservice.MovieService;
-import mate.academy.movieservice.MovieServiceImpl;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.academy");
