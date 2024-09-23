@@ -1,7 +1,5 @@
 package mate.academy.movieservice;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
@@ -19,8 +17,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        Optional<Movie> movieById = movieDao.get(id);
-        return movieById
-                .orElseThrow(() -> new NoSuchElementException("Movie not found"));
+        return movieDao.get(id).get();
     }
 }

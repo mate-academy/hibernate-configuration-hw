@@ -13,5 +13,7 @@ public class Main {
         movie.setTitle("12334523");
         movie.setDescription("frfrfrf");
         movieService.add(movie);
+        Movie movie1 = movieService.get(1L);
+        System.out.println(movie1);
     }
 }
