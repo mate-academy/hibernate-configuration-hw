@@ -7,5 +7,5 @@ import java.util.Optional;
 public interface MovieDao {
     Movie add(Movie movie);
 
-    Optional<Movie> getById(Long id);
+    Optional<Movie> get(Long id);
 }
