@@ -102,7 +102,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
+                    <version>3.11.0</version> <!-- Оновлена версія плагіна -->
                     <executions>
                         <execution>
                             <id>default-testCompile</id>
@@ -116,8 +116,8 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <source>${jdk.version}</source>
-                        <target>${jdk.version}</target>
+                        <source>21</source> <!-- Вказуємо JDK 21 -->
+                        <target>21</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
