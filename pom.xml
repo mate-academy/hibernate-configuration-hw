@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <jdk.version>21</jdk.version>
+        <jdk.version>17</jdk.version> <!-- Зміна на JDK 17 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skipTests>true</skipTests>
@@ -17,9 +17,9 @@
         <maven.checkstyle.plugin.configLocation>
             https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.source>17</maven.compiler.source> <!-- Зміна на JDK 17 -->
+        <maven.compiler.target>17</maven.compiler.target> <!-- Зміна на JDK 17 -->
+        <maven.compiler.release>17</maven.compiler.release> <!-- Зміна на JDK 17 -->
     </properties>
 
     <dependencies>
@@ -119,8 +119,8 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <source>21</source> <!-- Вказуємо JDK 21 -->
-                        <target>21</target>
+                        <source>17</source> <!-- Вказуємо JDK 17 -->
+                        <target>17</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
