@@ -12,7 +12,7 @@ public class Main {
         movie.setDescription("Nice Movie");
 
         Movie saveMovie = movieService.add(movie);
-        Movie getMovie = movieService.get(1L);
+        Movie getMovie = movieService.get(saveMovie.getId());
         System.out.println(getMovie);
     }
 }
