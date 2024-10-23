@@ -4,7 +4,7 @@ import java.util.Optional;
 import mate.academy.model.Movie;
 
 public interface MovieDao {
-    Movie addMovie(Movie movie);
+    Movie add(Movie movie);
 
-    Optional<Movie> get(int id);
+    Optional<Movie> get(Long id);
 }
