@@ -6,7 +6,7 @@ import mate.academy.service.MovieService;
 
 public class Main {
     private static final Injector injector = Injector
-            .getInstance("mate.academy.lib");
+            .getInstance("mate.academy");
     private static final Movie MOVIE = new Movie("Shrek", "Angry and green");
     private static final Long LONG = 1L;
 

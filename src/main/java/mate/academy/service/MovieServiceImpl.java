@@ -9,7 +9,7 @@ import mate.academy.model.Movie;
 @Service
 public class MovieServiceImpl implements MovieService {
     private static final Injector injector = Injector
-            .getInstance("mate.academy.lib");
+            .getInstance("mate.academy");
     private static final MovieDao movieDao = (MovieDao) injector.getInstance(MovieDao.class);
 
     @Override
