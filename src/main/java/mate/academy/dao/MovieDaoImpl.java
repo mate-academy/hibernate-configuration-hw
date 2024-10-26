@@ -23,7 +23,7 @@ public class MovieDaoImpl implements MovieDao {
             return movie;
         } catch (Exception e) {
             transaction.rollback();
-            throw new DataProcessingException("Can't save movie" + movie.toString(), e);
+            throw new DataProcessingException("Can't save movie " + movie.toString(), e);
         } finally {
             session.close();
         }

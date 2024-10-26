@@ -1,5 +1,6 @@
 package mate.academy.service;
 
+import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Injector;
@@ -19,9 +20,10 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        if (movieDao.get(id).isEmpty()) {
-            throw new DataProcessingException("Book not found with id:" + id);
+        Optional<Movie> movie = movieDao.get(id);
+        if (movie.isEmpty()) {
+            throw new DataProcessingException("Movie not found with id: " + id);
         }
-        return movieDao.get(id).get();
+        return movie.get();
     }
 }
