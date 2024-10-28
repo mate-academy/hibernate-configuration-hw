@@ -11,26 +11,32 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
     @Override
     public Movie add(Movie movie) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = null;
+        Transaction transaction = null;
         try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
             return movie;
         } catch (Exception e) {
-            transaction.rollback();
-            throw new DataProcessingException("Can't save movie " + movie.toString(), e);
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Failed to add new movie to the DB", e);
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Optional<Movie> get(Long id) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {

@@ -3,6 +3,7 @@ package mate.academy.service;
 import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.exception.DataProcessingException;
+import mate.academy.lib.Inject;
 import mate.academy.lib.Injector;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
@@ -11,7 +12,8 @@ import mate.academy.model.Movie;
 public class MovieServiceImpl implements MovieService {
     private static final Injector injector = Injector
             .getInstance("mate.academy");
-    private static final MovieDao movieDao = (MovieDao) injector.getInstance(MovieDao.class);
+    @Inject
+    private final MovieDao movieDao = (MovieDao) injector.getInstance(MovieDao.class);
 
     @Override
     public Movie add(Movie movie) {
