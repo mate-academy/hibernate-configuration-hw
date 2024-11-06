@@ -17,6 +17,6 @@ public class Main {
         movieService.add(movie);
 
         Movie retrievedMovie = movieService.get(movie.getId());
-        System.out.println("Retrieved Movie: " + retrievedMovie);
+        System.out.println("retrievedMovie: " + retrievedMovie);
     }
 }
