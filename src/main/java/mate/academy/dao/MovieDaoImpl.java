@@ -1,20 +1,18 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.dao.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
-import mate.academy.util.SessionFactoryUtil;
+import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import java.util.Optional;
-
 import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
 
-    private final SessionFactory factory = SessionFactoryUtil.getSessionFactory();
+    private final SessionFactory factory = HibernateUtil.getSessionFactory();
 
     @Override
     public Movie add(Movie movie) {
@@ -52,6 +50,10 @@ public class MovieDaoImpl implements MovieDao {
             return Optional.ofNullable(movie);
         } catch (Exception e) {
             throw new DataProcessingException("Failed to find Movie with id: " + id, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }

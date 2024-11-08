@@ -8,6 +8,7 @@ import mate.academy.service.MovieService;
 import mate.academy.service.MovieServiceImpl;
 
 public class Main {
+
     private static final Injector INJECTOR = Injector.getInstance("mate.academy");
 
     public static void main(String[] args) {
