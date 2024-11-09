@@ -27,7 +27,7 @@ public class MovieDaoImpl implements MovieDao {
             throw new DataProcessingException("Failed to save the movie. " + ex.getMessage());
         } finally {
             if (session != null) {
-            session.close();
+                session.close();
             }
         }
     }
