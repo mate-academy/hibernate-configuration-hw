@@ -32,6 +32,11 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        return Optional.empty();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
+        } catch (RuntimeException e) {
+            throw new DataProcessingException("Movie not found by id: " + id, e);
+        }
     }
+
 }
