@@ -7,6 +7,9 @@ public class HibernateUtil {
 
     private static final SessionFactory instance = initSessionFactory();
 
+    private HibernateUtil() {
+    }
+
     private static SessionFactory initSessionFactory() {
         try {
             return new Configuration().configure().buildSessionFactory();
