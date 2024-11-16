@@ -18,5 +18,7 @@ public class Main {
 
         Movie newMovie = movieService.get(movie.getId());
         System.out.println("newMovie: " + newMovie);
+        System.setProperty("net.bytebuddy.experimental", "true");
+
     }
 }

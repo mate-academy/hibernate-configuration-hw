@@ -29,15 +29,15 @@ public class MovieDaoImpl implements MovieDao {
             }
             throw new DataProcessingException("Can't insert movie: " + movie, e);
         } finally {
-            assert session != null;
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie by id: " + id, e);
