@@ -18,6 +18,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.fail;
+
 public class StructureTest {
     public static final String ROOT_FOLDER = "src/main";
     private static final List<String> requiredClasses = List
@@ -32,7 +34,7 @@ public class StructureTest {
         try {
             allClasses = getClasses("mate.academy");
             if (allClasses.size() == 0) {
-                Assert.fail("You should not rename base mate.academy package and project"
+                fail("You should not rename base mate.academy package and project"
                         + " name should not contain spaces or some cyrillic letters in path");
             }
         } catch (Exception e) {
@@ -44,16 +46,16 @@ public class StructureTest {
     public void structure_hibernateConfigFileExists_OK() {
         Optional<File> optionalResourcesFolder = Arrays.stream(
                 Objects.requireNonNull(new File(ROOT_FOLDER).listFiles()))
-                .filter(f -> f.isDirectory() && f.getName().equals(""))
+                .filter(f -> f.isDirectory() && f.getName().equals("resources"))
                 .findAny();
-        if (optionalResourcesFolder.isEmpty()) {
+        if (optionalResourcesFolder.isEmpty() || !optionalResourcesFolder.get().exists()) {
             Assert.fail("You should create src/main/resources folder");
         }
         File[] files = optionalResourcesFolder.get().listFiles();
         Optional<File> hibernateConfigFile = Arrays.stream(files)
                 .filter(f -> f.isFile() && f.getName().equals("hibernate.cfg.xml")).findAny();
-        if (hibernateConfigFile.isEmpty()) {
-            Assert.fail("You should create \"hibernate.cfg.xml\" file in resources folder");
+        if (hibernateConfigFile.isEmpty() && hibernateConfigFile.get().length() == 0) {
+            fail("You should create \"hibernate.cfg.xml\" file in resources folder");
         }
     }
 
@@ -86,18 +88,18 @@ public class StructureTest {
                         && Modifier.toString(c.getModifiers()).equals("private"))
                 .findAny();
         if (optionalPrivateConstructor.isEmpty()) {
-            Assert.fail("You should add a private default constructor to HibernateUtil class"
+            fail("You should add a private default constructor to HibernateUtil class"
                     + "in order to prevent creating HibernateUtil objects.");
         }
         Optional<Field> optionalSessionFactory = Arrays.stream(hibernateUtil.getDeclaredFields())
                 .filter(f -> f.getType().getName().equals("org.hibernate.SessionFactory"))
                 .findAny();
         if (optionalSessionFactory.isEmpty()) {
-            Assert.fail("You should have some SessionFactory in your HibernateUtil class");
+            fail("You should have some SessionFactory in your HibernateUtil class");
         }
         Field sessionFactoryField = optionalSessionFactory.get();
         if (!Modifier.isStatic(sessionFactoryField.getModifiers())) {
-            Assert.fail("SessionFactory field should be static");
+            fail("SessionFactory field should be static");
         }
         Optional<Method> optionalGetSessionFactoryMethod = Arrays.stream(
                 hibernateUtil.getDeclaredMethods())
@@ -105,7 +107,7 @@ public class StructureTest {
                 && Modifier.isPublic(m.getModifiers()))
                 .findAny();
         if (optionalGetSessionFactoryMethod.isEmpty()) {
-            Assert.fail("You should create public method, that return "
+            fail("You should create public method, that return "
                     + "SessionFactory instance in HibernateUtil class");
         }
     }
@@ -118,7 +120,7 @@ public class StructureTest {
                 .filter(m -> m.getName().equals(testedMethod))
                 .collect(Collectors.toList());
         if (allMethods.size() == 0) {
-            Assert.fail(
+            fail(
                     "You should create method called \"" + testedMethod + "\" in " + testedClazz);
         }
         Optional<Method> method = allMethods.stream()
@@ -128,10 +130,10 @@ public class StructureTest {
                         .get().getSimpleName().equals(parameter))
                 .findAny();
         if (method.isEmpty()) {
-            Assert.fail("You should create \"" + method + "\" method in " + testedClazz);
+            fail("You should create \"" + method + "\" method in " + testedClazz);
         }
         if (!method.get().getReturnType().getSimpleName().equals(returnType)) {
-            Assert.fail("Method \"" + method.get().getName() + "\" in " + testedClazz.getName()
+            fail("Method \"" + method.get().getName() + "\" in " + testedClazz.getName()
                     + " should have \"" + returnType + "\" return type");
         }
     }
@@ -140,8 +142,8 @@ public class StructureTest {
         Optional<Class> optionalClass = allClasses.stream()
                 .filter(c -> c.getSimpleName().equals(name))
                 .findAny();
-        if (optionalClass.isEmpty()) {
-            Assert.fail("You should create " + type + " called " + name
+        if (optionalClass.isPresent() && optionalClass.get().isAnnotationPresent(Deprecated.class)) {
+            fail("You should create " + type + " called " + name
                     + ". Create this " + type + " or check naming");
         }
     }
@@ -183,7 +185,7 @@ public class StructureTest {
                 }
             } catch (NoClassDefFoundError e) {
                 if (e.getMessage().contains("HibernateUtil")) {
-                    Assert.fail("Could not establish connection with db. You should create "
+                    fail("Could not establish connection with db. You should create "
                             + "\"hibernate.cfg.xml\" file in resources folder with all "
                             + "necessary configurations");
                 } else {

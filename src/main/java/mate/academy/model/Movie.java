@@ -37,7 +37,8 @@ public class Movie {
         return description;
     }
 
-    public void setDescription(String s) {
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
