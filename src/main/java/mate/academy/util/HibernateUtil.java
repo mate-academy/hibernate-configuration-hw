@@ -1,4 +1,4 @@
-package util;
+package mate.academy.util;
 
 import mate.academy.model.Movie;
 import org.hibernate.SessionFactory;

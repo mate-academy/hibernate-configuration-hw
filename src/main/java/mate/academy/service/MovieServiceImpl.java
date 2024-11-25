@@ -5,7 +5,7 @@ import mate.academy.dao.MovieDao;
 import mate.academy.lib.Injector;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
-import util.DataProcessingException;
+import mate.academy.util.DataProcessingException;
 
 @Service
 public class MovieServiceImpl implements MovieService {

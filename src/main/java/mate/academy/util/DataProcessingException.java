@@ -1,4 +1,4 @@
-package util;
+package mate.academy.util;
 
 public class DataProcessingException extends RuntimeException {
 

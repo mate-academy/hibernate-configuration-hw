@@ -6,8 +6,8 @@ import mate.academy.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import util.DataProcessingException;
-import util.HibernateUtil;
+import mate.academy.util.DataProcessingException;
+import mate.academy.util.HibernateUtil;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
