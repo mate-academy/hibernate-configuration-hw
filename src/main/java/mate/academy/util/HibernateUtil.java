@@ -5,23 +5,32 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-    static {
-        try {
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(Movie.class)
-                    .buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
+    private HibernateUtil() {
     }
 
     public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            synchronized (HibernateUtil.class) {
+                if (sessionFactory == null) {
+                    try {
+                        sessionFactory = new Configuration()
+                                .configure("hibernate.cfg.xml")
+                                .addAnnotatedClass(Movie.class)
+                                .buildSessionFactory();
+                    } catch (Throwable ex) {
+                        throw new ExceptionInInitializerError(ex);
+                    }
+                }
+            }
+        }
         return sessionFactory;
     }
 
     public static void shutdown() {
-        getSessionFactory().close();
+        if (sessionFactory != null) {
+            sessionFactory.close();
+        }
     }
 }
