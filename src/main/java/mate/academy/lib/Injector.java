@@ -10,6 +10,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class Injector {
     private static final Map<String, Injector> injectors = new HashMap<>();
@@ -19,6 +21,8 @@ public class Injector {
     private Injector(String mainPackageName) {
         try {
             classes.addAll(getClasses(mainPackageName));
+            System.out.println("Classpath classes:");
+            classes.stream().forEach(c -> System.out.println("Class: " + c.getName()));
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Can't get information about all classes", e);
         }
@@ -128,17 +132,40 @@ public class Injector {
         }
         String path = packageName.replace('.', '/');
         Enumeration<URL> resources = classLoader.getResources(path);
-        List<File> dirs = new ArrayList<>();
+        System.out.println("Scanning path: " + path);
+        List<Class<?>> classes = new ArrayList<>();
         while (resources.hasMoreElements()) {
             URL resource = resources.nextElement();
-            dirs.add(new File(resource.getFile()));
-        }
-        ArrayList<Class<?>> classes = new ArrayList<>();
-        for (File directory : dirs) {
-            classes.addAll(findClasses(directory, packageName));
+            if (resource.getProtocol().equals("file")) {
+                // Running from directory
+                File directory = new File(resource.getFile());
+                classes.addAll(findClasses(directory, packageName));
+            } else if (resource.getProtocol().equals("jar")) {
+                // Running from JAR
+                String jarPath = resource.getPath().substring(5, resource.getPath().indexOf("!"));
+                classes.addAll(findClassesFromJar(jarPath, packageName));
+            }
         }
         return classes;
     }
+    private static List<Class<?>> findClassesFromJar(String jarPath, String packageName)
+            throws IOException, ClassNotFoundException {
+        List<Class<?>> classes = new ArrayList<>();
+        try (JarFile jarFile = new JarFile(jarPath)) {
+            Enumeration<JarEntry> entries = jarFile.entries();
+            String packagePath = packageName.replace('.', '/');
+            while (entries.hasMoreElements()) {
+                JarEntry entry = entries.nextElement();
+                String entryName = entry.getName();
+                if (entryName.startsWith(packagePath) && entryName.endsWith(".class") && !entry.isDirectory()) {
+                    String className = entryName.replace('/', '.').replace(".class", "");
+                    classes.add(Class.forName(className));
+                }
+            }
+        }
+        return classes;
+    }
+
     /**
      * Recursive method used to find all classes in a given directory and subdirs.
      *
