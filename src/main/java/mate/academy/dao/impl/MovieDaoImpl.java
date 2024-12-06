@@ -48,7 +48,6 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            // Log the error here if necessary
             throw new DataProcessingException("Error retrieving movie");
         } finally {
             session.close();
