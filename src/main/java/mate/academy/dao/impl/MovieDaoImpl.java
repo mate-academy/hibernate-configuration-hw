@@ -10,47 +10,48 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class MovieDaoImpl implements MovieDao {
+    private final SessionFactory sessionFactory;
+
+    public MovieDaoImpl() {
+        this.sessionFactory = HibernateUtil.getSessionFactory();
+    }
+
     @Override
     public Movie add(Movie movie) {
-        return executeWithTransaction(session -> {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
             session.save(movie);
+            transaction.commit();
             return movie;
-        });
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Error adding movie");
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        return executeWithTransaction(session -> {
-            Movie movie = session.get(Movie.class, id);
-            return Optional.ofNullable(movie);
-        });
-    }
-
-    private <T> T executeWithTransaction(SessionOperation<T> operation) {
-        SessionFactory sessionFactory;
-        Session session = null;
+        Session session = sessionFactory.openSession();
         Transaction transaction = null;
         try {
-            sessionFactory = HibernateUtil.getSessionFactory();
-            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            T result = operation.execute(session);
+            Movie movie = session.get(Movie.class, id);
             transaction.commit();
-            return result;
-        } catch (DataProcessingException e) {
+            return Optional.ofNullable(movie);
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error during database operation");
+            // Log the error here if necessary
+            throw new DataProcessingException("Error retrieving movie");
         } finally {
-            if (session != null) {
-                session.close();
-            }
+            session.close();
         }
-    }
-
-    @FunctionalInterface
-    private interface SessionOperation<T> {
-        T execute(Session session);
     }
 }
