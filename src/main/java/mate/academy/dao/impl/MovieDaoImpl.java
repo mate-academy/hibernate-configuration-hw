@@ -38,7 +38,7 @@ public class MovieDaoImpl implements MovieDao {
             T result = operation.execute(session);
             transaction.commit();
             return result;
-        } catch (HibernateException e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
