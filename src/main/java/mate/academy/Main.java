@@ -1,14 +1,18 @@
 package mate.academy;
 
-import mate.academy.lib.Injector;
+import mate.academy.dao.MovieDaoImpl;
 import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
+import mate.academy.service.MovieServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        Injector injector = Injector.getInstance("mate.academy");
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
-        movieService.add(new Movie("Breaking bad", "Wao"));
-        movieService.get(1L);
+        MovieService movieService = new MovieServiceImpl(new MovieDaoImpl());
+        Movie movie = new Movie();
+        movie.setTitle("Inception");
+        movie.setDescription("A cry to die");
+        movieService.add(movie);
+        Movie retrievedMovie = movieService.get(movie.getId());
+        System.out.println("Movie retrieved: " + retrievedMovie.getTitle());
     }
 }

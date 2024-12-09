@@ -1,7 +1,6 @@
 package mate.academy.service;
 
 import mate.academy.dao.MovieDao;
-import mate.academy.dao.MovieDaoImpl;
 import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
@@ -10,7 +9,11 @@ import mate.academy.model.Movie;
 public class MovieServiceImpl implements MovieService {
 
     @Inject
-    private static final MovieDao movieDao = new MovieDaoImpl();
+    private static MovieDao movieDao;
+
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
+    }
 
     @Override
     public Movie add(Movie movie) {
