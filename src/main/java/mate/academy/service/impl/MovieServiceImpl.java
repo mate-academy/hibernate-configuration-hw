@@ -2,9 +2,8 @@ package mate.academy.service.impl;
 
 import mate.academy.dao.MovieDao;
 import mate.academy.model.Movie;
-import mate.academy.service.MovieService;
-
 import java.util.NoSuchElementException;
+import mate.academy.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
     private final MovieDao movieDao;
