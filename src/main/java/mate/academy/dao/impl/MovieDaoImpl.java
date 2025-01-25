@@ -3,57 +3,51 @@ package mate.academy.dao.impl;
 import java.util.Optional;
 import mate.academy.dao.MovieDao;
 import mate.academy.exception.DataProcessingException;
-import mate.academy.lib.Dao;
-import mate.academy.lib.Inject;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-@Dao
 public class MovieDaoImpl implements MovieDao {
-    private final SessionFactory sessionFactory;
-
-    @Inject
-    public MovieDaoImpl() {
-        this.sessionFactory = HibernateUtil.getSessionFactory();
-    }
-
     @Override
     public Movie add(Movie movie) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
+
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.save(movie);
+            session.persist(movie);
             transaction.commit();
             return movie;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error adding Movie: " + movie, e);
+            throw new DataProcessingException("Cant add movie to DB", e);
         } finally {
-            assert session != null;
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Optional<Movie> get(Long id) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {
-            throw new DataProcessingException("Error retrieving Movie with ID " + id, e);
+            throw new DataProcessingException("Failed to get the movie with id: " + id, e);
         } finally {
-            assert session != null;
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
-
     }
 }
