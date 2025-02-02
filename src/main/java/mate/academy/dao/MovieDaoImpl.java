@@ -18,7 +18,7 @@ public class MovieDaoImpl implements MovieDao {
         Transaction transaction = null;
 
         try {
-            session = HibernateUtil.INSTANCE.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.persist(movie);
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class MovieDaoImpl implements MovieDao {
     public Optional<Movie> get(Long id) {
         Session session = null;
         try {
-            session = HibernateUtil.INSTANCE.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {

@@ -3,16 +3,17 @@ package mate.academy.util;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public enum HibernateUtil {
-    INSTANCE;
+public class HibernateUtil {
+    private static final SessionFactory sessionFactory = initSessionFactory();
 
-    private final SessionFactory sessionFactory;
-
-     HibernateUtil() {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
+    private HibernateUtil() {
     }
 
-    public SessionFactory getSessionFactory() {
+    private static SessionFactory initSessionFactory() {
+        return new Configuration().configure().buildSessionFactory();
+    }
+
+    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 }
