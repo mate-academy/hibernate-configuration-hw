@@ -36,4 +36,13 @@ public class Movie {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", description='" + description + '\''
+                + '}';
+    }
 }

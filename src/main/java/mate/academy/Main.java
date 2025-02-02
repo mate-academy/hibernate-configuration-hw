@@ -12,13 +12,9 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
         movie.setTitle("Titanic");
-        movie.setDescription("""
-                Titanic was built in Belfast, Northern Ireland by Harland
-                & Wolff for transatlantic passage between Southampton, England
-                and New York City. It Was largest and most luxury passenger ship
-                of its time was reported to be unsinkable.
-                """);
-        movieService.add(movie);
-        movieService.get(movie.getId());
+        Movie add = movieService.add(movie);
+        System.out.println("Added movie: " + add);
+        Movie movie1 = movieService.get(movie.getId());
+        System.out.println("Movie with id: " + movie.getId() + " : " + movie1);
     }
 }
