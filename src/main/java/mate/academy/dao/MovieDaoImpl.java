@@ -21,6 +21,8 @@ public class MovieDaoImpl implements MovieDao {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.persist(movie);
+            transaction.commit();
+            return movie;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -31,7 +33,6 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
-        return movie;
     }
 
     @Override

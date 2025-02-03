@@ -19,10 +19,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         Optional<Movie> movie = movieDao.get(id);
-        if (movie.isPresent()) {
-            return movie.get();
-        } else {
-            throw new RuntimeException("Can't find movie with: " + id + " id.");
-        }
+        return movie.orElseThrow(() -> new RuntimeException("Can't fid a movie with id: " + id));
     }
 }

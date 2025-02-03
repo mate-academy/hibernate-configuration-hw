@@ -12,6 +12,7 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
         movie.setTitle("Titanic");
+        movie.setDescription("Movie about bout");
         Movie add = movieService.add(movie);
         System.out.println("Added movie: " + add);
         Movie movie1 = movieService.get(movie.getId());
