@@ -6,7 +6,7 @@ import mate.academy.model.Movie;
 
 public class Main {
     public static void main(String[] args) {
-        MovieDao movieDao = new MovieDaoImpl();
+       MovieDao movieDao = new MovieDaoImpl();
 
         Movie movie = new Movie();
         movie.setId(10L);
