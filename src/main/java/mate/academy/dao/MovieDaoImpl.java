@@ -1,6 +1,7 @@
 package mate.academy.dao;
 
 import java.util.Optional;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
@@ -17,11 +18,11 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.persist(movie);
             session.getTransaction().commit();
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't add movie to database", e);
+            throw new DataProcessingException("Can't add movie to database");
         } finally {
             session.close();
         }
@@ -31,7 +32,6 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         Transaction transaction = null;
-
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.getTransaction();
             Movie movie = session.get(Movie.class, id);
