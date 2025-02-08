@@ -21,7 +21,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't add movie to database");
+            throw new RuntimeException("Can't add movie to database", e);
         } finally {
             session.close();
         }
