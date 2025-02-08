@@ -1,7 +1,9 @@
 package mate.academy.model;
 
 import mate.academy.dao.MovieDao;
+import mate.academy.lib.Service;
 
+@Service
 public class MovieServiceImpl implements MovieService {
     private final MovieDao movieDao;
 
