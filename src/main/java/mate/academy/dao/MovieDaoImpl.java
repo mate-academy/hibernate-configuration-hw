@@ -1,7 +1,7 @@
 package mate.academy.dao;
 
 import mate.academy.model.Movie;
-import mate.academy.service.HibernateUtil;
+import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
