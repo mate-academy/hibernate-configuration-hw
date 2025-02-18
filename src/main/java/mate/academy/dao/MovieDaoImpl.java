@@ -1,5 +1,7 @@
 package mate.academy.dao;
 
+import mate.academy.exception.DataProcessingException;
+import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
@@ -7,6 +9,7 @@ import org.hibernate.Transaction;
 
 import java.util.Optional;
 
+@Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
@@ -17,32 +20,25 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
+            return movie;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+            throw new DataProcessingException("Cannot add movie: " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return movie;
     }
 
     @Override
     public Optional<Movie> findById(Long id) {
-        Session session = null;
-        Movie movie;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            movie = session.get(Movie.class, id);
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new RuntimeException("Cannot retrieve movie from db, movieId: " + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new DataProcessingException("Cannot retrieve movie by id: " + id, e);
         }
-        return Optional.ofNullable(movie);
     }
 }
