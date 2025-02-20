@@ -1,17 +1,16 @@
 package mate.academy.dao;
 
+import java.util.Optional;
 import mate.academy.lib.Dao;
 import mate.academy.lib.DataProcessingException;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
-import org.hibernate.SessionFactory;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.util.Optional;
-
 @Dao
-public class MovieDaoImpl implements MovieDao{
+public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
