@@ -13,7 +13,6 @@ import org.hibernate.Transaction;
 @Dao
 public class MovieDaoImpl implements MovieDao {
     public static final String ERROR_DURING_CREATION_OF_MOVIE = "Error during creation of movie.";
-    public static final String ERROR_DURING_RETRIEVING_MOVIE = "Error during retrieving movie.";
     private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
@@ -41,8 +40,7 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            Optional<Movie> result = Optional.ofNullable(session.get(Movie.class, id));
-            return result;
+            return Optional.ofNullable(session.get(Movie.class, id));
         }
     }
 }

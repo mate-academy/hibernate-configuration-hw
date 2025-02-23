@@ -9,8 +9,6 @@ public class Main {
         Injector injector = Injector.getInstance("mate.academy");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie("Harry Potter", "Awesome movie");
-        System.out.println(movieService.add(movie));
-        System.out.println(movieService.get(3L));
-
+        Movie retrievedMovie = movieService.get(1L);
     }
 }
