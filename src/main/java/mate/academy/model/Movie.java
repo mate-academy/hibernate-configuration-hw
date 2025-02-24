@@ -1,6 +1,10 @@
 package mate.academy.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "movies")
@@ -9,7 +13,8 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    
+    private String description;
+
     public String getDescription() {
         return description;
     }
@@ -33,6 +38,4 @@ public class Movie {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    private String description;
 }
