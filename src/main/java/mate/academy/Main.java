@@ -13,7 +13,9 @@ public class Main {
         Movie movie = new Movie();
         movie.setTitle("Top Gun");
         movie.setDescription("Good film!!!");
-        movieService.add(movie);
+        Movie savedMovie = movieService.add(movie);
         System.out.println(movieService.get(1L));
+
+        System.out.println(movieService.get(savedMovie.getId()));
     }
 }
