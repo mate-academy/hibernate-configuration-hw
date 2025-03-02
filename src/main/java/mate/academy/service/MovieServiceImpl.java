@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 @Service
 public class MovieServiceImpl implements MovieService {
     private static final MovieDao movieDao = new MovieDaoImpl();
+
     @Override
     public Movie save(Movie movie) {
         return movieDao.save(movie);

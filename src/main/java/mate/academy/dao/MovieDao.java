@@ -5,5 +5,6 @@ import java.util.Optional;
 
 public interface MovieDao {
     Movie save(Movie movie);
+
     Optional<Movie> get(Long id);
 }

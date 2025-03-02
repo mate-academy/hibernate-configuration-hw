@@ -6,7 +6,6 @@ import mate.academy.service.MovieServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        MovieService movieService = new MovieServiceImpl();
         Movie movie = new Movie();
         movie.setTitle("The Dark Knight");
         movie.setDescription("The best comics movie of cinematography");
@@ -16,6 +15,7 @@ public class Main {
         Movie movie3 = new Movie();
         movie3.setTitle("Mad Max");
         movie3.setDescription("Very cool action");
+        MovieService movieService = new MovieServiceImpl();
         movieService.save(movie);
         movieService.save(movie2);
         movieService.save(movie3);
