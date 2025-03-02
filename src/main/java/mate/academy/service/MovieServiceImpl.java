@@ -1,28 +1,24 @@
 package mate.academy.service;
 
 import mate.academy.dao.MovieDao;
-import mate.academy.dao.MovieDaoImpl;
+import mate.academy.exception.DataProcessingException;
+import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
-import mate.academy.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 @Service
 public class MovieServiceImpl implements MovieService {
-    private static final MovieDao movieDao = new MovieDaoImpl();
+    @Inject
+    private MovieDao movieDao;
 
     @Override
-    public Movie save(Movie movie) {
-        return movieDao.save(movie);
+    public Movie add(Movie movie) {
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Movie movie = session.get(Movie.class, id);
-        session.close();
-        return movie;
+        return movieDao.get(id).orElseThrow(()
+                -> new DataProcessingException("Movie not found with id: " + id));
     }
 }

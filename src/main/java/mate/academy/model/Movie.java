@@ -13,11 +13,11 @@ public class Movie {
     private String title;
     private String description;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -25,8 +25,8 @@ public class Movie {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     public String getDescription() {
@@ -41,7 +41,7 @@ public class Movie {
     public String toString() {
         return "Movie{"
                 + "id=" + id
-                + ", title='" + title + '\''
+                + ", name='" + title + '\''
                 + ", description='" + description + '\''
                 + '}';
     }
