@@ -13,7 +13,7 @@ public class HibernateUtil {
 
     private static SessionFactory initSessionFactory() {
         try {
-            return new Configuration().configure().buildSessionFactory();
+            return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         } catch (Exception e) {
             throw new DataProcessingException("Can not create Session factory instance", e);
         }
