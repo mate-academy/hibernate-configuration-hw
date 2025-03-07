@@ -11,12 +11,13 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
 
         Movie movie = new Movie();
-        movie.setId(1l);
+        movie.setId(1L);
         movie.setTitle("Siiiuuu");
         movie.setTitle("Goat");
 
         Movie addedMovie = movieService.add(movie);
         System.out.println(addedMovie);
+        System.out.println(movieService.get(1L));
 
     }
 }
