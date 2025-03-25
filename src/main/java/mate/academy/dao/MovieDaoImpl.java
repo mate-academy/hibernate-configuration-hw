@@ -1,7 +1,7 @@
 package mate.academy.dao;
 
-import mate.academy.DataProcessingException;
 import java.util.Optional;
+import mate.academy.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import org.hibernate.Session;
