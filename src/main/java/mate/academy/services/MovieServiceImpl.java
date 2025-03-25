@@ -1,8 +1,9 @@
-package mate.academy.Services;
+package mate.academy.services;
+
 import mate.academy.dao.MovieDao;
 import mate.academy.dao.MovieDaoImpl;
-import mate.academy.model.Movie;
 import java.util.Optional;
+import mate.academy.model.Movie;
 
 public class MovieServiceImpl implements MovieService {
     private MovieDao dao = new MovieDaoImpl();

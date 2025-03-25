@@ -16,6 +16,7 @@ public class HibernateUtil {
             throw new RuntimeException("Can't create session factory ", e);
         }
     }
+
     public static SessionFactory getInstance() {
         return instance;
     }
