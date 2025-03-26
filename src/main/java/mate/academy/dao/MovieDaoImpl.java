@@ -41,10 +41,10 @@ public class MovieDaoImpl implements MovieDao {
     @Dao
     @Override
     public Optional<Movie> get(Long id) {
-        Optional<Movie> movie = null;
+        Optional<Movie> movie;
         try {
             session = HibernateUtil.getInstance().openSession();
-            movie = Optional.of(session.get(Movie.class, id));
+            movie = Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             try {
                 throw new DataProcessingException("Can not get an movie", e);
