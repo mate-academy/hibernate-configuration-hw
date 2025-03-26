@@ -25,11 +25,11 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            try {
-                throw new DataProcessingException("Can not add movie", e);
-            } catch (DataProcessingException ex) {
-                throw new RuntimeException(ex);
+        } catch (RuntimeException e) {
+            if (transaction != null) {
+                transaction.rollback();
             }
+            throw new DataProcessingException("Can not add a movie", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -46,11 +46,7 @@ public class MovieDaoImpl implements MovieDao {
             session = HibernateUtil.getInstance().openSession();
             movie = Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            try {
-                throw new DataProcessingException("Can not get an movie", e);
-            } catch (DataProcessingException ex) {
-                throw new RuntimeException(ex);
-            }
+            throw new DataProcessingException("Can not add a movie", e);
         } finally {
             if (session != null) {
                 session.close();
