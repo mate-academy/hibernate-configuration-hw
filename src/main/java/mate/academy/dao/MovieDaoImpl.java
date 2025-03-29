@@ -25,10 +25,6 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-        } catch (RuntimeException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             throw new DataProcessingException("Can not add a movie", e);
         } finally {
             if (session != null) {
@@ -38,7 +34,6 @@ public class MovieDaoImpl implements MovieDao {
         return movie;
     }
 
-    @Dao
     @Override
     public Optional<Movie> get(Long id) {
         Optional<Movie> movie;
