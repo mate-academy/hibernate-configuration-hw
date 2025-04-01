@@ -4,10 +4,16 @@ import mate.academy.dao.MovieDaoImpl;
 import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
 import mate.academy.service.implementation.MovieServiceImpl;
+import org.hibernate.cfg.Configuration;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        Configuration cfg = new Configuration();
+        cfg.configure(Thread.currentThread()
+                .getContextClassLoader()
+                .getResource("hibernate.cfg.xml"));
 
         MovieService movieService = new MovieServiceImpl(new MovieDaoImpl());
 
