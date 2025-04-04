@@ -1,5 +1,6 @@
 package mate.academy.service;
 
+import mate.academy.dao.DataProcessingException;
 import mate.academy.dao.MovieDao;
 import mate.academy.dao.MovieDaoImpl;
 import mate.academy.lib.Inject;
@@ -17,6 +18,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow(RuntimeException::new);
+        return movieDao.get(id).orElseThrow(() -> new RuntimeException("Movie not found with id " + id));
+
     }
 }

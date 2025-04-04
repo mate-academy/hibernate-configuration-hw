@@ -17,5 +17,4 @@ public class HibernateUtil {
    private HibernateUtil() {
        super();
    }
-
 }
