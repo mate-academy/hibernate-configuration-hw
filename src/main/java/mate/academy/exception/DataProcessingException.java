@@ -1,11 +1,6 @@
 package mate.academy.exception;
 
-import java.io.Serial;
-
-@SuppressWarnings("unused")
 public class DataProcessingException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = 1L;
 
     public DataProcessingException() {
         super();

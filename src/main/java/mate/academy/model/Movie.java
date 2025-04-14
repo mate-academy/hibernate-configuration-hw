@@ -9,18 +9,18 @@ import jakarta.persistence.Id;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String title;
     private String description;
 
     public Movie() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,9 +44,8 @@ public class Movie {
     public String toString() {
         return "Movie{"
                 + "id=" + id
-                + ", title='"
-                + title + '\''
-                + ", description='" + description
-                + '\'' + '}';
+                + ", title='" + title + '\''
+                + ", description='" + description + '\''
+                + '}';
     }
 }

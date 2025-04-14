@@ -3,32 +3,35 @@ package mate.academy.dao;
 import java.util.Optional;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
+import mate.academy.lib.Inject;
 import mate.academy.model.Movie;
-import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+    @Inject
+    private SessionFactory sessionFactory;
 
     public MovieDaoImpl() {
     }
 
+    public MovieDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public Movie add(Movie movie) {
-        if (movie == null) {
-            throw new DataProcessingException("Move can't be Null");
-        }
-
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
             return movie;
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -42,16 +45,12 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        if (id <= 0) {
-            throw new DataProcessingException("Invalid movie ID");
-        }
-
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             throw new DataProcessingException("Error processing data for movie ID: " + id, e);
         } finally {
             if (session != null && session.isOpen()) {
