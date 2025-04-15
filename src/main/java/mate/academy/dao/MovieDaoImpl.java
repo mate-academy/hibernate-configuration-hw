@@ -1,22 +1,16 @@
 package mate.academy.dao;
 
+import static mate.academy.util.HibernateUtil.sessionFactory;
+
 import java.util.Optional;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private final SessionFactory sessionFactory;
-
-    public MovieDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-
     @Override
     public Movie add(Movie movie) {
         Session session = null;
@@ -41,17 +35,11 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
+        try (Session session = sessionFactory.openSession()) {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {
             throw new DataProcessingException("Error processing data for movie ID: " + id, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
         }
     }
 }
