@@ -3,7 +3,6 @@ package mate.academy.dao;
 import java.util.Optional;
 import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
-import mate.academy.lib.Inject;
 import mate.academy.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,15 +10,12 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    @Inject
-    private SessionFactory sessionFactory;
-
-    public MovieDaoImpl() {
-    }
+    private final SessionFactory sessionFactory;
 
     public MovieDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
 
     @Override
     public Movie add(Movie movie) {
