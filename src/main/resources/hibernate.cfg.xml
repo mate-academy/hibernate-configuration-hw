@@ -10,7 +10,7 @@
 
         <!-- Hibernate settings -->
         <property name="show_sql">true</property>
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create-drop</property>
 
         <mapping class="mate.academy.model.Movie"/>
     </session-factory>
