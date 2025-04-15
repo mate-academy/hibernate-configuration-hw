@@ -6,7 +6,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -35,10 +34,6 @@ public class Injector {
     }
 
     public Object getInstance(Class<?> certainInterface) {
-        if (instanceOfClasses.containsKey(certainInterface)) {
-            return instanceOfClasses.get(certainInterface);
-        }
-
         Object newInstanceOfClass = null;
         Class<?> clazz = findClassExtendingInterface(certainInterface);
         Object instanceOfCurrentClass = createInstance(clazz);
@@ -99,13 +94,10 @@ public class Injector {
     private Object createInstance(Class<?> clazz) {
         Object newInstance;
         try {
-            Constructor<?> classConstructor = clazz.getConstructors()[0];
-            Object[] parameters = Arrays.stream(classConstructor.getParameterTypes())
-                    .map(this::getInstance)
-                    .toArray();
-            newInstance = classConstructor.newInstance(parameters);
+            Constructor<?> classConstructor = clazz.getConstructor();
+            newInstance = classConstructor.newInstance();
         } catch (Exception e) {
-            throw new RuntimeException("Can't create object of the class " + clazz.getName(), e);
+            throw new RuntimeException("Can't create object of the class", e);
         }
         return newInstance;
     }
@@ -178,9 +170,5 @@ public class Injector {
             }
         }
         return classes;
-    }
-
-    public <T> void registerInstance(Class<T> clazz, T instance) {
-        instanceOfClasses.put(clazz, instance);
     }
 }
