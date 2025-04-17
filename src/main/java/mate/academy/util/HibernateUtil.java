@@ -4,12 +4,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    public static final SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory sessionFactory = initSessionFactory();
 
     private HibernateUtil() {
     }
 
-    private static SessionFactory buildSessionFactory() {
+    private static SessionFactory initSessionFactory() {
         try {
             return new Configuration().configure().buildSessionFactory();
         } catch (Exception e) {
@@ -19,5 +19,9 @@ public class HibernateUtil {
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public static void setSessionFactory(SessionFactory factory) {
+        sessionFactory = factory;
     }
 }
