@@ -7,16 +7,22 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Movie {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
 
-    public Movie() {
+    public String getDescription() {
+        return description;
     }
 
-    public Long getId() {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -30,14 +36,6 @@ public class Movie {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override
