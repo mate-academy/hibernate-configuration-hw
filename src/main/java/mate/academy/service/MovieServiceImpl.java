@@ -1,36 +1,26 @@
 package mate.academy.service;
 
-import java.util.Optional;
+import mate.academy.DataProcessingException;
 import mate.academy.dao.MovieDao;
-import mate.academy.lib.Inject;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
 
 @Service
 public class MovieServiceImpl implements MovieService {
-    @Inject
-    private MovieDao movieDao;
+    private final MovieDao movieDao;
+
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
+    }
 
     @Override
     public Movie add(Movie movie) {
-        Movie addMovie;
-
-        if (movie != null) {
-            addMovie = movieDao.add(movie);
-        } else {
-            throw new RuntimeException("Can't add movie. Is null" + null);
-        }
-        return addMovie;
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        Optional<Movie> movie = movieDao.get(id);
-
-        if (movie.isEmpty()) {
-            throw new RuntimeException("Can't find movie with id: " + id);
-        }
-
-        return movie.get();
+        return movieDao.get(id).orElseThrow(()
+                -> new DataProcessingException("Could not save a movie by id: " + id));
     }
 }
