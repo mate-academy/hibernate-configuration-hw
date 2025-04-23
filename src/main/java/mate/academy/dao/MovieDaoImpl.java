@@ -12,15 +12,17 @@ import org.hibernate.Transaction;
 public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
+        if (movie.getTitle() == null) {
+            throw new IllegalArgumentException("Title cannot be null or empty");
+        }
+
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
             session.save(movie);
-            if (movie.getTitle() == null) {
-                throw new IllegalArgumentException("Title cannot be null or empty");
-            }
+
             transaction.commit();
         } catch (RuntimeException e) {
             if (transaction != null) {
@@ -37,17 +39,9 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        try {
-            Movie movie = session.get(Movie.class, id);
-            if (movie != null) {
-                return Optional.of(movie);
-            } else {
-                throw new DataProcessingException("Movie can not be found");
-            }
-        } finally {
-            session.close();
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Movie movie = session.get(Movie.class, id);
+        session.close();
+        return Optional.ofNullable(movie);
     }
 }
