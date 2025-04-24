@@ -1,12 +1,13 @@
 name: Java CI
 
 on:
-  [push, pull_request]
+  [push, pull_request_target]
 
 permissions:
   contents: read     # pozwala na pobieranie kodu
   actions: write     # pozwala na operacje na cache
   packages: write    # (opcjonalnie, jeśli korzystasz z GitHub Packages)
+  cache: write       # uprawnienia do zapisu w cache
 
 jobs:
   build:
