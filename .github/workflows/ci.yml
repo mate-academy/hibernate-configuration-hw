@@ -8,8 +8,8 @@ on:
 
 permissions:
   contents: read
-  actions: write   # potrzebne do działania cache
-  cache: write     # pozwala na zapisywanie cache
+  pull-requests: write
+  issues: write
 
 jobs:
   build:
@@ -17,26 +17,33 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Setup JDK 17 + Maven cache
+      - name: Cache Maven local repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: '17'
-          cache: maven
 
-      - name: Build and test with Maven
+      - name: Build and run tests
         run: mvn --batch-mode --update-snapshots verify
 
-      - name: Auto-approve if tests pass
-        uses: mate-academy/auto-approve-action@v2
+      - name: Auto-approve PR if tests pass
         if: ${{ github.event_name == 'pull_request' && success() }}
+        uses: mate-academy/auto-approve-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Auto-reject if tests fail
-        uses: mate-academy/auto-reject-action@v2
+      - name: Auto-reject PR if tests fail
         if: ${{ github.event_name == 'pull_request' && failure() }}
+        uses: mate-academy/auto-reject-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
