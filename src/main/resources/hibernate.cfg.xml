@@ -1,0 +1,19 @@
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="connection.url">jdbc:mysql://localhost:3306/hibernate_config_hw</property> <!-- BD Mane -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property> <!-- DB Driver -->
+        <property name="connection.username">root</property> <!-- DB User -->
+        <property name="connection.password">Qq123456</property> <!-- DB Password -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+
+        <property name="hbm2ddl.auto">create-drop</property> <!-- create / create-drop / update -->
+
+        <property name="show_sql">true</property> <!-- Show SQL in console -->
+        <property name="format_sql">true</property> <!-- Show SQL formatted -->
+
+        <mapping class="mate.academy.model.Movie"/>
+
+    </session-factory>
+</hibernate-configuration>
