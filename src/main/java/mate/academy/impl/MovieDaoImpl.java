@@ -39,7 +39,6 @@ public class MovieDaoImpl implements MovieDao {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Movie movie = (Movie) session.get(Movie.class, id);
             return Optional.ofNullable(session.get(Movie.class, id));
         } finally {
             if (session != null) {
