@@ -1,10 +1,5 @@
 package mate.academy;
 
-import static org.mockito.Mockito.description;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mockStatic;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -30,6 +25,11 @@ import org.mockito.InOrder;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.exceptions.verification.VerificationInOrderFailure;
+
+import static org.mockito.Mockito.description;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mockStatic;
 
 public class FunctionalityTest extends AbstractTest {
     private static List<Class> allClasses = new ArrayList<>();
