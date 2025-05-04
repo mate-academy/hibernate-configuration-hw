@@ -1,8 +1,8 @@
-package mate.academy.lib;
+package mate.academy.lib.service;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Inject {
+public @interface Service {
 }

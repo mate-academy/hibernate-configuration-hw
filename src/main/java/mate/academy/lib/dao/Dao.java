@@ -1,8 +1,8 @@
-package mate.academy.lib;
+package mate.academy.lib.dao;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Service {
+public @interface Dao {
 }
