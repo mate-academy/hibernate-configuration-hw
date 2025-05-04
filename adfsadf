@@ -1,0 +1,34 @@
+* [31md913775[m -[33m (HEAD -> homework)[m implemented MovieDao and Service [32m(5 minutes ago) [1;34m<Skrudj>[m
+* [31m64df419[m -[33m[m implemented Movie model, HibernateUtil class and set annotations [32m(56 minutes ago) [1;34m<Skrudj>[m
+* [31med87f1a[m -[33m[m created initial project structure and configured xml files [32m(3 hours ago) [1;34m<Skrudj>[m
+*   [31mb92cfca[m -[33m (origin/master, origin/HEAD, master)[m Merge pull request #368 from mate-academy/fix-tests-for-persist [32m(6 months ago) [1;34m<Dasha>[m
+[32m|[m[33m\[m  
+[32m|[m * [31m95434ec[m -[33m[m fix test in case persist method used [32m(6 months ago) [1;34m<Dasha>[m
+[32m|[m[32m/[m  
+*   [31m674ea7e[m -[33m[m Merge pull request #251 from mate-academy/add-checkstyle-plugin [32m(11 months ago) [1;34m<KseniiaMakarova>[m
+[34m|[m[35m\[m  
+[34m|[m * [31m64aab92[m -[33m[m added checkstyle plugin and fixed task description [32m(11 months ago) [1;34m<kseniia_makarova>[m
+[34m|[m[34m/[m  
+*   [31m4f8ee9d[m -[33m[m Merge pull request #216 from mate-academy/fix-db-connection [32m(11 months ago) [1;34m<Dasha>[m
+[36m|[m[1;31m\[m  
+[36m|[m * [31m5dca0d7[m -[33m[m added db connection prop file for tests [32m(11 months ago) [1;34m<Dasha>[m
+[36m|[m[36m/[m  
+*   [31m77c3849[m -[33m[m Merge pull request #211 from mate-academy/add-tests [32m(11 months ago) [1;34m<Dasha>[m
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [31m42c9657[m -[33m[m fix some exception messages [32m(11 months ago) [1;34m<Dasha>[m
+[1;32m|[m * [31m652f4c8[m -[33m[m added reflection to tests [32m(11 months ago) [1;34m<Dasha>[m
+[1;32m|[m * [31m3d8898d[m -[33m[m added functionality tests [32m(11 months ago) [1;34m<Dasha>[m
+[1;32m|[m * [31m56aedcd[m -[33m[m made method void [32m(12 months ago) [1;34m<Dasha>[m
+[1;32m|[m * [31me3f7331[m -[33m[m Added test and auto approve to task [32m(12 months ago) [1;34m<Dasha>[m
+[1;32m|[m[1;32m/[m  
+* [31m8634ffa[m -[33m[m Update CI config [32m(1 year, 5 months ago) [1;34m<resci>[m
+* [31m3f3efef[m -[33m[m Migrate from Travis to Github Actions [32m(1 year, 5 months ago) [1;34m<resci>[m
+*   [31m3e3d30e[m -[33m[m Merge pull request #72 from mate-academy/update-description [32m(1 year, 8 months ago) [1;34m<Sofia Diakonova>[m
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [31mf75e839[m -[33m[m removed junit dependency, update readme.md [32m(1 year, 8 months ago) [1;34m<Sofasmile>[m
+[1;34m|[m[1;34m/[m  
+* [31mcca1a27[m -[33m[m Update .travis.yml [32m(1 year, 10 months ago) [1;34m<Bohdan Chupika>[m
+* [31mdcf910b[m -[33m[m removed tests (#4) [32m(1 year, 11 months ago) [1;34m<Bohdan Chupika>[m
+* [31m4085342[m -[33m[m added small checkstyle fixes (#2) [32m(1 year, 11 months ago) [1;34m<Bohdan Chupika>[m
+* [31mddd6865[m -[33m[m added requirements (#1) [32m(1 year, 11 months ago) [1;34m<Bohdan Chupika>[m
+* [31m3d7382b[m -[33m[m Initial commit [32m(1 year, 11 months ago) [1;34m<Bohdan Chupika>[m
