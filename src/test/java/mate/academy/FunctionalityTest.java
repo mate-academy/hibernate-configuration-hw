@@ -100,7 +100,7 @@ public class FunctionalityTest extends AbstractTest {
             }
             throw new RuntimeException("Failed to add movie " + testMovie, e);
         }
-        Object movieFromDb = optionalMovieFromDb.get();
+               Object movieFromDb = optionalMovieFromDb.get();
         Assert.assertNotNull("Failed to get movie from db through \"get(Long id)\" method. "
                 + "Movie should not be null.", movieFromDb);
 
@@ -183,7 +183,7 @@ public class FunctionalityTest extends AbstractTest {
             return movieDaoImpl.getConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException
                 | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException("Could not get instance of " + className + " class.", e);
+                throw new RuntimeException("Could not get instance of " + className + " class.", e);
         }
     }
 
