@@ -1,0 +1,1 @@
+CREATE SCHEMA IF NOT EXISTS `hibernate_project_db` DEFAULT CHARACTER SET utf8;
