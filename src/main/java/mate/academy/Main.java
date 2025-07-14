@@ -24,7 +24,8 @@ public class Main {
             try {
                 movieService.get(addedMovie1.getId());
             } catch (Exception e) {
-                throw new DataProcessingException("Помилка доступу індифікатора: " + addedMovie1.getId(), e);
+                throw new DataProcessingException("Помилка доступу індифікатора: "
+                        + addedMovie1.getId(), e);
             }
         }
 
@@ -32,7 +33,8 @@ public class Main {
             try {
                 movieService.get(addedMovie2.getId());
             } catch (Exception e) {
-                throw new DataProcessingException("Помилка доступу індифікатора: " + addedMovie2.getId(), e);
+                throw new DataProcessingException("Помилка доступу індифікатора: "
+                        + addedMovie2.getId(), e);
             }
         }
 
@@ -40,7 +42,8 @@ public class Main {
         try {
             movieService.get(nonExistentId);
         } catch (Exception e) {
-            throw new DataProcessingException("Тест на отримання індифікатора неіснуйочого фільму", e);
+            throw new DataProcessingException(
+                    "Тест на отримання індифікатора неіснуйочого фільму", e);
         } finally {
             HibernateUtil.shutdown();
         }
