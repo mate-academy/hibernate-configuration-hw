@@ -1,13 +1,12 @@
 package mate.academy.dao;
 
-import mate.academy.exception.DataProcessinngException;
+import java.util.Optional;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import java.util.Optional;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
@@ -17,13 +16,14 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
+                throw new DataProcessingException("Rollback occurred");
             }
         } finally {
             if (session != null) {
@@ -35,13 +35,11 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Optional<Movie> movie = Optional.ofNullable(session.get(Movie.class, id));
-            session.close();
-            return movie;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessinngException("Can't get Optional<Movie> object from DB, id =" + id, e);
+            throw new DataProcessingException(
+                    "Can't get Optional<Movie> object from DB, id =" + id, e);
         }
     }
 }

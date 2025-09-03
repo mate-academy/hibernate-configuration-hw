@@ -1,13 +1,13 @@
 package mate.academy.service;
 
 import mate.academy.dao.MovieDao;
-import mate.academy.exception.DataProcessinngException;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Service;
 import mate.academy.model.Movie;
 
 @Service
 public class MovieServiceImpl implements MovieService {
-    private final MovieDao movieDao;
+    private MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
@@ -16,7 +16,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie add(Movie movie) {
         if (movie == null || movie.getTitle() == null) {
-            throw new DataProcessinngException("Movie info cannot be null");
+            throw new DataProcessingException("Movie info cannot be null");
         }
         return movieDao.add(movie);
     }
@@ -24,6 +24,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(
-                () -> new DataProcessinngException("Movie not found with id = " + id));
+                () -> new DataProcessingException("Movie not found with id = " + id));
     }
 }
