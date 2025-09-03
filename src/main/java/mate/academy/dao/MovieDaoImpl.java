@@ -1,5 +1,7 @@
 package mate.academy.dao;
 
+import mate.academy.exception.DataProcessinngException;
+import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
@@ -7,6 +9,7 @@ import org.hibernate.Transaction;
 
 import java.util.Optional;
 
+@Dao
 public class MovieDaoImpl implements MovieDao {
     private Session session = null;
     private Transaction transaction = null;
@@ -38,7 +41,7 @@ public class MovieDaoImpl implements MovieDao {
             session.close();
             return movie;
         } catch (Exception e) {
-            throw new RuntimeException("Can't get Optional<Movie> object from DB, id =" + id, e);
+            throw new DataProcessinngException("Can't get Optional<Movie> object from DB, id =" + id, e);
         }
     }
 }
