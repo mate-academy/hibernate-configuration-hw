@@ -13,7 +13,7 @@ import org.hibernate.Transaction;
 public class MovieDaoImpl implements MovieDao {
 
     @Override
-    public Movie save(Movie movie) {
+    public Movie add(Movie movie) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
