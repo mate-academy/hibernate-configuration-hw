@@ -9,7 +9,6 @@ public class Main {
         Injector injector = Injector.getInstance("mate.academy");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie movie = new Movie();
-        movie.setId(null);
         movie.setTitle("Harry Potter");
         movie.setDescription("Good movie");
         movieService.add(movie);
