@@ -4,13 +4,11 @@ import java.util.Optional;
 
 import mate.academy.exceptions.DataProcessingException;
 import mate.academy.util.HibernateUtil;
+import mate.academy.lib.Dao;
+import mate.academy.models.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
-import mate.academy.lib.Dao;
-import mate.academy.models.Movie;
-
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
