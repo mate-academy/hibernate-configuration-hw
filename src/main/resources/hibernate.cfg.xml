@@ -22,7 +22,7 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <!-- Options: validate, update, create, create-drop -->
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Names the annotated entity class -->
         <mapping class="mate.academy.models.Movie"/>
