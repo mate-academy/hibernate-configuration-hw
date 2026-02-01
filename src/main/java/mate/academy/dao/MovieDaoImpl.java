@@ -1,9 +1,9 @@
 package mate.academy.dao;
 
 import java.util.Optional;
-import mate.academy.exceptions.DataProcessingException;
+import mate.academy.exception.DataProcessingException;
 import mate.academy.lib.Dao;
-import mate.academy.models.Movie;
+import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,47 +11,36 @@ import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final SessionFactory sf = HibernateUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
     public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = sf.openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (Exception e) {
+            return movie;
+        } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            if (session != null) {
-                session.close();
-            }
-            throw new DataProcessingException("Cannot add movie" + movie, e);
+            throw new DataProcessingException("Can`t save film to DB " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-
-        return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        Session session = null;
-        try {
-            session = sf.openSession();
-            Movie movie = session.get(Movie.class, id);
-            return Optional.ofNullable(movie);
-        } catch (Exception e) {
-            throw new DataProcessingException("Cannot find movie by id: " + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
+        } catch (RuntimeException e) {
+            throw new DataProcessingException("Unable to get movie by id: " + id, e);
         }
     }
 }

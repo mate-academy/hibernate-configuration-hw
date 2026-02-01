@@ -1,7 +1,7 @@
 package mate.academy;
 
 import mate.academy.lib.Injector;
-import mate.academy.models.Movie;
+import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
 
 public class Main {
