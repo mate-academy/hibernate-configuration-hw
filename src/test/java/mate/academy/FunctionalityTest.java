@@ -141,7 +141,7 @@ public class FunctionalityTest extends AbstractTest {
                             description("You should close transaction in catch block "
                                     + "if something went wrong while saving movie.")).rollback();
                     Mockito.verify(mockedSession, description("You should close session with db "
-                            + "in \"add(Movie movie)\" method after adding Movie do db."))
+                                    + "in \"add(Movie movie)\" method after adding Movie do db."))
                             .close();
                     InOrder inOrder = inOrder(mockedTransaction, mockedSession);
 
@@ -182,7 +182,7 @@ public class FunctionalityTest extends AbstractTest {
         try {
             return movieDaoImpl.getConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException
-                | InvocationTargetException | NoSuchMethodException e) {
+                 | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException("Could not get instance of " + className + " class.", e);
         }
     }
