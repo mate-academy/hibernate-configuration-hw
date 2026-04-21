@@ -2,14 +2,19 @@ package mate.academy.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import mate.academy.model.Movie;
 
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory = init();
+    private static final SessionFactory sessionFactory = initSessionFactory();
 
-    private static SessionFactory init() {
+    private HibernateUtil() {
+    }
+
+    private static SessionFactory initSessionFactory() {
         try {
             return new Configuration()
                     .configure("hibernate.cfg.xml")
+                    .addAnnotatedClass(Movie.class)
                     .buildSessionFactory();
         } catch (Exception e) {
             throw new RuntimeException("Can't create SessionFactory", e);
