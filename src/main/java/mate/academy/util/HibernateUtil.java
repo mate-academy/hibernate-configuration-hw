@@ -5,14 +5,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
+    private static final SessionFactory sessionFactory;
 
-    private static final SessionFactory sessionFactory = initSessionFactory();
-
-    private static SessionFactory initSessionFactory() {
+    static {
         try {
-            return new Configuration()
-                    .configure("hibernate.cfg.xml")
+            sessionFactory = new Configuration()
                     .addAnnotatedClass(Movie.class)
+                    .configure()
                     .buildSessionFactory();
         } catch (Exception e) {
             throw new RuntimeException("Can't create SessionFactory", e);
