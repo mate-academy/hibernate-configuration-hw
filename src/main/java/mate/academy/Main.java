@@ -13,6 +13,9 @@ public class Main {
         Movie movie = new Movie();
         movie.setTitle("Superhero 5");
         movie.setDescription("Movie about exciting adventures!");
+
+        Movie addedMovie = movieService.add(movie);
+        System.out.println(movieService.get(addedMovie.getId()));
     }
 
 }
