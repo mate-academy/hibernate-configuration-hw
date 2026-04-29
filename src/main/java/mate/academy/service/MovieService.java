@@ -4,7 +4,7 @@ import mate.academy.lib.Service;
 import mate.academy.model.Movie;
 
 @Service
-public interface MovieServie {
+public interface MovieService {
     Movie add(Movie movie);
 
     Movie get(Long id);

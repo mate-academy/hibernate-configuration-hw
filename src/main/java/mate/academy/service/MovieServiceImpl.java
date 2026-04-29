@@ -7,7 +7,7 @@ import mate.academy.lib.Service;
 import mate.academy.model.Movie;
 
 @Service
-public class MovieServiceImpl implements MovieServie {
+public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao = new MovieDaoImpl();
 
     @Override
