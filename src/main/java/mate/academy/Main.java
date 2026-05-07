@@ -6,19 +6,19 @@ import mate.academy.service.MovieService;
 import mate.academy.service.impl.MovieServiceImpl;
 
 public class Main {
-        private static final Injector injector = Injector.getInstance("mate.academy");
+    private static final Injector injector = Injector.getInstance("mate.academy");
 
-        public static void main(String[] args) {
-            MovieService movieService =
-                    (MovieService) injector.getInstance(MovieServiceImpl.class);
+    public static void main(String[] args) {
+        MovieService movieService =
+                (MovieService) injector.getInstance(MovieServiceImpl.class);
 
-            Movie movie = new Movie();
-            movie.setTitle("Harry Potter");
-            movie.setDescription("Action movie");
+        Movie movie = new Movie();
+        movie.setTitle("Harry Potter");
+        movie.setDescription("Action movie");
 
-            movieService.add(movie);
+        movieService.add(movie);
 
-            Movie movieFromDb = movieService.get(movie.getId());
-            System.out.println(movieFromDb);
-        }
+        Movie movieFromDb = movieService.get(movie.getId());
+        System.out.println(movieFromDb);
+    }
 }
