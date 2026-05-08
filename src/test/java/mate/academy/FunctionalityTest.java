@@ -1,5 +1,6 @@
 package mate.academy;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.description;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
@@ -129,7 +130,7 @@ public class FunctionalityTest extends AbstractTest {
             Mockito.when(mockedSession.beginTransaction()).thenReturn(mockedTransaction);
             mockSessionFactory(mockedSessionFactory);
             Object testMovie = getTestMovie();
-            Mockito.when(mockedSession.save(testMovie)).thenThrow(new RuntimeException());
+            Mockito.doThrow(new RuntimeException()).when(mockedSession).persist(testMovie);
             doThrow(new RuntimeException()).when(mockedSession).persist(testMovie);
             Class dataProcessingExceptionClass = getClass("DataProcessingException");
 
@@ -170,7 +171,7 @@ public class FunctionalityTest extends AbstractTest {
         mockSessionFactory(mockedSessionFactory);
         Class movieClass = getClass("Movie");
         Long movieId = 1L;
-        Mockito.when(mockedSession.get(movieClass, movieId)).thenReturn(null);
+        Mockito.when(mockedSession.find(eq(Movie.class), eq(movieId))).thenReturn(null);
         invokeGetMethod(movieId);
         Mockito.verify(mockedSession, description("You should close session in \"get(Long id)\" "
                 + "method in dao layer after getting movie from db. You can use"
