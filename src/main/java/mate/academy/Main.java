@@ -1,6 +1,5 @@
 package mate.academy;
 
-import java.util.Optional;
 import mate.academy.lib.Injector;
 import mate.academy.model.Movie;
 import mate.academy.service.MovieService;
@@ -14,6 +13,6 @@ public class Main {
         movie.setTitle("Rocky");
         movieService.add(movie);
 
-        Optional<Movie> foundMovie = movieService.get(1L);
+        Movie foundMovie = movieService.get(1L);
     }
 }
