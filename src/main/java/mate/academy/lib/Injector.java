@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -13,8 +14,8 @@ import java.util.Map;
 
 public class Injector {
     private static final Map<String, Injector> injectors = new HashMap<>();
-    private final Map<Class<?>, Object> instanceOfClasses = new HashMap<>();
-    private final List<Class<?>> classes = new ArrayList<>();
+    private static final Map<Class<?>, Object> instanceOfClasses = new HashMap<>();
+    private static final List<Class<?>> classes = new ArrayList<>();
 
     private Injector(String mainPackageName) {
         try {
@@ -33,7 +34,7 @@ public class Injector {
         return injector;
     }
 
-    public Object getInstance(Class<?> certainInterface) {
+    public static Object getInstance(Class<?> certainInterface) {
         Object newInstanceOfClass = null;
         Class<?> clazz = findClassExtendingInterface(certainInterface);
         Object instanceOfCurrentClass = createInstance(clazz);
@@ -57,7 +58,7 @@ public class Injector {
         return newInstanceOfClass;
     }
 
-    private Class<?> findClassExtendingInterface(Class<?> certainInterface) {
+    private static Class<?> findClassExtendingInterface(Class<?> certainInterface) {
         for (Class<?> clazz : classes) {
             Class<?>[] interfaces = clazz.getInterfaces();
             for (Class<?> singleInterface : interfaces) {
@@ -73,7 +74,7 @@ public class Injector {
                 + " interface and has valid annotation (Dao or Service)");
     }
 
-    private Object getNewInstance(Class<?> certainClass) {
+    private static Object getNewInstance(Class<?> certainClass) {
         if (instanceOfClasses.containsKey(certainClass)) {
             return instanceOfClasses.get(certainClass);
         }
@@ -82,7 +83,7 @@ public class Injector {
         return newInstance;
     }
 
-    private boolean isFieldInitialized(Field field, Object instance) {
+    private static boolean isFieldInitialized(Field field, Object instance) {
         field.setAccessible(true);
         try {
             return field.get(instance) != null;
@@ -91,18 +92,34 @@ public class Injector {
         }
     }
 
-    private Object createInstance(Class<?> clazz) {
-        Object newInstance;
+    private static Object createInstance(Class<?> clazz) {
         try {
-            Constructor<?> classConstructor = clazz.getConstructor();
-            newInstance = classConstructor.newInstance();
+            Constructor<?>[] constructors = clazz.getConstructors();
+            Constructor<?> targetConstructor = Arrays.stream(constructors)
+                    .filter(constructor -> constructor.isAnnotationPresent(Inject.class))
+                    .findFirst()
+                    .orElse(null);
+            if (targetConstructor == null) {
+                try {
+                    targetConstructor = clazz.getConstructor();
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException("Class " + clazz.getName()
+                            + " must have a public no-argument constructor "
+                            + "or a constructor annotated with @Inject", e);
+                }
+            }
+            Class<?>[] parameterTypes = targetConstructor.getParameterTypes();
+            Object[] parameterInstances = new Object[parameterTypes.length];
+            for (int i = 0; i < parameterTypes.length; i++) {
+                parameterInstances[i] = getInstance(parameterTypes[i]);
+            }
+            return targetConstructor.newInstance(parameterInstances);
         } catch (Exception e) {
-            throw new RuntimeException("Can't create object of the class", e);
+            throw new RuntimeException("Can't create object of the class: " + clazz.getName(), e);
         }
-        return newInstance;
     }
 
-    private void setValueToField(Field field, Object instanceOfClass, Object classToInject) {
+    private static void setValueToField(Field field, Object instanceOfClass, Object classToInject) {
         try {
             field.setAccessible(true);
             field.set(instanceOfClass, classToInject);
