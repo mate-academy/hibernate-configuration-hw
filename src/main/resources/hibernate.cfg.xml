@@ -11,6 +11,7 @@
         <property name="connection.password">kali</property>
 
         <property name="connection.pool_size">5</property>
+        <property name="dialect">org.hibernate.dialect.MariaDB106Dialect</property>
 
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>

@@ -1,13 +1,15 @@
 package mate.academy.dao;
 
+import mate.academy.exception.DataProcessingException;
+import mate.academy.lib.Dao;
 import mate.academy.model.Movie;
 import mate.academy.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import java.util.Optional;
 
+@Dao
 public class MovieDaoImpl implements MovieDao {
-
 
     @Override
     public Movie add(Movie movie) {
@@ -40,7 +42,7 @@ public class MovieDaoImpl implements MovieDao {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {
-            throw new RuntimeException("Cannot get movie with id: " + id, e);
+            throw new DataProcessingException("Cannot get movie with id: " + id, e);
         }
     }
 }
