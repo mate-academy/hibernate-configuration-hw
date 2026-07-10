@@ -16,6 +16,12 @@ public class MovieDaoImpl implements MovieDao {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
+
+            Long id = (Long) session.save(movie);
+            movie.setId(id);
+
+            transaction.commit();
+            return movie;
         } catch (Exception e) {
             if (transaction != null){
                 transaction.rollback();
@@ -25,12 +31,16 @@ public class MovieDaoImpl implements MovieDao {
                 session.close();
             }
         }
-
         return movie;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        return Optional.empty();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Movie movie = session.get(Movie.class, id);
+            return Optional.ofNullable(movie);
+        } catch (Exception e) {
+            throw new RuntimeException("Cannot get movie with id: " + id, e);
+        }
     }
 }
