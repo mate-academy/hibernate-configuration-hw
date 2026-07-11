@@ -18,8 +18,8 @@ public class Main {
         movieService.add(movie);
         System.out.println("Film successfully added.");
 
-        movieService.get(1L);
+        Movie gotMovie = movieService.get(1L);
 
-
+        System.out.println(gotMovie.toString());
     }
 }
