@@ -4,10 +4,9 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.GenerationType;
-
 
 @Entity
 @Table(name = "movies")
@@ -52,8 +51,12 @@ public class Movie {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Movie movie)) return false;
-        return Objects.equals(id, movie.id) && Objects.equals(title, movie.title) && Objects.equals(description, movie.description);
+        if (!(o instanceof Movie movie)) {
+            return false;
+        }
+        return Objects.equals(id, movie.id)
+                && Objects.equals(title, movie.title)
+                && Objects.equals(description, movie.description);
     }
 
     @Override
@@ -63,10 +66,12 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Movie{"
+                + "id=" + id
+                + ", title='"
+                + title + '\''
+                + ", description='"
+                + description + '\''
+                + '}';
     }
 }
