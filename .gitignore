@@ -1,4 +1,6 @@
 .idea/*
+.vscode/*
 *.iml
 target/*
+mem.*
 src/main/resources/db.properties
