@@ -12,7 +12,7 @@ public class Main {
         Movie movie = new Movie();
         movie.setTitle("Hamlet");
         movieService.add(movie);
-        System.out.println("Movie " + movie + " was added to DB");
+        System.out.println("Movie " + movie + " was added to DB.");
         movieService.get(1L);
     }
 }
