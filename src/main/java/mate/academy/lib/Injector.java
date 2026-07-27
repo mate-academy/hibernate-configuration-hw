@@ -20,7 +20,7 @@ public class Injector {
         try {
             classes.addAll(getClasses(mainPackageName));
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException("Can't get information about all classes", e);
+            throw new RuntimeException("Can not get information about all classes", e);
         }
     }
 
