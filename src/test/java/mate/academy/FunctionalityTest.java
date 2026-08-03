@@ -125,40 +125,48 @@ public class FunctionalityTest extends AbstractTest {
             SessionFactory mockedSessionFactory = Mockito.mock(SessionFactory.class);
             Session mockedSession = Mockito.mock(Session.class);
             Transaction mockedTransaction = Mockito.mock(Transaction.class);
+
             Mockito.when(mockedSessionFactory.openSession()).thenReturn(mockedSession);
             Mockito.when(mockedSession.beginTransaction()).thenReturn(mockedTransaction);
+
             mockSessionFactory(mockedSessionFactory);
+
             Object testMovie = getTestMovie();
-            Mockito.when(mockedSession.save(testMovie)).thenThrow(new RuntimeException());
-            doThrow(new RuntimeException()).when(mockedSession).persist(testMovie);
-            Class dataProcessingExceptionClass = getClass("DataProcessingException");
+
+            doThrow(new RuntimeException())
+                    .when(mockedSession)
+                    .persist(testMovie);
+
+            Class<? extends Throwable> dataProcessingExceptionClass =
+                    (Class<? extends Throwable>) getClass("DataProcessingException");
 
             try {
                 invokeAddMethod(testMovie);
             } catch (Exception e) {
                 if (ExceptionUtils.indexOfThrowable(e, dataProcessingExceptionClass) != -1) {
+
                     Mockito.verify(mockedTransaction,
-                            description("You should close transaction in catch block "
-                                    + "if something went wrong while saving movie.")).rollback();
-                    Mockito.verify(mockedSession, description("You should close session with db "
-                            + "in \"add(Movie movie)\" method after adding Movie do db."))
+                                    description("You should rollback transaction if something went wrong."))
+                            .rollback();
+
+                    Mockito.verify(mockedSession,
+                                    description("You should close session after operation."))
                             .close();
-                    InOrder inOrder = inOrder(mockedTransaction, mockedSession);
+
+                    InOrder inOrder = Mockito.inOrder(mockedTransaction, mockedSession);
 
                     inOrder.verify(mockedTransaction).rollback();
                     inOrder.verify(mockedSession).close();
                     return;
                 }
-                Assert.fail("It's better to catch general \"Exception\" or \"RuntimeException\" "
-                        + "instead of specific one in \"add(Movie movie)\" method.");
+
+                Assert.fail("It's better to catch Exception or RuntimeException in add(Movie).");
             }
-            Assert.fail(
-                    "You should throw DataProcessingException in the catch block on dao layer.");
+
+            Assert.fail("You should throw DataProcessingException from DAO layer.");
         } catch (VerificationInOrderFailure ex) {
-            Assert.fail("You should not use try-with-resources in \"add(Movie movie)\" method, "
-                    + "as it closes session before catch block, so you could not rollback "
-                    + "transaction. You should close session in finally block in order to make"
-                    + " transaction rollback.");
+            Assert.fail("Do not use try-with-resources for Session. "
+                    + "Close it in finally after transaction rollback.");
         }
     }
 
@@ -169,8 +177,8 @@ public class FunctionalityTest extends AbstractTest {
         Mockito.when(mockedSessionFactory.openSession()).thenReturn(mockedSession);
         mockSessionFactory(mockedSessionFactory);
         Class movieClass = getClass("Movie");
-        Long movieId = 1L;
-        Mockito.when(mockedSession.get(movieClass, movieId)).thenReturn(null);
+        Long movieId = (Long) 1L;
+        Mockito.when(mockedSession.find(movieClass, movieId)).thenReturn(null);
         invokeGetMethod(movieId);
         Mockito.verify(mockedSession, description("You should close session in \"get(Long id)\" "
                 + "method in dao layer after getting movie from db. You can use"
