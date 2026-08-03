@@ -6,7 +6,7 @@ The completed structure of the project is described below:
 
 Your task is to implement the following steps:
 - add required hibernate dependencies
-- create a `hibernate.cfg.xml` file
+- create a `src/main/java/resources/hibernate.cfg.xml` file
 - create `HibernateUtil` class
 - create `Movie` model class
 - create `MovieDao` interface and `MovieDaoImpl` class
