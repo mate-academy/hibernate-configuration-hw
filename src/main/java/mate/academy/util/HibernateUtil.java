@@ -1,0 +1,22 @@
+package mate.academy.util;
+
+import mate.academy.model.Movie;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class HibernateUtil {
+    private static SessionFactory sessionFactory;
+
+    private HibernateUtil() {
+    }
+
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            sessionFactory = new Configuration()
+                    .configure()
+                    .addAnnotatedClass(Movie.class)
+                    .buildSessionFactory();
+        }
+        return sessionFactory;
+    }
+}
