@@ -1,0 +1,34 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< mate-academy:hibernate-configuration-hw >---------------
+[INFO] Building hibernate-configuration-hw 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ hibernate-configuration-hw ---
+[INFO] Deleting C:\Users\anton\IdeaProjects\hibernate-configuration-hw\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ hibernate-configuration-hw ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.8.0:compile (default-compile) @ hibernate-configuration-hw ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 12 source files to C:\Users\anton\IdeaProjects\hibernate-configuration-hw\target\classes
+[INFO] 
+[INFO] --- checkstyle:3.3.0:check (default) @ hibernate-configuration-hw ---
+[INFO] Starting audit...
+[ERROR] C:\Users\anton\IdeaProjects\hibernate-configuration-hw\src\main\java\mate\academy\exception\DataProcessingException.java:1: File does not end with a newline. [NewlineAtEndOfFile]
+Audit done.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.604 s
+[INFO] Finished at: 2026-07-13T12:06:09+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-checkstyle-plugin:3.3.0:check (default) on project hibernate-configuration-hw: Failed during checkstyle execution: There is 1 error reported by Checkstyle 9.3 with https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml ruleset. -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
