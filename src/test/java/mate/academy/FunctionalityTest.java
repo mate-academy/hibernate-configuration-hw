@@ -129,8 +129,11 @@ public class FunctionalityTest extends AbstractTest {
             Mockito.when(mockedSession.beginTransaction()).thenReturn(mockedTransaction);
             mockSessionFactory(mockedSessionFactory);
             Object testMovie = getTestMovie();
-            Mockito.when(mockedSession.save(testMovie)).thenThrow(new RuntimeException());
-            doThrow(new RuntimeException()).when(mockedSession).persist(testMovie);
+
+            // USUNIĘTO: Mockito.when(mockedSession.save(testMovie)).thenThrow(new RuntimeException());
+            // Zostawiamy poprawne persist():
+            Mockito.doThrow(new RuntimeException()).when(mockedSession).persist(testMovie);
+
             Class dataProcessingExceptionClass = getClass("DataProcessingException");
 
             try {
@@ -141,7 +144,7 @@ public class FunctionalityTest extends AbstractTest {
                             description("You should close transaction in catch block "
                                     + "if something went wrong while saving movie.")).rollback();
                     Mockito.verify(mockedSession, description("You should close session with db "
-                            + "in \"add(Movie movie)\" method after adding Movie do db."))
+                                    + "in \"add(Movie movie)\" method after adding Movie do db."))
                             .close();
                     InOrder inOrder = inOrder(mockedTransaction, mockedSession);
 
