@@ -11,8 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Inject
 public class Injector {
-    private static final Map<String, Injector> injectors = new HashMap<>();
+    private static final Map<String, Injector> INJECTOR_MAP = new HashMap<>();
     private final Map<Class<?>, Object> instanceOfClasses = new HashMap<>();
     private final List<Class<?>> classes = new ArrayList<>();
 
@@ -25,11 +26,11 @@ public class Injector {
     }
 
     public static Injector getInstance(String mainPackageName) {
-        if (injectors.containsKey(mainPackageName)) {
-            return injectors.get(mainPackageName);
+        if (INJECTOR_MAP.containsKey(mainPackageName)) {
+            return INJECTOR_MAP.get(mainPackageName);
         }
         Injector injector = new Injector(mainPackageName);
-        injectors.put(mainPackageName, injector);
+        INJECTOR_MAP.put(mainPackageName, injector);
         return injector;
     }
 
@@ -110,15 +111,6 @@ public class Injector {
             throw new RuntimeException("Can't set value to field ", e);
         }
     }
-    /**
-     * Scans all classes accessible from the context class loader which
-     * belong to the given package and subpackages.
-     *
-     * @param packageName The base package
-     * @return The classes
-     * @throws ClassNotFoundException if the class cannot be located
-     * @throws IOException            if I/O errors occur
-     */
 
     private static List<Class<?>> getClasses(String packageName)
             throws IOException, ClassNotFoundException {
@@ -139,14 +131,6 @@ public class Injector {
         }
         return classes;
     }
-    /**
-     * Recursive method used to find all classes in a given directory and subdirs.
-     *
-     * @param directory   The base directory
-     * @param packageName The package name for classes found inside the base directory
-     * @return The classes
-     * @throws ClassNotFoundException if the class cannot be located
-     */
 
     private static List<Class<?>> findClasses(File directory, String packageName)
             throws ClassNotFoundException {
