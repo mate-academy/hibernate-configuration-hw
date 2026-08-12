@@ -48,7 +48,30 @@
             <artifactId>hsqldb</artifactId>
             <version>2.3.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.7.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.5.2.Final</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.18.11</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -61,7 +84,7 @@
                         <resource>
                             <filtering>true</filtering>
                             <includes>
-                                <include>src/test/resources/hibernate.cfg.xml</include>
+                                <include>src/main/resources/hibernate.cfg.xml</include>
                             </includes>
                         </resource>
                     </webResources>
@@ -80,7 +103,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
+                    <configLocation>config/checkstyle.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>

@@ -1,0 +1,2 @@
+/*C2*/SET SCHEMA PUBLIC
+drop table if exists movies cascade 
