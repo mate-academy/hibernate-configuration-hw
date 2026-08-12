@@ -322,7 +322,7 @@ public class FunctionalityTest extends AbstractTest {
             } catch (NoClassDefFoundError e) {
                 if (e.getMessage().contains("HibernateUtil")) {
                     Assert.fail("Could not establish connection with db. You should create "
-                            + "\"hibernate.cfg.xml\" file in resources folder with all "
+                            + "\"hi22bernate.cfg.xml\" file in resources folder with all "
                             + "necessary configurations");
                 } else {
                     throw new RuntimeException("Could not initialize class.", e);
