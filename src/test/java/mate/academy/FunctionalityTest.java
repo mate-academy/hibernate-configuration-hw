@@ -1,27 +1,9 @@
 package mate.academy;
 
-import static org.mockito.Mockito.description;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mockStatic;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -30,6 +12,18 @@ import org.mockito.InOrder;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.exceptions.verification.VerificationInOrderFailure;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.net.URL;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.mockito.Mockito.*;
 
 public class FunctionalityTest extends AbstractTest {
     private static List<Class> allClasses = new ArrayList<>();
@@ -62,7 +56,7 @@ public class FunctionalityTest extends AbstractTest {
 
     @Test
     public void functionality_addAndGetMovie_Ok() {
-        mockSessionFactory(getSessionFactory());
+        mockSessionFactory((SessionFactory) getSessionFactory());
         Class movieClass = getClass("Movie");
         Class dataProcessingExceptionClass = getClass("DataProcessingException");
         Object testMovie = getTestMovie();
@@ -170,7 +164,7 @@ public class FunctionalityTest extends AbstractTest {
         mockSessionFactory(mockedSessionFactory);
         Class movieClass = getClass("Movie");
         Long movieId = 1L;
-        Mockito.when(mockedSession.get(movieClass, movieId)).thenReturn(null);
+        Mockito.when(mockedSession.find(movieClass, movieId)).thenReturn(null);
         invokeGetMethod(movieId);
         Mockito.verify(mockedSession, description("You should close session in \"get(Long id)\" "
                 + "method in dao layer after getting movie from db. You can use"
