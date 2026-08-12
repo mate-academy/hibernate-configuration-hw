@@ -1,5 +1,6 @@
 package mate.academy;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.description;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
@@ -18,6 +19,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import mate.academy.model.Movie;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -129,7 +132,7 @@ public class FunctionalityTest extends AbstractTest {
             Mockito.when(mockedSession.beginTransaction()).thenReturn(mockedTransaction);
             mockSessionFactory(mockedSessionFactory);
             Object testMovie = getTestMovie();
-            Mockito.when(mockedSession.save(testMovie)).thenThrow(new RuntimeException());
+            Mockito.doThrow(new RuntimeException()).when(mockedSession).persist(testMovie);
             doThrow(new RuntimeException()).when(mockedSession).persist(testMovie);
             Class dataProcessingExceptionClass = getClass("DataProcessingException");
 
@@ -141,7 +144,7 @@ public class FunctionalityTest extends AbstractTest {
                             description("You should close transaction in catch block "
                                     + "if something went wrong while saving movie.")).rollback();
                     Mockito.verify(mockedSession, description("You should close session with db "
-                            + "in \"add(Movie movie)\" method after adding Movie do db."))
+                                    + "in \"add(Movie movie)\" method after adding Movie do db."))
                             .close();
                     InOrder inOrder = inOrder(mockedTransaction, mockedSession);
 
@@ -170,7 +173,7 @@ public class FunctionalityTest extends AbstractTest {
         mockSessionFactory(mockedSessionFactory);
         Class movieClass = getClass("Movie");
         Long movieId = 1L;
-        Mockito.when(mockedSession.get(movieClass, movieId)).thenReturn(null);
+        Mockito.when(mockedSession.find(eq(Movie.class), eq(movieId))).thenReturn(null);
         invokeGetMethod(movieId);
         Mockito.verify(mockedSession, description("You should close session in \"get(Long id)\" "
                 + "method in dao layer after getting movie from db. You can use"
@@ -182,7 +185,7 @@ public class FunctionalityTest extends AbstractTest {
         try {
             return movieDaoImpl.getConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException
-                | InvocationTargetException | NoSuchMethodException e) {
+                 | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException("Could not get instance of " + className + " class.", e);
         }
     }
