@@ -129,7 +129,6 @@ public class FunctionalityTest extends AbstractTest {
             Mockito.when(mockedSession.beginTransaction()).thenReturn(mockedTransaction);
             mockSessionFactory(mockedSessionFactory);
             Object testMovie = getTestMovie();
-            Mockito.when(mockedSession.save(testMovie)).thenThrow(new RuntimeException());
             doThrow(new RuntimeException()).when(mockedSession).persist(testMovie);
             Class dataProcessingExceptionClass = getClass("DataProcessingException");
 
@@ -170,7 +169,7 @@ public class FunctionalityTest extends AbstractTest {
         mockSessionFactory(mockedSessionFactory);
         Class movieClass = getClass("Movie");
         Long movieId = 1L;
-        Mockito.when(mockedSession.get(movieClass, movieId)).thenReturn(null);
+        Mockito.when(mockedSession.find(movieClass, movieId)).thenReturn(null);
         invokeGetMethod(movieId);
         Mockito.verify(mockedSession, description("You should close session in \"get(Long id)\" "
                 + "method in dao layer after getting movie from db. You can use"
