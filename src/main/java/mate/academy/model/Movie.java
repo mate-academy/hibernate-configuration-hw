@@ -1,9 +1,13 @@
 package mate.academy.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import org.hibernate.annotations.Audited;
 
 @Entity
-@Table(name = "movie")
+@Audited.Table(name = "movie")
 public class Movie {
 
     @Id
@@ -34,14 +38,5 @@ public class Movie {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 }
