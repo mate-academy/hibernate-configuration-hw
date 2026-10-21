@@ -8,7 +8,6 @@ import mate.academy.service.MovieService;
 
 @Service
 public class MovieServiceImpl implements MovieService {
-
     @Inject
     private MovieDao movieDao;
 
@@ -20,8 +19,8 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Movie not found with id " + id)
-        );
+                .orElseThrow(
+                        () -> new RuntimeException("Movie not found with id " + id)
+                );
     }
 }
