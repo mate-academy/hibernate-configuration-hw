@@ -1,4 +1,4 @@
-package mate.academy.service.Impl;
+package mate.academy.service.impl;
 
 import mate.academy.dao.MovieDao;
 import mate.academy.lib.Inject;
