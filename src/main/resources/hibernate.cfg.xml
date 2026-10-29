@@ -15,7 +15,7 @@
         </property>
 
         <property name="hibernate.connection.username">daryna</property>
-        <property name="hibernate.connection.password">Hug$$030425</property>
+        <property name="hibernate.connection.password">12345</property>
 
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
